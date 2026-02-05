@@ -1,0 +1,150 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+enum TypeAttribut {
+  Texte
+  Nombre
+  Date
+  Booleen
+  Liste
+}
+
+'========================
+' CLIENTS (noyau + dynamique)
+'========================
+class Client {
+    +Id Guid
+    +Nom String
+    +Prenom String
+    +Telephone string
+    +Email string
+    +CreeLe: DateTime
+ }
+
+class SchemaClient {
+  +Id: Guid
+  +Nom: string
+}
+
+class DefinitionAttribut {
+  +Id: Guid
+  +Cle: string
+  +Libelle: string
+  +Type: TypeAttribut
+  +EstRequis: bool
+  +ValeurDefaut: string?
+}
+
+class ValeurAttributClient {
+  +Id: Guid
+  +Cle: string
+  +Valeur: string
+}
+
+Client "1" --> "0..1" SchemaClient : utilise >
+SchemaClient "1" --> "*" DefinitionAttribut : contient >
+Client "1" --> "8"  ValeurAttributClient : possede >
+DefinitionAttribut --> TypeAttribut : utilise >
+
+
+'========================
+' DOSSIERS VIRTUELS + TEMPLATES
+'========================
+class TemplateDossier {
+  +Id: Guid
+  +Nom: string
+  +Description: string?
+}
+
+class TemplateDossierElement {
+  +Id: Guid
+  +Nom: string
+  +IdParent: Guid?
+  +Ordre: int
+}
+
+TemplateDossier "1" --> "*" TemplateDossierElement : contient >
+TemplateDossierElement "0..1" --> "0..1" TemplateDossierElement : parent >
+
+class DossierClient {
+  +Id: Guid
+  +Nom: string
+  +CheminVirtuel: string
+}
+
+Client "1" --> "*" DossierClient
+Client "1" --> "1" TemplateDossier :  est associe a >
+
+'========================
+' DOCUMENTS ATTENDUS + DOCUMENTS REELS
+'========================
+class TypeDocument {
+  +Id: Guid
+  +Code: string
+  +Nom: string
+  +ExtensionsPermises: string?
+  +DossierCibleParDefaut: string?
+}
+
+class DocumentAttendu {
+  +Id: Guid
+  +IdTypeDocument: Guid?
+}
+
+TemplateDossierElement "1" --> "*" DocumentAttendu : contient >
+DocumentAttendu "*" --> "0..1" TypeDocument
+
+class DocumentClient {
+  +Id: Guid
+  +NomOriginal: string
+  +NomStandardise: string
+  + CheminPhysique : string
+  +Extension: string
+  +AjouteLe: DateTime
+}
+
+DossierClient "1" --> "*" DocumentClient
+DocumentClient "*" --> "0..1" TypeDocument
+
+class RegleNommageDocument {
+  +Id: Guid
+  +Pattern: string
+}
+
+TypeDocument "0..1" --> "0..1" RegleNommageDocument : regle >
+
+'========================
+' EMAILS
+'========================
+class ProfilEntreprise {
+  +Id: Guid
+  +Nom: string
+  +Email: string
+  +Telephone: string?
+  +Adresse: string?
+  +LogoPath: string?
+  +Signature: string?
+}
+
+class TemplateCourriel {
+  +Id: Guid
+  +Nom: string
+  +Sujet: string
+  +Corps: string
+}
+
+class CourrielEnvoye {
+  +Id: Guid
+  +A: string
+  +Sujet: string
+  +EnvoyeLe: DateTime
+  +PiecesJointes: string
+}
+
+ProfilEntreprise "1" --> "*" TemplateCourriel : alimente >
+TemplateCourriel "*" --> "0..1" TemplateDossier : est lié à >
+DossierClient "1" --> "*" CourrielEnvoye
+
+@enduml
