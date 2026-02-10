@@ -6,6 +6,8 @@ using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
 using casefile.data.configuration;
+using casefile.data.Repositories;
+using casefile.data.Repositories.Interface;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views;
@@ -29,6 +31,7 @@ public partial class App : Application
         var configuration = BuildConfiguration();
         var services = new ServiceCollection();
         ConfigureDatabase(services, configuration);
+        ConfigureServices(services);
         Services = services.BuildServiceProvider();
 
         using (var scope = Services.CreateScope())
@@ -112,5 +115,19 @@ public partial class App : Application
 
     private static void ConfigureServices(IServiceCollection services)
     {
+        services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IDefinitionAttributRepository, DefinitionAttributRepository>();
+        services.AddScoped<IDocumentAttenduRepository, DocumentAttenduRepository>();
+        services.AddScoped<IDocumentClientRepository, DocumentClientRepository>();
+        services.AddScoped<IDossierClientRepository, DossierClientRepository>();
+        services.AddScoped<ICourrielEnvoyeRepository, CourrielEnvoyeRepository>();
+        services.AddScoped<IProfilEntrepriseRepository, ProfilEntrepriseRepository>();
+        services.AddScoped<IRegleNommageDocumentRepository, RegleNommageDocumentRepository>();
+        services.AddScoped<ISchemaClientRepository, SchemaClientRepository>();
+        services.AddScoped<ITemplateCourrielRepository, TemplateCourrielRepository>();
+        services.AddScoped<ITemplateDossierRepository, TemplateDossierRepository>();
+        services.AddScoped<ITemplateDossierElementRepository, TemplateDossierElementRepository>();
+        services.AddScoped<ITypeDocumentRepository, TypeDocumentRepository>();
+        services.AddScoped<IValeurAttributClientRepository, ValeurAttributClientRepository>();
     }
 }
