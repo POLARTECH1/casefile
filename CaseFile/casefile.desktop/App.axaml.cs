@@ -86,6 +86,17 @@ public partial class App : Application
         var provider = dbCfg["Provider"];
         var cs = dbCfg["ConnectionString"];
 
+        if (string.IsNullOrWhiteSpace(provider))
+        {
+            throw new InvalidOperationException(
+                "Database configuration error: 'Database:Provider' is not specified in the application configuration.");
+        }
+
+        if (string.IsNullOrWhiteSpace(cs))
+        {
+            throw new InvalidOperationException(
+                "Database configuration error: 'Database:ConnectionString' is not specified in the application configuration.");
+        }
         services.AddDbContext<CaseFileContext>(opt =>
         {
             if (string.Equals(provider, "Postgres", StringComparison.OrdinalIgnoreCase))

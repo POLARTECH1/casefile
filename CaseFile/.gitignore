@@ -62,3 +62,4 @@ nunit-*.xml
 /.idea
 
 **/appsettings.*.json
+!**/appsettings.Development.json
