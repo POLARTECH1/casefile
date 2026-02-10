@@ -89,7 +89,7 @@ public partial class App : Application
         services.AddDbContext<CaseFileContext>(opt =>
         {
             if (string.Equals(provider, "Postgres", StringComparison.OrdinalIgnoreCase))
-                opt.UseNpgsql(cs);
+                opt.UseNpgsql(cs).UseSnakeCaseNamingConvention();
             else
                 opt.UseSqlite(cs);
         });
