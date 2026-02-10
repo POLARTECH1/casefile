@@ -6,6 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
 using casefile.data.configuration;
+using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace casefile.desktop;
 
 public partial class App : Application
 {
-    public static IServiceProvider Services { get; private set; } = default!;
+    private static IServiceProvider Services { get; set; } = default!;
 
     public override void Initialize()
     {
@@ -34,6 +35,7 @@ public partial class App : Application
         {
             var db = scope.ServiceProvider.GetRequiredService<CaseFileContext>();
             db.Database.Migrate();
+            Seeder.Seed(db);
         }
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -86,6 +88,7 @@ public partial class App : Application
         var provider = dbCfg["Provider"];
         var cs = dbCfg["ConnectionString"];
 
+
         if (string.IsNullOrWhiteSpace(provider))
         {
             throw new InvalidOperationException(
@@ -97,6 +100,7 @@ public partial class App : Application
             throw new InvalidOperationException(
                 "Database configuration error: 'Database:ConnectionString' is not specified in the application configuration.");
         }
+
         services.AddDbContext<CaseFileContext>(opt =>
         {
             if (string.Equals(provider, "Postgres", StringComparison.OrdinalIgnoreCase))

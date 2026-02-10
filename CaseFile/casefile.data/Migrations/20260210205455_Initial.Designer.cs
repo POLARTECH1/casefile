@@ -12,7 +12,7 @@ using casefile.data.configuration;
 namespace casefile.data.Migrations
 {
     [DbContext(typeof(CaseFileContext))]
-    [Migration("20260210195931_Initial")]
+    [Migration("20260210205455_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
