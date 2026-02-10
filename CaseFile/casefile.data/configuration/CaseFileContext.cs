@@ -27,7 +27,32 @@ public class CaseFileContext : DbContext
     public DbSet<TemplateDossierElement> TemplatesDossierElements => Set<TemplateDossierElement>();
     public DbSet<TypeDocument> TypesDocument => Set<TypeDocument>();
     public DbSet<ValeurAttributClient> ValeursAttributsClients => Set<ValeurAttributClient>();
-    
+
+#if DEBUG //Permet d'inclure cette méthode uniquement si l'application est en mode DEBUG
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        //Vérifie si la configuration n'a pas été spécifiée par un fichier de configuration
+        if (optionsBuilder.IsConfigured == false)
+        {
+            //Aucune configuration à partir d'un fichier de configuration
+            //Option de base pour la migration
+            string? chaineConnexion =
+                "Host=localhost;Port=55432;Database=casefile;Username=casefile;Password=casefile_dev_pw";
+            //Vérifie si la variable n'est pas vide
+            if (string.IsNullOrEmpty(chaineConnexion) == false)
+            {
+                //La variable n'est pas vide, la chaine de connexion est appliquée
+                optionsBuilder.UseNpgsql(chaineConnexion);
+            }
+            else
+            {
+                //Il n'y a aucune chaine de connexion.
+                throw new Exception(
+                    "La variable MIGRATION_CONNECTION_STRING n'est pas spécifiée. Effectuez la commande suivante dans la Console du Gestionnaire de package : $env:MIGRATION_CONNECTION_STRING=\"[ma chaine de connexion]\" ");
+            }
+        }
+    }
+#endif
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
