@@ -36,8 +36,7 @@ public class CaseFileContext : DbContext
         {
             //Aucune configuration à partir d'un fichier de configuration
             //Option de base pour la migration
-            string? chaineConnexion =
-                "Host=localhost;Port=55432;Database=casefile;Username=casefile;Password=casefile_dev_pw";
+            string? chaineConnexion = Environment.GetEnvironmentVariable("MIGRATION_CONNECTION_STRING");
             //Vérifie si la variable n'est pas vide
             if (string.IsNullOrEmpty(chaineConnexion) == false)
             {
@@ -54,7 +53,7 @@ public class CaseFileContext : DbContext
     }
 #endif
 
-protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Client>(entity =>
         {
