@@ -6,8 +6,8 @@
 ## has more thorough IDE-specific entries.
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
-**/bin/
-**/obj/
+/bin/
+/obj
 
 # Build results
 [Dd]ebug/
@@ -63,3 +63,4 @@ nunit-*.xml
 
 **/appsettings.*.json
 !**/appsettings.Development.json
+bin\\Debug/

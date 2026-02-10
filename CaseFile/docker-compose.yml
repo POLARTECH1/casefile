@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    container_name: casefile-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - casefile_pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+volumes:
+  casefile_pgdata:

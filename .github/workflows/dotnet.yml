@@ -23,7 +23,27 @@ jobs:
     - name: Restore dependencies
       working-directory: CaseFile
       run: dotnet restore CaseFile.sln
-      
+
+    - name: Detect invalid backslash paths
+      working-directory: CaseFile
+      run: |
+        echo "Tracked files containing backslash:"
+        git ls-files | grep '\\' || true
+        echo "Any path containing backslash in workspace:"
+        find . -print | grep '\\' || true
+
+    - name: Debug - list axaml and repo weird paths
+      working-directory: CaseFile
+      run: |
+        echo "== AXAML files actually present =="
+        find casefile.desktop -type f -name "*.axaml" -print || true
+        echo "== Tracked files with backslash in name (breaks globs) =="
+        git ls-files | grep '\\' || true
+        echo "== Any path with backslash in workspace =="
+        find . -print | grep '\\' || true
+
+
+
     - name: Build
       working-directory: CaseFile
       run: dotnet build CaseFile.sln --no-restore
