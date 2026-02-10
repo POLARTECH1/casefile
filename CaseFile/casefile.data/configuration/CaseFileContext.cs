@@ -41,7 +41,7 @@ public class CaseFileContext : DbContext
             if (string.IsNullOrEmpty(chaineConnexion) == false)
             {
                 //La variable n'est pas vide, la chaine de connexion est appliquée
-                optionsBuilder.UseNpgsql(chaineConnexion);
+                optionsBuilder.UseNpgsql(chaineConnexion).UseSnakeCaseNamingConvention();
             }
             else
             {
