@@ -1,3 +1,5 @@
+using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using casefile.data.configuration;
 using casefile.data.Repositories.Interface;
 using FluentResults;
@@ -37,6 +39,27 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     }
 
     /// <summary>
+    /// Recupere toutes les entites correspondant a une specification.
+    /// </summary>
+    public virtual async Task<Result<IEnumerable<TData>>> GetAllAsync(ISpecification<TData> specification)
+    {
+
+        try
+        {
+            var query = ApplySpecification(specification);
+            var entities = await query.ToListAsync();
+            return Result.Ok<IEnumerable<TData>>(entities);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors de la recuperation des entites {EntityType} avec specification",
+                typeof(TData).Name);
+            return Result.Fail<IEnumerable<TData>>(
+                $"Erreur lors de la recuperation des entites {typeof(TData).Name} avec specification: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// Recupere une entite par son identifiant.
     /// </summary>
     public virtual async Task<Result<TData>> GetByIdAsync(Guid id)
@@ -56,7 +79,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
             Log.Error(ex, "Erreur lors de la recuperation de l'entité {EntityType} avec l'identifiant {Id}",
                 typeof(TData).Name, id);
             return Result.Fail<TData>(
-                $"Erreur lors de la recuperation de l'entité {typeof(TData).Name} ({id}).");
+                $"Erreur lors de la recuperation de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
         }
     }
 
@@ -83,7 +106,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors de l'ajout d'une entite de type {EntityType}", typeof(TData).Name);
-            return Result.Fail<TData>($"Erreur lors de l'ajout de l'entite {typeof(TData).Name}.");
+            return Result.Fail<TData>($"Erreur lors de l'ajout de l'entite {typeof(TData).Name}: {ex.Message}");
         }
     }
 
@@ -101,12 +124,12 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
                 return await SaveChangesAsync();
             }
 
-            return Result.Ok();
+            return Result.Ok(0);
         }
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors de la mise à jour d'une entite de type {EntityType}", typeof(TData).Name);
-            return Result.Fail($"Erreur lors de la mise a jour de l'entité {typeof(TData).Name}.");
+            return Result.Fail<int>($"Erreur lors de la mise a jour de l'entité {typeof(TData).Name}: {ex.Message}");
         }
     }
 
@@ -120,7 +143,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
             var entityResult = await GetByIdAsync(id);
             if (entityResult.IsFailed)
             {
-                return Result.Fail(entityResult.Errors);
+                return Result.Fail<int>(entityResult.Errors);
             }
 
             Set.Remove(entityResult.Value);
@@ -130,13 +153,13 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
                 return await SaveChangesAsync();
             }
 
-            return Result.Ok();
+            return Result.Ok(0);
         }
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors de la suppression de l'entité {EntityType} avec l'identifiant {Id}",
                 typeof(TData).Name, id);
-            return Result.Fail($"Erreur lors de la suppression de l'entité {typeof(TData).Name} ({id}).");
+            return Result.Fail<int>($"Erreur lors de la suppression de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
         }
     }
 
@@ -154,7 +177,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         {
             Log.Error(ex, "Erreur lors de la persistence asynchrone des changements pour l'entité {EntityType}",
                 typeof(TData).Name);
-            return Result.Fail($"Erreur lors de la persistence des changements.");
+            return Result.Fail<int>($"Erreur lors de la persistence des changements: {ex.Message}");
         }
     }
 
@@ -172,7 +195,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         {
             Log.Error(ex, "Erreur lors de la persistence synchrone des changements pour l'entité {EntityType}",
                 typeof(TData).Name);
-            return Result.Fail($"Erreur lors de la persistence des changements.");
+            return Result.Fail<int>($"Erreur lors de la persistence des changements: {ex.Message}");
         }
     }
 
@@ -192,21 +215,29 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
             Log.Error(ex, "Erreur lors de la verification d'existence de l'entité {EntityType} avec l'identifiant {Id}",
                 typeof(TData).Name, id);
             return Result.Fail<bool>(
-                $"Erreur lors de la verification d'existence de l'entité {typeof(TData).Name} ({id}).");
+                $"Erreur lors de la verification d'existence de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
         }
     }
 
-    public async Task<Result<int>> CountAsync()
+    public async Task<Result<int>> CountAsync(ISpecification<TData>? specification = null)
     {
         try
         {
-            var count = await Set.CountAsync();
+            var query = specification is null
+                ? Set.AsQueryable()
+                : ApplySpecification(specification, true);
+            var count = await query.CountAsync();
             return Result.Ok(count);
         }
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors du comptage des entites de type {EntityType}", typeof(TData).Name);
-            return Result.Fail<int>($"Erreur lors du comptage des entites {typeof(TData).Name}.");
+            return Result.Fail<int>($"Erreur lors du comptage des entites {typeof(TData).Name}: {ex.Message}");
         }
+    }
+
+    private IQueryable<TData> ApplySpecification(ISpecification<TData> specification, bool evaluateCriteriaOnly = false)
+    {
+        return SpecificationEvaluator.Default.GetQuery(Set.AsQueryable(), specification, evaluateCriteriaOnly);
     }
 }

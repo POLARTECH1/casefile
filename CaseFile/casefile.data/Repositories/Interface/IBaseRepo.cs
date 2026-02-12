@@ -1,3 +1,4 @@
+using Ardalis.Specification;
 using FluentResults;
 
 namespace casefile.data.Repositories.Interface;
@@ -8,6 +9,10 @@ public interface IBaseRepo<TData> where TData : class
     /// Recupere toutes les entites.
     /// </summary>
     Task<Result<IEnumerable<TData>>> GetAllAsync();
+    /// <summary>
+    /// Recupere toutes les entites correspondant a une specification.
+    /// </summary>
+    Task<Result<IEnumerable<TData>>> GetAllAsync(ISpecification<TData> specification);
 
     /// <summary>
     /// Recupere une entite par son identifiant.
@@ -51,5 +56,5 @@ public interface IBaseRepo<TData> where TData : class
     /// <summary>
     /// Compte le nombre total d'entites.
     /// </summary>
-    Task<Result<int>> CountAsync();
+    Task<Result<int>> CountAsync(ISpecification<TData>? specification = null);
 }
