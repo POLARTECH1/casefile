@@ -6,13 +6,16 @@ using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
 using casefile.data.configuration;
+using casefile.data.Repositories;
+using casefile.data.Repositories.Interface;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Extensions.Logging;
+using Serilog;
 namespace casefile.desktop;
 
 public partial class App : Application
@@ -26,9 +29,30 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var logDirectory = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "CaseFile",
+            "logs");
+        Directory.CreateDirectory(logDirectory);
+        var logFilePath = Path.Combine(logDirectory, "app.log");
+
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day)
+            .CreateLogger();
         var configuration = BuildConfiguration();
         var services = new ServiceCollection();
+        services.AddLogging(lb =>
+        {
+            lb.ClearProviders();
+            lb.AddSerilog(Log.Logger, dispose: false);
+        });
         ConfigureDatabase(services, configuration);
+        ConfigureRepositories(services);
+        ConfigureViewModel(services);
+        ConfigureServices(services);
         Services = services.BuildServiceProvider();
 
         using (var scope = Services.CreateScope())
@@ -45,7 +69,7 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = Services.GetRequiredService<MainWindowViewModel>(),
             };
         }
 
@@ -110,7 +134,31 @@ public partial class App : Application
         });
     }
 
+
+    private static void ConfigureRepositories(IServiceCollection services)
+    {
+        services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IDefinitionAttributRepository, DefinitionAttributRepository>();
+        services.AddScoped<IDocumentAttenduRepository, DocumentAttenduRepository>();
+        services.AddScoped<IDocumentClientRepository, DocumentClientRepository>();
+        services.AddScoped<IDossierClientRepository, DossierClientRepository>();
+        services.AddScoped<ICourrielEnvoyeRepository, CourrielEnvoyeRepository>();
+        services.AddScoped<IProfilEntrepriseRepository, ProfilEntrepriseRepository>();
+        services.AddScoped<IRegleNommageDocumentRepository, RegleNommageDocumentRepository>();
+        services.AddScoped<ISchemaClientRepository, SchemaClientRepository>();
+        services.AddScoped<ITemplateCourrielRepository, TemplateCourrielRepository>();
+        services.AddScoped<ITemplateDossierRepository, TemplateDossierRepository>();
+        services.AddScoped<ITemplateDossierElementRepository, TemplateDossierElementRepository>();
+        services.AddScoped<ITypeDocumentRepository, TypeDocumentRepository>();
+        services.AddScoped<IValeurAttributClientRepository, ValeurAttributClientRepository>();
+    }
+
     private static void ConfigureServices(IServiceCollection services)
     {
+    }
+
+    private static void ConfigureViewModel(IServiceCollection services)
+    {
+        services.AddScoped<MainWindowViewModel>();
     }
 }

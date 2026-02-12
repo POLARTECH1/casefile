@@ -1,3 +1,8 @@
 DB-used: postgresql (16)
         UsePascalNamingCOnvention
         
+Packaged: FluentResults : pour ammeliorer l'informations des resultats
+            Serilog : pour les logs
+            Adalis : pour les filtres des requetes
+            
+        
