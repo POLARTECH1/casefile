@@ -183,7 +183,8 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     {
         try
         {
-            var exists = await Set.FindAsync(id) is not null;
+            var exists = await Set.AsNoTracking()
+                .AnyAsync(e => EF.Property<Guid>(e, "Id") == id);
             return Result.Ok(exists);
         }
         catch (Exception ex)
