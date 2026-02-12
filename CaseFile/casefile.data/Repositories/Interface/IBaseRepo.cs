@@ -36,4 +36,8 @@ public interface IBaseRepo<TData> where TData : class
     /// Verifie l'existence d'une entite par identifiant.
     /// </summary>
     Task<Result<bool>> ExistsAsync(Guid id);
+    /// <summary>
+    /// Compte le nombre total d'entites.
+    /// </summary>
+    Task<Result<int>> CountAsync();
 }
