@@ -32,7 +32,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
             Log.Error(ex, "Erreur lors de la recuperation de toutes les entites de type {EntityType}",
                 typeof(TData).Name);
             return Result.Fail<IEnumerable<TData>>(
-                $"Erreur lors de la recuperation des entites {typeof(TData).Name}: {ex.Message}");
+                $"Erreur lors de la recuperation des entites {typeof(TData).Name}.");
         }
     }
 
@@ -56,7 +56,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
             Log.Error(ex, "Erreur lors de la recuperation de l'entité {EntityType} avec l'identifiant {Id}",
                 typeof(TData).Name, id);
             return Result.Fail<TData>(
-                $"Erreur lors de la recuperation de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
+                $"Erreur lors de la recuperation de l'entité {typeof(TData).Name} ({id}).");
         }
     }
 
@@ -83,7 +83,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors de l'ajout d'une entite de type {EntityType}", typeof(TData).Name);
-            return Result.Fail<TData>($"Erreur lors de l'ajout de l'entite {typeof(TData).Name}: {ex.Message}");
+            return Result.Fail<TData>($"Erreur lors de l'ajout de l'entite {typeof(TData).Name}.");
         }
     }
 
@@ -106,7 +106,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors de la mise à jour d'une entite de type {EntityType}", typeof(TData).Name);
-            return Result.Fail($"Erreur lors de la mise a jour de l'entité {typeof(TData).Name}: {ex.Message}");
+            return Result.Fail($"Erreur lors de la mise a jour de l'entité {typeof(TData).Name}.");
         }
     }
 
@@ -136,7 +136,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         {
             Log.Error(ex, "Erreur lors de la suppression de l'entité {EntityType} avec l'identifiant {Id}",
                 typeof(TData).Name, id);
-            return Result.Fail($"Erreur lors de la suppression de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
+            return Result.Fail($"Erreur lors de la suppression de l'entité {typeof(TData).Name} ({id}).");
         }
     }
 
@@ -154,7 +154,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         {
             Log.Error(ex, "Erreur lors de la persistence asynchrone des changements pour l'entité {EntityType}",
                 typeof(TData).Name);
-            return Result.Fail($"Erreur lors de la persistence des changements: {ex.Message}");
+            return Result.Fail($"Erreur lors de la persistence des changements.");
         }
     }
 
@@ -172,7 +172,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         {
             Log.Error(ex, "Erreur lors de la persistence synchrone des changements pour l'entité {EntityType}",
                 typeof(TData).Name);
-            return Result.Fail($"Erreur lors de la persistence des changements: {ex.Message}");
+            return Result.Fail($"Erreur lors de la persistence des changements.");
         }
     }
 
@@ -192,7 +192,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
             Log.Error(ex, "Erreur lors de la verification d'existence de l'entité {EntityType} avec l'identifiant {Id}",
                 typeof(TData).Name, id);
             return Result.Fail<bool>(
-                $"Erreur lors de la verification d'existence de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
+                $"Erreur lors de la verification d'existence de l'entité {typeof(TData).Name} ({id}).");
         }
     }
 
@@ -206,7 +206,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         catch (Exception ex)
         {
             Log.Error(ex, "Erreur lors du comptage des entites de type {EntityType}", typeof(TData).Name);
-            return Result.Fail<int>($"Erreur lors du comptage des entites {typeof(TData).Name}: {ex.Message}");
+            return Result.Fail<int>($"Erreur lors du comptage des entites {typeof(TData).Name}.");
         }
     }
 }
