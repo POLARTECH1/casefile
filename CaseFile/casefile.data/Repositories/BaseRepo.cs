@@ -90,12 +90,12 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     /// <summary>
     /// Met a jour une entite.
     /// </summary>
-    public virtual async Task<Result> UpdateAsync(TData data, bool saveChanges = true)
+    public virtual async Task<Result<int>> UpdateAsync(TData data, bool saveChanges = true)
     {
         try
         {
+            
             Set.Update(data);
-
             if (saveChanges)
             {
                 return await SaveChangesAsync();
@@ -113,7 +113,7 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     /// <summary>
     /// Supprime une entite par identifiant.
     /// </summary>
-    public virtual async Task<Result> DeleteAsync(Guid id, bool saveChanges = true)
+    public virtual async Task<Result<int>> DeleteAsync(Guid id, bool saveChanges = true)
     {
         try
         {
@@ -143,12 +143,12 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     /// <summary>
     /// Persiste les changements (async).
     /// </summary>
-    public async Task<Result> SaveChangesAsync()
+    public async Task<Result<int>> SaveChangesAsync()
     {
         try
         {
-            await Context.SaveChangesAsync();
-            return Result.Ok();
+            var affectedRow = await Context.SaveChangesAsync();
+            return Result.Ok(affectedRow);
         }
         catch (Exception ex)
         {
@@ -161,12 +161,12 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     /// <summary>
     /// Persiste les changements (sync).
     /// </summary>
-    public Result SaveChanges()
+    public Result<int> SaveChanges()
     {
         try
         {
-            Context.SaveChanges();
-            return Result.Ok();
+            var affectedRow = Context.SaveChanges();
+            return Result.Ok(affectedRow);
         }
         catch (Exception ex)
         {

@@ -1,3 +1,4 @@
+
 namespace casefile.domain.model;
 
 /// <summary>

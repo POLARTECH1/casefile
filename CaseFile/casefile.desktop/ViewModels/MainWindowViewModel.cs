@@ -5,11 +5,9 @@ namespace casefile.desktop.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     
-    private readonly ILogger<MainWindowViewModel> _logger;
 
-    public MainWindowViewModel(ILogger<MainWindowViewModel> logger)
+    public MainWindowViewModel()
     {
-        _logger = logger;
     }
 
     public string Greeting { get; } = "Welcome to Avalonia!";

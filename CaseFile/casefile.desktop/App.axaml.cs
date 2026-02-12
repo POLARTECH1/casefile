@@ -16,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-
 namespace casefile.desktop;
 
 public partial class App : Application
@@ -36,7 +35,7 @@ public partial class App : Application
             "logs");
         Directory.CreateDirectory(logDirectory);
         var logFilePath = Path.Combine(logDirectory, "app.log");
-        
+
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
             .Enrich.FromLogContext()
@@ -51,8 +50,9 @@ public partial class App : Application
             lb.AddSerilog(Log.Logger, dispose: false);
         });
         ConfigureDatabase(services, configuration);
-        ConfigureServices(services);
+        ConfigureRepositories(services);
         ConfigureViewModel(services);
+        ConfigureServices(services);
         Services = services.BuildServiceProvider();
 
         using (var scope = Services.CreateScope())
@@ -135,7 +135,7 @@ public partial class App : Application
     }
 
 
-    private static void ConfigureServices(IServiceCollection services)
+    private static void ConfigureRepositories(IServiceCollection services)
     {
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IDefinitionAttributRepository, DefinitionAttributRepository>();
@@ -151,6 +151,10 @@ public partial class App : Application
         services.AddScoped<ITemplateDossierElementRepository, TemplateDossierElementRepository>();
         services.AddScoped<ITypeDocumentRepository, TypeDocumentRepository>();
         services.AddScoped<IValeurAttributClientRepository, ValeurAttributClientRepository>();
+    }
+
+    private static void ConfigureServices(IServiceCollection services)
+    {
     }
 
     private static void ConfigureViewModel(IServiceCollection services)
