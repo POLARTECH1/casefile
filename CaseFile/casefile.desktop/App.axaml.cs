@@ -14,6 +14,8 @@ using casefile.desktop.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace casefile.desktop;
 
@@ -28,10 +30,22 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
         var configuration = BuildConfiguration();
         var services = new ServiceCollection();
+        services.AddLogging(lb =>
+        {
+            lb.ClearProviders();
+            lb.AddSerilog(Log.Logger, dispose: false);
+        });
         ConfigureDatabase(services, configuration);
         ConfigureServices(services);
+        ConfigureViewModel(services);
         Services = services.BuildServiceProvider();
 
         using (var scope = Services.CreateScope())
@@ -48,7 +62,7 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = Services.GetRequiredService<MainWindowViewModel>(),
             };
         }
 
@@ -113,6 +127,7 @@ public partial class App : Application
         });
     }
 
+
     private static void ConfigureServices(IServiceCollection services)
     {
         services.AddScoped<IClientRepository, ClientRepository>();
@@ -129,5 +144,10 @@ public partial class App : Application
         services.AddScoped<ITemplateDossierElementRepository, TemplateDossierElementRepository>();
         services.AddScoped<ITypeDocumentRepository, TypeDocumentRepository>();
         services.AddScoped<IValeurAttributClientRepository, ValeurAttributClientRepository>();
+    }
+
+    private static void ConfigureViewModel(IServiceCollection services)
+    {
+        services.AddScoped<MainWindowViewModel>();
     }
 }

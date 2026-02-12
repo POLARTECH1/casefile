@@ -111,4 +111,10 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     {
         return await Set.FindAsync(id) is not null;
     }
+
+    public async Task<int> CountAsync()
+    {
+        return await Set.CountAsync();
+    }
+    
 }

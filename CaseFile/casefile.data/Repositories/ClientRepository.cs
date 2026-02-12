@@ -9,4 +9,5 @@ public class ClientRepository : BaseRepo<Client>, IClientRepository
     public ClientRepository(CaseFileContext context) : base(context)
     {
     }
+    
 }
