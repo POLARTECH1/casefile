@@ -1,6 +1,8 @@
 using casefile.data.configuration;
 using casefile.data.Repositories.Interface;
+using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace casefile.data.Repositories;
 
@@ -18,103 +20,192 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
     /// <summary>
     /// Recupere toutes les entites.
     /// </summary>
-    public virtual async Task<IEnumerable<TData>> GetAllAsync()
+    public virtual async Task<Result<IEnumerable<TData>>> GetAllAsync()
     {
-        return await Set.ToListAsync();
+        try
+        {
+            var entities = await Set.ToListAsync();
+            return Result.Ok<IEnumerable<TData>>(entities);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors de la recuperation de toutes les entites de type {EntityType}",
+                typeof(TData).Name);
+            return Result.Fail<IEnumerable<TData>>(
+                $"Erreur lors de la recuperation des entites {typeof(TData).Name}: {ex.Message}");
+        }
     }
 
     /// <summary>
     /// Recupere une entite par son identifiant.
     /// </summary>
-    public virtual async Task<TData?> GetByIdAsync(Guid id)
+    public virtual async Task<Result<TData>> GetByIdAsync(Guid id)
     {
-        return await Set.FindAsync(id);
+        try
+        {
+            var entity = await Set.FindAsync(id);
+            if (entity is null)
+            {
+                return Result.Fail<TData>($"Entite {typeof(TData).Name} introuvable pour l'identifiant {id}.");
+            }
+
+            return Result.Ok(entity);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors de la recuperation de l'entité {EntityType} avec l'identifiant {Id}",
+                typeof(TData).Name, id);
+            return Result.Fail<TData>(
+                $"Erreur lors de la recuperation de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
+        }
     }
 
     /// <summary>
     /// Ajoute une entite.
     /// </summary>
-    public virtual async Task<TData> AddAsync(TData data, bool saveChanges = true)
+    public virtual async Task<Result<TData>> AddAsync(TData data, bool saveChanges = true)
     {
-        if (data is null)
+        try
         {
-            throw new ArgumentNullException(nameof(data));
+            await Set.AddAsync(data);
+
+            if (saveChanges)
+            {
+                var saveResult = await SaveChangesAsync();
+                if (saveResult.IsFailed)
+                {
+                    return Result.Fail<TData>(saveResult.Errors);
+                }
+            }
+
+            return Result.Ok(data);
         }
-
-        await Set.AddAsync(data);
-
-        if (saveChanges)
+        catch (Exception ex)
         {
-            await Context.SaveChangesAsync();
+            Log.Error(ex, "Erreur lors de l'ajout d'une entite de type {EntityType}", typeof(TData).Name);
+            return Result.Fail<TData>($"Erreur lors de l'ajout de l'entite {typeof(TData).Name}: {ex.Message}");
         }
-
-        return data;
     }
 
     /// <summary>
     /// Met a jour une entite.
     /// </summary>
-    public virtual async Task UpdateAsync(TData data, bool saveChanges = true)
+    public virtual async Task<Result> UpdateAsync(TData data, bool saveChanges = true)
     {
-        if (data is null)
+        try
         {
-            throw new ArgumentNullException(nameof(data));
+            Set.Update(data);
+
+            if (saveChanges)
+            {
+                return await SaveChangesAsync();
+            }
+
+            return Result.Ok();
         }
-
-        Set.Update(data);
-
-        if (saveChanges)
+        catch (Exception ex)
         {
-            await Context.SaveChangesAsync();
+            Log.Error(ex, "Erreur lors de la mise à jour d'une entite de type {EntityType}", typeof(TData).Name);
+            return Result.Fail($"Erreur lors de la mise a jour de l'entité {typeof(TData).Name}: {ex.Message}");
         }
     }
 
     /// <summary>
     /// Supprime une entite par identifiant.
     /// </summary>
-    public virtual async Task DeleteAsync(Guid id, bool saveChanges = true)
+    public virtual async Task<Result> DeleteAsync(Guid id, bool saveChanges = true)
     {
-        var entity = await GetByIdAsync(id);
-        if (entity is null)
+        try
         {
-            return;
+            var entityResult = await GetByIdAsync(id);
+            if (entityResult.IsFailed)
+            {
+                return Result.Fail(entityResult.Errors);
+            }
+
+            Set.Remove(entityResult.Value);
+
+            if (saveChanges)
+            {
+                return await SaveChangesAsync();
+            }
+
+            return Result.Ok();
         }
-
-        Set.Remove(entity);
-
-        if (saveChanges)
+        catch (Exception ex)
         {
-            await Context.SaveChangesAsync();
+            Log.Error(ex, "Erreur lors de la suppression de l'entité {EntityType} avec l'identifiant {Id}",
+                typeof(TData).Name, id);
+            return Result.Fail($"Erreur lors de la suppression de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
         }
     }
 
     /// <summary>
     /// Persiste les changements (async).
     /// </summary>
-    public Task SaveChangesAsync()
+    public async Task<Result> SaveChangesAsync()
     {
-        return Context.SaveChangesAsync();
+        try
+        {
+            await Context.SaveChangesAsync();
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors de la persistence asynchrone des changements pour l'entité {EntityType}",
+                typeof(TData).Name);
+            return Result.Fail($"Erreur lors de la persistence des changements: {ex.Message}");
+        }
     }
 
     /// <summary>
     /// Persiste les changements (sync).
     /// </summary>
-    public void SaveChanges()
+    public Result SaveChanges()
     {
-        Context.SaveChanges();
+        try
+        {
+            Context.SaveChanges();
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors de la persistence synchrone des changements pour l'entité {EntityType}",
+                typeof(TData).Name);
+            return Result.Fail($"Erreur lors de la persistence des changements: {ex.Message}");
+        }
     }
 
     /// <summary>
     /// Verifie l'existence d'une entite par identifiant.
     /// </summary>
-    public async Task<bool> ExistsAsync(Guid id)
+    public async Task<Result<bool>> ExistsAsync(Guid id)
     {
-        return await Set.FindAsync(id) is not null;
+        try
+        {
+            var exists = await Set.FindAsync(id) is not null;
+            return Result.Ok(exists);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors de la verification d'existence de l'entité {EntityType} avec l'identifiant {Id}",
+                typeof(TData).Name, id);
+            return Result.Fail<bool>(
+                $"Erreur lors de la verification d'existence de l'entité {typeof(TData).Name} ({id}): {ex.Message}");
+        }
     }
 
-    public async Task<int> CountAsync()
+    public async Task<Result<int>> CountAsync()
     {
-        return await Set.CountAsync();
+        try
+        {
+            var count = await Set.CountAsync();
+            return Result.Ok(count);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Erreur lors du comptage des entites de type {EntityType}", typeof(TData).Name);
+            return Result.Fail<int>($"Erreur lors du comptage des entites {typeof(TData).Name}: {ex.Message}");
+        }
     }
-    
 }

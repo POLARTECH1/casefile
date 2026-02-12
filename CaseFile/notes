@@ -1,3 +1,7 @@
 DB-used: postgresql (16)
         UsePascalNamingCOnvention
         
+Packaged: fluentResult
+            Serilog
+            
+        
