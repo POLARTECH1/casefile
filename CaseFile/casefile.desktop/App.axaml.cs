@@ -30,11 +30,18 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var logDirectory = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "CaseFile",
+            "logs");
+        Directory.CreateDirectory(logDirectory);
+        var logFilePath = Path.Combine(logDirectory, "app.log");
+        
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
             .Enrich.FromLogContext()
             .WriteTo.Console()
-            .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day)
+            .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day)
             .CreateLogger();
         var configuration = BuildConfiguration();
         var services = new ServiceCollection();
