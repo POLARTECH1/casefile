@@ -35,17 +35,20 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
                         .HasColumnName("email");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("prenom");
 
                     b.Property<Guid?>("SchemaClientId")
@@ -54,7 +57,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Telephone")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("telephone");
 
                     b.Property<Guid?>("TemplateDossierId")
@@ -86,7 +90,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("A")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
                         .HasColumnName("a");
 
                     b.Property<Guid?>("DossierClientId")
@@ -99,12 +104,14 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("PiecesJointes")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
                         .HasColumnName("pieces_jointes");
 
                     b.Property<string>("Sujet")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("sujet");
 
                     b.HasKey("Id")
@@ -125,7 +132,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Cle")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("cle");
 
                     b.Property<bool>("EstRequis")
@@ -134,7 +142,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Libelle")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("libelle");
 
                     b.Property<Guid?>("SchemaClientId")
@@ -146,7 +155,8 @@ namespace casefile.data.Migrations
                         .HasColumnName("type");
 
                     b.Property<string>("ValeurDefaut")
-                        .HasColumnType("text")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
                         .HasColumnName("valeur_defaut");
 
                     b.HasKey("Id")
@@ -201,7 +211,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("CheminPhysique")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
                         .HasColumnName("chemin_physique");
 
                     b.Property<Guid?>("DossierClientId")
@@ -210,17 +221,20 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Extension")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("extension");
 
                     b.Property<string>("NomOriginal")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("nom_original");
 
                     b.Property<string>("NomStandardise")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("nom_standardise");
 
                     b.Property<Guid?>("TypeDocumentId")
@@ -248,7 +262,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("CheminVirtuel")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("chemin_virtuel");
 
                     b.Property<Guid?>("ClientId")
@@ -257,7 +272,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.HasKey("Id")
@@ -277,29 +293,35 @@ namespace casefile.data.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Adresse")
-                        .HasColumnType("text")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("adresse");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)")
                         .HasColumnName("email");
 
                     b.Property<string>("LogoPath")
-                        .HasColumnType("text")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
                         .HasColumnName("logo_path");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("nom");
 
                     b.Property<string>("Signature")
-                        .HasColumnType("text")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)")
                         .HasColumnName("signature");
 
                     b.Property<string>("Telephone")
-                        .HasColumnType("text")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("telephone");
 
                     b.HasKey("Id")
@@ -317,7 +339,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Pattern")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("pattern");
 
                     b.HasKey("Id")
@@ -335,7 +358,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.HasKey("Id")
@@ -353,12 +377,14 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Corps")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(20000)
+                        .HasColumnType("character varying(20000)")
                         .HasColumnName("corps");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.Property<Guid?>("ProfilEntrepriseId")
@@ -367,7 +393,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Sujet")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("sujet");
 
                     b.Property<Guid?>("TemplateDossierId")
@@ -394,12 +421,14 @@ namespace casefile.data.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
                         .HasColumnName("description");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.HasKey("Id")
@@ -421,7 +450,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.Property<int>("Ordre")
@@ -441,7 +471,10 @@ namespace casefile.data.Migrations
                     b.HasIndex("TemplateDossierId")
                         .HasDatabaseName("ix_templates_dossier_elements_template_dossier_id");
 
-                    b.ToTable("templates_dossier_elements", (string)null);
+                    b.ToTable("templates_dossier_elements", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_template_dossier_element_ordre_non_negatif", "Ordre >= 0");
+                        });
                 });
 
             modelBuilder.Entity("casefile.domain.model.TypeDocument", b =>
@@ -453,20 +486,24 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("code");
 
                     b.Property<string>("DossierCibleParDefaut")
-                        .HasColumnType("text")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("dossier_cible_par_defaut");
 
                     b.Property<string>("ExtensionsPermises")
-                        .HasColumnType("text")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("extensions_permises");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
                         .HasColumnName("nom");
 
                     b.Property<Guid?>("RegleNommageDocumentId")
@@ -496,7 +533,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Cle")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("cle");
 
                     b.Property<Guid?>("ClientId")
@@ -505,7 +543,8 @@ namespace casefile.data.Migrations
 
                     b.Property<string>("Valeur")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)")
                         .HasColumnName("valeur");
 
                     b.HasKey("Id")

@@ -236,6 +236,12 @@ public class BaseRepo<TData> : IBaseRepo<TData> where TData : class
         }
     }
 
+    /// <summary>
+    /// Applique une specification sur l'ensemble des donnees.
+    /// </summary>
+    /// <param name="specification">La specification a appliquer.</param>
+    /// <param name="evaluateCriteriaOnly">Indique si seuls les criteres de la specification doivent etre evalues.</param>
+    /// <returns>Une requete IQueryable representant l'ensemble des donnees filtrees par la specification.</returns>
     private IQueryable<TData> ApplySpecification(ISpecification<TData> specification, bool evaluateCriteriaOnly = false)
     {
         return SpecificationEvaluator.Default.GetQuery(Set.AsQueryable(), specification, evaluateCriteriaOnly);
