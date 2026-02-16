@@ -1,5 +1,6 @@
 using AutoMapper;
 using casefile.application.DTOs.TemplateDossier;
+using casefile.application.UseCases.Interfaces;
 using casefile.data.Repositories.Interface;
 using casefile.domain.model;
 using FluentResults;
@@ -15,7 +16,7 @@ namespace casefile.application.UseCases.TemplateDossierUseCases;
 public class CreateTemplateDossier(
     ITemplateDossierRepository templateDossierRepository,
     IValidator<CreateTemplateDossierDto> validator,
-    IMapper mapper)
+    IMapper mapper) : ICreateTemplateDossier
 {
     public async Task<Result<TemplateDossierDto>> ExecuteAsync(CreateTemplateDossierDto createTemplateDossierDto)
     {
