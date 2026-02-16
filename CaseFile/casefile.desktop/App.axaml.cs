@@ -5,17 +5,33 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using casefile.application.DTOs.Client.Validation;
+using casefile.application.DTOs.CourrielEnvoye.Validation;
+using casefile.application.DTOs.DefinitionAttribut.Validation;
+using casefile.application.DTOs.DocumentAttendu.Validation;
+using casefile.application.DTOs.DocumentClient.Validation;
+using casefile.application.DTOs.ProfilEntreprise.Validation;
+using casefile.application.DTOs.RegleNommageDocument.Validation;
+using casefile.application.DTOs.SchemaClient.Validation;
+using casefile.application.DTOs.TemplateCourriel.Validation;
+using casefile.application.DTOs.TemplateDossier.Validation;
+using casefile.application.DTOs.TemplateDossierElement.Validation;
+using casefile.application.DTOs.TypeDocument.Validation;
+using casefile.application.DTOs.ValeurAttributClient.Validation;
+using casefile.application.Mapping;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+
 namespace casefile.desktop;
 
 public partial class App : Application
@@ -49,10 +65,13 @@ public partial class App : Application
             lb.ClearProviders();
             lb.AddSerilog(Log.Logger, dispose: false);
         });
+        //==============================================================================================================
         ConfigureDatabase(services, configuration);
         ConfigureRepositories(services);
         ConfigureViewModel(services);
         ConfigureServices(services);
+        ConfigureValidations(services);
+        //==============================================================================================================
         Services = services.BuildServiceProvider();
 
         using (var scope = Services.CreateScope())
@@ -134,7 +153,10 @@ public partial class App : Application
         });
     }
 
-
+    /// <summary>
+    /// Configure et enregistre les repo nécessaires pour l'application dans le conteneur de services.
+    /// </summary>
+    /// <param name="services">La collection de services où les dépôts seront ajoutés.</param>
     private static void ConfigureRepositories(IServiceCollection services)
     {
         services.AddScoped<IClientRepository, ClientRepository>();
@@ -153,12 +175,55 @@ public partial class App : Application
         services.AddScoped<IValeurAttributClientRepository, ValeurAttributClientRepository>();
     }
 
+    /// <summary>
+    /// Permet de configurer les services qui doivent être utilisés par l'application.
+    /// </summary>
+    /// <param name="services">La collection de services à configurer.</param>
     private static void ConfigureServices(IServiceCollection services)
     {
+        services.AddAutoMapper(cfg => { }, typeof(MapperConfig));
     }
 
+    /// <summary>
+    /// Configure les services pour les ViewModels de l'application.
+    /// </summary>
+    /// <param name="services">Le conteneur de services pour l'injection de dépendances.</param>
     private static void ConfigureViewModel(IServiceCollection services)
     {
         services.AddScoped<MainWindowViewModel>();
+    }
+
+    /// <summary>
+    /// Configure les règles de validation pour les différents DTOs de l'application.
+    /// </summary>
+    /// <param name="services">Le conteneur de services à utiliser pour enregistrer les validateurs.</param>
+    private static void ConfigureValidations(IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<CreateClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateDocumentClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateDocumentClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateCourrielEnvoyeDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateCourrielEnvoyeDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateTemplateCourrielDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateTemplateCourrielDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateTemplateDossierDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateTemplateDossierDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateTemplateDossierElementDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateTemplateDossierElementDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateProfilEntrepriseDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateProfilEntrepriseDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateValeurAttributClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateValeurAttributClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateRegleNommageDocumentDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateRegleNommageDocumentDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateSchemaClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateSchemaClientDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateDefinitionAttributDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateDefinitionAttributDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateDocumentAttenduDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateDocumentAttenduDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateTypeDocumentDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateTypeDocumentDtoValidator>();
     }
 }

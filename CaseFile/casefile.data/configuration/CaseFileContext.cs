@@ -59,10 +59,10 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
-            entity.Property(e => e.Prenom).IsRequired();
-            entity.Property(e => e.Telephone).IsRequired();
-            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.Prenom).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.Telephone).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(320);
             entity.Property(e => e.CreeLe).IsRequired();
             entity.HasIndex(e => e.Email).IsUnique();
 
@@ -91,20 +91,21 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.A).IsRequired();
-            entity.Property(e => e.Sujet).IsRequired();
+            entity.Property(e => e.A).IsRequired().HasMaxLength(320);
+            entity.Property(e => e.Sujet).IsRequired().HasMaxLength(200);
             entity.Property(e => e.EnvoyeLe).IsRequired();
-            entity.Property(e => e.PiecesJointes).IsRequired();
+            entity.Property(e => e.PiecesJointes).IsRequired().HasMaxLength(2000);
         });
 
         modelBuilder.Entity<DefinitionAttribut>(entity =>
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Cle).IsRequired();
-            entity.Property(e => e.Libelle).IsRequired();
+            entity.Property(e => e.Cle).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Libelle).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Type).IsRequired();
             entity.Property(e => e.EstRequis).IsRequired();
+            entity.Property(e => e.ValeurDefaut).HasMaxLength(1000);
 
             entity.HasIndex(e => e.Cle);
 
@@ -129,10 +130,10 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.NomOriginal).IsRequired();
-            entity.Property(e => e.NomStandardise).IsRequired();
-            entity.Property(e => e.CheminPhysique).IsRequired();
-            entity.Property(e => e.Extension).IsRequired();
+            entity.Property(e => e.NomOriginal).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.NomStandardise).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.CheminPhysique).IsRequired().HasMaxLength(1000);
+            entity.Property(e => e.Extension).IsRequired().HasMaxLength(20);
             entity.Property(e => e.AjouteLe).IsRequired();
 
             entity.HasOne(e => e.TypeDocument)
@@ -150,8 +151,8 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
-            entity.Property(e => e.CheminVirtuel).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.CheminVirtuel).IsRequired().HasMaxLength(500);
 
             entity.HasMany(e => e.Documents)
                 .WithOne()
@@ -168,8 +169,12 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
-            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(320);
+            entity.Property(e => e.Telephone).HasMaxLength(50);
+            entity.Property(e => e.Adresse).HasMaxLength(500);
+            entity.Property(e => e.LogoPath).HasMaxLength(1000);
+            entity.Property(e => e.Signature).HasMaxLength(4000);
 
             entity.HasMany(e => e.TemplatesCourriel)
                 .WithOne()
@@ -181,14 +186,14 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Pattern).IsRequired();
+            entity.Property(e => e.Pattern).IsRequired().HasMaxLength(500);
         });
 
         modelBuilder.Entity<SchemaClient>(entity =>
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
 
             entity.HasMany(e => e.Definitions)
                 .WithOne()
@@ -200,9 +205,9 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
-            entity.Property(e => e.Sujet).IsRequired();
-            entity.Property(e => e.Corps).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.Sujet).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Corps).IsRequired().HasMaxLength(20000);
 
             entity.HasOne(e => e.TemplateDossier)
                 .WithMany()
@@ -219,7 +224,8 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.Description).HasMaxLength(2000);
 
             entity.HasMany(e => e.Elements)
                 .WithOne()
@@ -229,9 +235,10 @@ public class CaseFileContext : DbContext
 
         modelBuilder.Entity<TemplateDossierElement>(entity =>
         {
+            entity.ToTable(tb => tb.HasCheckConstraint("CK_template_dossier_element_ordre_non_negatif", "Ordre >= 0"));
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Nom).IsRequired();
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
             entity.Property(e => e.Ordre).IsRequired();
 
             entity.HasOne(e => e.Parent)
@@ -249,8 +256,10 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Code).IsRequired();
-            entity.Property(e => e.Nom).IsRequired();
+            entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.Nom).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.ExtensionsPermises).HasMaxLength(500);
+            entity.Property(e => e.DossierCibleParDefaut).HasMaxLength(500);
 
             entity.HasIndex(e => e.Code).IsUnique();
 
@@ -264,8 +273,8 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Cle).IsRequired();
-            entity.Property(e => e.Valeur).IsRequired();
+            entity.Property(e => e.Cle).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Valeur).IsRequired().HasMaxLength(4000);
 
             entity.HasIndex(e => e.Cle);
             entity.HasIndex("ClientId", "Cle").IsUnique();
