@@ -1,0 +1,119 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="24"
+                Background="{DynamicResource Brush.Background}">
+            <StackPanel Spacing="18"
+                        Width="520">
+                <TextBlock Classes="h2" Text="Preview UI" />
+                <TextBlock Text="Apercu des styles typographiques et controles." />
+
+                <Border Padding="16"
+                        Background="{DynamicResource Brush.Card}"
+                        BorderBrush="{DynamicResource Brush.Border}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource Radius.Lg}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="h3" Text="Typographie" />
+                        <TextBlock Classes="h1" Text="Titre h1" />
+                        <TextBlock Classes="h2" Text="Titre h2" />
+                        <TextBlock Classes="h3" Text="Titre h3" />
+                        <TextBlock Classes="h4" Text="Titre h4" />
+                        <TextBlock Classes="label" Text="Texte label" />
+                    </StackPanel>
+                </Border>
+
+                <Border Padding="16"
+                        Background="{DynamicResource Brush.Card}"
+                        BorderBrush="{DynamicResource Brush.Border}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource Radius.Lg}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="h3" Text="Formulaire" />
+                        <TextBlock Classes="label" Text="Nom du client" />
+                        <TextBox Watermark="Entrez un nom de client" />
+                        <TextBlock Classes="label" Text="Courriel" />
+                        <TextBox Text="exemple@casefile.app" />
+                        <CheckBox Content="Envoyer une notification" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="Secondaire" />
+                            <Button Content="Primaire"
+                                    Background="{DynamicResource Brush.Primary}"
+                                    Foreground="{DynamicResource Brush.Primary.Foreground}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+    <!-- Fenêtre: background / foreground globaux -->
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource Brush.Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground}" />
+    </Style>
+
+    <!-- TextBlocks typographiques via Classes -->
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="{DynamicResource Text.2Xl}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="LineHeight" Value="36" />
+    </Style>
+
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Xl}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="LineHeight" Value="30" />
+    </Style>
+
+    <Style Selector="TextBlock.h3">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Lg}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="LineHeight" Value="28" />
+    </Style>
+
+    <Style Selector="TextBlock.h4">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="LineHeight" Value="24" />
+    </Style>
+
+    <!-- Label -->
+    <Style Selector="TextBlock.label">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+    </Style>
+
+    <!-- Button -->
+    <Style Selector="Button">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+    </Style>
+
+    <!-- TextBox (input) -->
+    <Style Selector="TextBox">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Normal}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
+    </Style>
+
+    <!-- Icon de l'application -->
+    <Style Selector="Border#IconApp">
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
+        <Setter Property="Padding" Value="7" />
+        <Setter Property="Background" Value="{DynamicResource Color.Blue-600}" />
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+
+    <!-- Sidebar -->
+    <Style Selector="Border.Sidebar">
+        <Setter Property="Background" Value="{DynamicResource Color.Sidebar}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Sidebar.Border}" />
+        <Setter Property="BorderThickness" Value="1, 0, 1, 1" />
+    </Style>
+
+</Styles>

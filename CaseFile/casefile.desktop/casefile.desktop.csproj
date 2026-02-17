@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="Controls\" />
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
     </ItemGroup>
@@ -26,6 +27,7 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="EFCore.NamingConventions" Version="10.0.1" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+        <PackageReference Include="Lucide.Avalonia" Version="0.1.59" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
           <PrivateAssets>all</PrivateAssets>
