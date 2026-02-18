@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lucide="using:Lucide.Avalonia"
+             x:Class="casefile.desktop.Controls.NavBar">
+    <Border Classes="Sidebar">
+        <Grid RowDefinitions="Auto, * , Auto">
+            <!-- HEADER -->
+            <Border Padding="{DynamicResource Sidebar.DefaultPadding}"
+                    BorderBrush="{DynamicResource Color.Sidebar.Border}"
+                    BorderThickness="0,0,0,1">
+                <Grid ColumnDefinitions="Auto, *"
+                      ColumnSpacing="12"
+                      VerticalAlignment="Center">
+                    <!-- LOGO -->
+                    <Border Name="IconApp">
+                        <lucide:LucideIcon Kind="FolderOpen" Foreground="White" Size="25"></lucide:LucideIcon>
+                    </Border>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock Classes="h1">CaseFile</TextBlock>
+                        <TextBlock FontSize="{DynamicResource Text.Xs}" FontWeight="SemiLight">Gestion de dossier</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Padding="{DynamicResource Sidebar.DefaultPadding}"
+                    BorderBrush="{DynamicResource Color.Sidebar.Border}"
+                    BorderThickness="0,0,0,1">
+                <StackPanel Spacing="4">
+                    <Button Classes="NavItem">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="LayoutDashboard" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Tableau de bord" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="Users" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Clients" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="FileStack" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Schemas" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="FolderTree" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Templates" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="Building2" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Entreprise" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

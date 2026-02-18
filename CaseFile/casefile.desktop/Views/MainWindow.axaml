@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:casefile.desktop.ViewModels"
+        xmlns:controls="using:casefile.desktop.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -18,32 +19,10 @@
     <SplitView PanePlacement="Left"
                DisplayMode="CompactInline"
                IsPaneOpen="True"
-               OpenPaneLength="300"
-               CompactPaneLength="50">
+               OpenPaneLength="{StaticResource Sidebar.Width.Expanded}"
+               CompactPaneLength="{StaticResource Sidebar.Width.Compact}">
         <SplitView.Pane>
-            <Border Classes="Sidebar">
-                <Grid RowDefinitions="Auto, * , Auto">
-                    <!-- HEADER -->
-                    <Border Padding="{DynamicResource Sidebar.DefaultPadding}"
-                            BorderBrush="{DynamicResource Color.Sidebar.Border}"
-                            BorderThickness="0,0,0,1">
-                        <Grid ColumnDefinitions="Auto, *"
-                              ColumnSpacing="12"
-                              VerticalAlignment="Center">
-                            <!-- LOGO -->
-                            <Border Name="IconApp">
-                                <LucideIcon Kind="FolderOpen" Size="25"></LucideIcon>
-                            </Border>
-
-                            <StackPanel Grid.Column="1" Orientation="Vertical">
-                                <TextBlock Classes="h1">CaseFile</TextBlock>
-                                <TextBlock FontSize="{DynamicResource Text.Xs}" FontWeight="SemiLight">Gestion de dossier</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
-
+            <controls:NavBar />
         </SplitView.Pane>
     </SplitView>
 

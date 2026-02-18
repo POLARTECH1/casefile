@@ -91,6 +91,27 @@
         <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
     </Style>
 
+    <!-- Boutons de navigation dans la sidebar -->
+    <Style Selector="Button.NavItem">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Padding" Value="10,10" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource Color.Sidebar.Accent.Foreground}"></Setter>
+    </Style>
+
+    <Style Selector="Button.NavItem:pointerover">
+        <Setter Property="Background" Value="{DynamicResource Color.Sidebar.Accent}" />
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <Style Selector="Button.NavItem.Selected">
+        <Setter Property="Background" Value="{DynamicResource Color.Blue-50}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Blue-600}"></Setter>
+
+    </Style>
+
     <!-- TextBox (input) -->
     <Style Selector="TextBox">
         <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
@@ -108,6 +129,7 @@
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
+
 
     <!-- Sidebar -->
     <Style Selector="Border.Sidebar">
