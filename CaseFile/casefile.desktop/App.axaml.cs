@@ -22,6 +22,7 @@ using casefile.application.Mapping;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
+using casefile.desktop.Navigation;
 using casefile.desktop.Models;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
@@ -87,10 +88,12 @@ public partial class App : Application
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
+            var appScope = Services.CreateScope();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = Services.GetRequiredService<MainWindowViewModel>(),
+                DataContext = appScope.ServiceProvider.GetRequiredService<MainWindowViewModel>(),
             };
+            desktop.Exit += (_, _) => appScope.Dispose();
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -191,6 +194,10 @@ public partial class App : Application
     /// <param name="services">Le conteneur de services pour l'injection de dépendances.</param>
     private static void ConfigureViewModel(IServiceCollection services)
     {
+        services.AddSingleton<AppScreen>();
+        services.AddSingleton<ReactiveUI.IScreen>(sp => sp.GetRequiredService<AppScreen>());
+        services.AddSingleton<IAppRouter, AppRouter>();
+        services.AddScoped<NavBarViewModel>();
         services.AddScoped<MainWindowViewModel>();
         services.AddScoped<TemplatePageViewModel>();
         services.AddScoped<ClientPageViewModel>();

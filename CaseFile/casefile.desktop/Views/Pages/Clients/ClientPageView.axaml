@@ -8,7 +8,7 @@
              x:DataType="models:ClientPageViewModel">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <TextBlock>Page des templates</TextBlock>
+        <TextBlock>Page des clients</TextBlock>
         <TextBlock Text="{Binding UrlPathSegment}" />
     </StackPanel>
 </UserControl>

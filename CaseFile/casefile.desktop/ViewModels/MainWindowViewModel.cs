@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Reactive;
-using casefile.desktop.Models;
-using Microsoft.Extensions.Logging;
+using casefile.desktop.Navigation;
 using ReactiveUI;
 
 namespace casefile.desktop.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IScreen
 {
-    public MainWindowViewModel(IServiceProvider services)
+    private readonly AppScreen _screen;
+    private readonly IAppRouter _appRouter;
+
+    public MainWindowViewModel(AppScreen screen, NavBarViewModel navBar, IAppRouter appRouter)
     {
-        NavBar = new NavBarViewModel(this);
-        /*NavigateToClientPage =
-            ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new ClientPageViewModel(this)));
-        NavigateToTemplatePage =
-            ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new TemplatePageViewModel(this)));*/
+        _screen = screen;
+        _appRouter = appRouter;
+        NavBar = navBar;
+        GoBack = ReactiveCommand.CreateFromObservable(() => _appRouter.GoBack());
+
+        _appRouter.NavigateTo(AppRoute.Clients).Subscribe(new NoOpObserver());
     }
 
     /// <summary>
@@ -23,12 +26,9 @@ public partial class MainWindowViewModel : ViewModelBase, IScreen
     /// Cette propriété expose un <see cref="RoutingState"/> utilisé pour contrôler
     /// les transitions et maintenir l'état de navigation.
     /// </summary>
-    public RoutingState Router { get; } = new RoutingState();
+    public RoutingState Router => _screen.Router;
 
     public NavBarViewModel NavBar { get; }
-    /* public ReactiveCommand<Unit, IRoutableViewModel> NavigateToClientPage { get; }
-
-     public ReactiveCommand<Unit, IRoutableViewModel> NavigateToTemplatePage { get; }*/
 
     /// <summary>
     /// Représente une commande permettant de revenir à la vue précédente
@@ -37,5 +37,20 @@ public partial class MainWindowViewModel : ViewModelBase, IScreen
     /// déclencher l'action de navigation en arrière via le <see cref="RoutingState"/>
     /// associé.
     /// </summary>
-    public ReactiveCommand<Unit, IRoutableViewModel> GoBack => Router.NavigateBack;
+    public ReactiveCommand<Unit, IRoutableViewModel> GoBack { get; }
+
+    private sealed class NoOpObserver : IObserver<IRoutableViewModel>
+    {
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
+        }
+
+        public void OnNext(IRoutableViewModel value)
+        {
+        }
+    }
 }
