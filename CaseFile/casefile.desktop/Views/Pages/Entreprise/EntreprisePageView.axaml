@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:casefile.desktop.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="casefile.desktop.Views.Pages.Templates.TemplatePageView"
-             x:DataType="models:TemplatePageViewModel">
+             x:Class="casefile.desktop.Views.Pages.Entreprise.EntreprisePageView"
+             x:DataType="models:EntreprisePageViewModel">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <TextBlock>Page des templates</TextBlock>
+        <TextBlock>Page entreprise</TextBlock>
         <TextBlock Text="{Binding UrlPathSegment}" />
     </StackPanel>
 </UserControl>

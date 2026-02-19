@@ -23,7 +23,6 @@ using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
 using casefile.desktop.Navigation;
-using casefile.desktop.Models;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views;
@@ -199,8 +198,11 @@ public partial class App : Application
         services.AddSingleton<IAppRouter, AppRouter>();
         services.AddScoped<NavBarViewModel>();
         services.AddScoped<MainWindowViewModel>();
+        services.AddScoped<DashboardPageViewModel>();
         services.AddScoped<TemplatePageViewModel>();
         services.AddScoped<ClientPageViewModel>();
+        services.AddScoped<SchemaPageViewModel>();
+        services.AddScoped<EntreprisePageViewModel>();
     }
 
     /// <summary>

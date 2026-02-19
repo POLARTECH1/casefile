@@ -1,4 +1,3 @@
-using casefile.desktop.Models;
 using ReactiveUI;
 
 namespace casefile.desktop.ViewModels;

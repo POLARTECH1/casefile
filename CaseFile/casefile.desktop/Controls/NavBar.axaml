@@ -29,7 +29,7 @@
                     BorderBrush="{DynamicResource Color.Sidebar.Border}"
                     BorderThickness="0,0,0,1">
                 <StackPanel Spacing="4">
-                    <Button Classes="NavItem">
+                    <Button Classes="NavItem" Command="{Binding NavigateToDashboardPage}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="LayoutDashboard" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Tableau de bord" />
@@ -41,7 +41,7 @@
                             <TextBlock Text="Clients" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem">
+                    <Button Classes="NavItem" Command="{Binding NavigateToSchemaPage}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="FileStack" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Schemas" />
@@ -53,7 +53,7 @@
                             <TextBlock Text="Templates" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem">
+                    <Button Classes="NavItem" Command="{Binding NavigateToEntreprisePage}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="Building2" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Entreprise" />

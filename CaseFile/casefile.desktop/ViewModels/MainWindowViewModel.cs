@@ -17,7 +17,7 @@ public partial class MainWindowViewModel : ViewModelBase, IScreen
         NavBar = navBar;
         GoBack = ReactiveCommand.CreateFromObservable(() => _appRouter.GoBack());
 
-        _appRouter.NavigateTo(AppRoute.Clients).Subscribe(new NoOpObserver());
+        _appRouter.NavigateTo(AppRoute.Dashboard).Subscribe(new NoOpObserver());
     }
 
     /// <summary>

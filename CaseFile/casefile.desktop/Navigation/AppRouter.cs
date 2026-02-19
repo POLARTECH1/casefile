@@ -1,5 +1,4 @@
 using System;
-using casefile.desktop.Models;
 using casefile.desktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
@@ -38,8 +37,11 @@ public sealed class AppRouter : IAppRouter, IDisposable
         _activeRouteScope = _scopeFactory.CreateScope();
         IRoutableViewModel vm = route switch
         {
+            AppRoute.Dashboard => _activeRouteScope.ServiceProvider.GetRequiredService<DashboardPageViewModel>(),
             AppRoute.Clients => _activeRouteScope.ServiceProvider.GetRequiredService<ClientPageViewModel>(),
+            AppRoute.Schema => _activeRouteScope.ServiceProvider.GetRequiredService<SchemaPageViewModel>(),
             AppRoute.Templates => _activeRouteScope.ServiceProvider.GetRequiredService<TemplatePageViewModel>(),
+            AppRoute.Entreprise => _activeRouteScope.ServiceProvider.GetRequiredService<EntreprisePageViewModel>(),
             _ => throw new ArgumentOutOfRangeException(nameof(route), route, "Route non supportee"),
         };
 

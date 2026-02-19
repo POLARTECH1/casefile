@@ -1,15 +1,13 @@
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using casefile.desktop.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
 
-namespace casefile.desktop.Views.Pages.Templates;
+namespace casefile.desktop.Views.Pages.Dashboard;
 
-public partial class TemplatePageView : ReactiveUserControl<TemplatePageViewModel>
+public partial class DashboardPageView : ReactiveUserControl<DashboardPageViewModel>
 {
-    public TemplatePageView()
+    public DashboardPageView()
     {
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);

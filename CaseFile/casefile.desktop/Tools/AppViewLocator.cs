@@ -1,7 +1,9 @@
 using System;
-using casefile.desktop.Models;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views.Pages.Clients;
+using casefile.desktop.Views.Pages.Dashboard;
+using casefile.desktop.Views.Pages.Entreprise;
+using casefile.desktop.Views.Pages.Schema;
 using casefile.desktop.Views.Pages.Templates;
 using ReactiveUI;
 
@@ -20,6 +22,9 @@ public class AppViewLocator : ReactiveUI.IViewLocator
         return viewModel switch
         {
             ClientPageViewModel context => new ClientPageView { DataContext = context },
+            DashboardPageViewModel context => new DashboardPageView { DataContext = context },
+            EntreprisePageViewModel context => new EntreprisePageView { DataContext = context },
+            SchemaPageViewModel context => new SchemaPageView { DataContext = context },
             TemplatePageViewModel context => new TemplatePageView { DataContext = context },
             _ => throw new ArgumentOutOfRangeException(nameof(viewModel))
         };

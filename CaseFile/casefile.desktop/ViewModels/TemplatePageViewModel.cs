@@ -1,8 +1,6 @@
-using System;
-using casefile.desktop.ViewModels;
 using ReactiveUI;
 
-namespace casefile.desktop.Models;
+namespace casefile.desktop.ViewModels;
 
 public class TemplatePageViewModel : PageViewModelBase
 {
