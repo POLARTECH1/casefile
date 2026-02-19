@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="Button /template/ ContentPresenter">
         <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
-        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Normal}" />
     </Style>
 
     <Style Selector="TextBox">
@@ -11,5 +11,24 @@
         <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
+    </Style>
+
+    <Style Selector="Button.Primary /template/ ContentPresenter">
+        <Setter Property="Padding" Value="10,10" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Primary.Foreground}" />
+    </Style>
+
+    <Style Selector="Button.Primary:not(:disabled):pointerover /template/ ContentPresenter">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource Color.Primary}"
+                                 Opacity="0.9">
+                </SolidColorBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Primary.Foreground}" />
     </Style>
 </Styles>

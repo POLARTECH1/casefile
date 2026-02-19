@@ -14,7 +14,7 @@
     <SolidColorBrush x:Key="Brush.Blue-500" Color="{DynamicResource Color.Blue-500}" />
     <Color x:Key="Color.Blue-600">#2563eb</Color>
     <SolidColorBrush x:Key="Brush.Blue-600" Color="{DynamicResource Color.Blue-600}" />
-    <Color x:Key="Color.Blue-700">#1d4ed8</Color>
+    <Color x:Key="Color.Blue-700">#1447e6</Color>
     <SolidColorBrush x:Key="Brush.Blue-700" Color="{DynamicResource Color.Blue-700}" />
     <Color x:Key="Color.Blue-800">#1e40af</Color>
     <SolidColorBrush x:Key="Brush.Blue-800" Color="{DynamicResource Color.Blue-800}" />

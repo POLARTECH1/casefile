@@ -72,6 +72,11 @@
                     </Button>
                 </StackPanel>
             </Border>
+            <!-- FOOTER -->
+            <Border Grid.Row="2" Padding="{DynamicResource Sidebar.DefaultPadding}" HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                <TextBlock FontSize="{DynamicResource Text.Xs}" Foreground="{DynamicResource Brush.Muted.Foreground}">Version 1.0.0</TextBlock>
+            </Border>
         </Grid>
     </Border>
 </UserControl>
