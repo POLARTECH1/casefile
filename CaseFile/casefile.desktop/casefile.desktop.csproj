@@ -9,8 +9,11 @@
 
     <ItemGroup>
         <Folder Include="Controls\" />
-        <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
+        <Folder Include="Models\" />
+        <Folder Include="Views\Pages\Dashboard\" />
+        <Folder Include="Views\Pages\Entreprise\" />
+        <Folder Include="Views\Pages\Schema\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -45,6 +48,7 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+        <PackageReference Include="ReactiveUI.Avalonia" Version="11.3.8" />
         <PackageReference Include="Serilog" Version="4.3.1" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />

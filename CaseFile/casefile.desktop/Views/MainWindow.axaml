@@ -1,9 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:app="using:casefile.desktop"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:casefile.desktop.ViewModels"
         xmlns:controls="using:casefile.desktop.Controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tools="clr-namespace:casefile.desktop.Tools"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="casefile.desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -22,8 +25,20 @@
                OpenPaneLength="{StaticResource Sidebar.Width.Expanded}"
                CompactPaneLength="{StaticResource Sidebar.Width.Compact}">
         <SplitView.Pane>
-            <controls:NavBar />
+            <controls:NavBar DataContext="{Binding NavBar}" />
         </SplitView.Pane>
+        <SplitView.Content>
+            <rxui:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
+                <rxui:RoutedViewHost.DefaultContent>
+                    <TextBlock Text="Default content"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </rxui:RoutedViewHost.DefaultContent>
+                <rxui:RoutedViewHost.ViewLocator>
+                    <tools:AppViewLocator />
+                </rxui:RoutedViewHost.ViewLocator>
+            </rxui:RoutedViewHost>
+        </SplitView.Content>
     </SplitView>
 
 </Window>

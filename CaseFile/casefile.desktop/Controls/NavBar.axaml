@@ -1,7 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:lucide="using:Lucide.Avalonia"
-             x:Class="casefile.desktop.Controls.NavBar">
+             xmlns:viewModels="clr-namespace:casefile.desktop.ViewModels"
+             x:Class="casefile.desktop.Controls.NavBar"
+             x:DataType="viewModels:NavBarViewModel">
     <Border Classes="Sidebar">
         <Grid RowDefinitions="Auto, * , Auto">
             <!-- HEADER -->
@@ -22,6 +24,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
+            <!-- NAVIGATION -->
             <Border Grid.Row="1" Padding="{DynamicResource Sidebar.DefaultPadding}"
                     BorderBrush="{DynamicResource Color.Sidebar.Border}"
                     BorderThickness="0,0,0,1">
@@ -32,7 +35,7 @@
                             <TextBlock Text="Tableau de bord" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem">
+                    <Button Classes="NavItem" Command="{Binding NavigateToClientPage}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="Users" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Clients" />
@@ -44,7 +47,7 @@
                             <TextBlock Text="Schemas" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem">
+                    <Button Classes="NavItem" Command="{Binding NavigateToTemplatePage}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="FolderTree" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Templates" />

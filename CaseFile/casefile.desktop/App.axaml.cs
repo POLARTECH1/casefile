@@ -22,6 +22,7 @@ using casefile.application.Mapping;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
+using casefile.desktop.Models;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.Views;
@@ -191,6 +192,8 @@ public partial class App : Application
     private static void ConfigureViewModel(IServiceCollection services)
     {
         services.AddScoped<MainWindowViewModel>();
+        services.AddScoped<TemplatePageViewModel>();
+        services.AddScoped<ClientPageViewModel>();
     }
 
     /// <summary>

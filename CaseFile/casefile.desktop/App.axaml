@@ -11,13 +11,13 @@
 
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="Styles/AppStyle.axaml"></StyleInclude>
+        <StyleInclude Source="Styles/AppStyles.axaml" />
     </Application.Styles>
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <MergeResourceInclude Source="Styles/AppResources.axaml"></MergeResourceInclude>
+                <MergeResourceInclude Source="Resources/AppResources.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
