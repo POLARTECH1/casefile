@@ -29,31 +29,42 @@
                     BorderBrush="{DynamicResource Color.Sidebar.Border}"
                     BorderThickness="0,0,0,1">
                 <StackPanel Spacing="4">
-                    <Button Classes="NavItem" Command="{Binding NavigateToDashboardPage}">
+                    <Button Classes="NavItem"
+                            Classes.Selected="{Binding IsDashboardActive}"
+                            Command="{Binding NavigateToDashboardPage}"
+                            IsEnabled="{Binding !IsDashboardActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="LayoutDashboard" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Tableau de bord" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem" Command="{Binding NavigateToClientPage}">
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsClientActive}"
+                            Command="{Binding NavigateToClientPage}"
+                            IsEnabled="{Binding !IsClientActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="Users" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Clients" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem" Command="{Binding NavigateToSchemaPage}">
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsSchemaActive}"
+                            Command="{Binding NavigateToSchemaPage}"
+                            IsEnabled="{Binding !IsSchemaActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="FileStack" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Schemas" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem" Command="{Binding NavigateToTemplatePage}">
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsTemplateActive}"
+                            Command="{Binding NavigateToTemplatePage}"
+                            IsEnabled="{Binding !IsTemplateActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="FolderTree" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Templates" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="NavItem" Command="{Binding NavigateToEntreprisePage}">
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsEntrepriseActive}"
+                            Command="{Binding NavigateToEntreprisePage}"
+                            IsEnabled="{Binding !IsEntrepriseActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
                             <lucide:LucideIcon Kind="Building2" Size="22"></lucide:LucideIcon>
                             <TextBlock Text="Entreprise" />

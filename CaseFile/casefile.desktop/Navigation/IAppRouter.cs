@@ -10,6 +10,16 @@ namespace casefile.desktop.Navigation;
 public interface IAppRouter
 {
     /// <summary>
+    /// Représente la route active actuellement affichée dans l'application.
+    /// </summary>
+    AppRoute? CurrentRoute { get; }
+
+    /// <summary>
+    /// Flux émis à chaque changement de route active.
+    /// </summary>
+    IObservable<AppRoute> CurrentRouteChanged { get; }
+
+    /// <summary>
     /// Navigue vers une vue spécifique selon la route fournie.
     /// </summary>
     /// <param name="route">La route cible représentant la vue vers laquelle naviguer.</param>

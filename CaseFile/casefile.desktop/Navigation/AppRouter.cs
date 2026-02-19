@@ -1,4 +1,6 @@
 using System;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using casefile.desktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
@@ -14,13 +16,19 @@ public sealed class AppRouter : IAppRouter, IDisposable
 {
     private readonly AppScreen _screen;
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly Subject<AppRoute> _currentRouteSubject = new();
     private IServiceScope? _activeRouteScope;
+    private AppRoute? _currentRoute;
 
     public AppRouter(AppScreen screen, IServiceScopeFactory scopeFactory)
     {
         _screen = screen;
         _scopeFactory = scopeFactory;
     }
+
+    public AppRoute? CurrentRoute => _currentRoute;
+
+    public IObservable<AppRoute> CurrentRouteChanged => _currentRouteSubject.AsObservable();
 
     /// <summary>
     /// Navigue vers une page spécifique en fonction de l'itinéraire fourni.
@@ -45,16 +53,49 @@ public sealed class AppRouter : IAppRouter, IDisposable
             _ => throw new ArgumentOutOfRangeException(nameof(route), route, "Route non supportee"),
         };
 
-        return _screen.Router.NavigateAndReset.Execute(vm);
+        return _screen.Router.NavigateAndReset.Execute(vm)
+            .Do(_ => SetCurrentRoute(route));
     }
 
-    public IObservable<IRoutableViewModel> GoBack() => _screen.Router.NavigateBack.Execute();
+    public IObservable<IRoutableViewModel> GoBack() =>
+        _screen.Router.NavigateBack.Execute()
+            .Do(vm =>
+            {
+                var route = ResolveRoute(vm);
+                if (route is not null)
+                {
+                    SetCurrentRoute(route.Value);
+                }
+            });
 
-    public void Dispose() => DisposeActiveScope();
+    public void Dispose()
+    {
+        DisposeActiveScope();
+        _currentRouteSubject.Dispose();
+    }
 
     private void DisposeActiveScope()
     {
         _activeRouteScope?.Dispose();
         _activeRouteScope = null;
+    }
+
+    private void SetCurrentRoute(AppRoute route)
+    {
+        _currentRoute = route;
+        _currentRouteSubject.OnNext(route);
+    }
+
+    private static AppRoute? ResolveRoute(IRoutableViewModel vm)
+    {
+        return vm switch
+        {
+            DashboardPageViewModel => AppRoute.Dashboard,
+            ClientPageViewModel => AppRoute.Clients,
+            SchemaPageViewModel => AppRoute.Schema,
+            TemplatePageViewModel => AppRoute.Templates,
+            EntreprisePageViewModel => AppRoute.Entreprise,
+            _ => null,
+        };
     }
 }

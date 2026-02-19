@@ -50,11 +50,36 @@
             <SolidColorBrush x:Key="Brush.Foreground" Color="{DynamicResource Color.Foreground}" />
             <SolidColorBrush x:Key="Brush.Card" Color="{DynamicResource Color.Card}" />
             <SolidColorBrush x:Key="Brush.Card.Foreground" Color="{DynamicResource Color.Card.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Popover" Color="{DynamicResource Color.Popover}" />
+            <SolidColorBrush x:Key="Brush.Popover.Foreground" Color="{DynamicResource Color.Popover.Foreground}" />
             <SolidColorBrush x:Key="Brush.Primary" Color="{DynamicResource Color.Primary}" />
             <SolidColorBrush x:Key="Brush.Primary.Foreground" Color="{DynamicResource Color.Primary.Foreground}" />
             <SolidColorBrush x:Key="Brush.Secondary" Color="{DynamicResource Color.Secondary}" />
+            <SolidColorBrush x:Key="Brush.Secondary.Foreground" Color="{DynamicResource Color.Secondary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Muted" Color="{DynamicResource Color.Muted}" />
+            <SolidColorBrush x:Key="Brush.Muted.Foreground" Color="{DynamicResource Color.Muted.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Accent" Color="{DynamicResource Color.Accent}" />
+            <SolidColorBrush x:Key="Brush.Accent.Foreground" Color="{DynamicResource Color.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Destructive" Color="{DynamicResource Color.Destructive}" />
+            <SolidColorBrush x:Key="Brush.Destructive.Foreground" Color="{DynamicResource Color.Destructive.Foreground}" />
             <SolidColorBrush x:Key="Brush.Border" Color="{DynamicResource Color.Border}" />
+            <SolidColorBrush x:Key="Brush.Input" Color="{DynamicResource Color.Input}" />
             <SolidColorBrush x:Key="Brush.Input.Background" Color="{DynamicResource Color.Input.Background}" />
+            <SolidColorBrush x:Key="Brush.Switch.Background" Color="{DynamicResource Color.Switch.Background}" />
+            <SolidColorBrush x:Key="Brush.Ring" Color="{DynamicResource Color.Ring}" />
+            <SolidColorBrush x:Key="Brush.Chart.1" Color="{DynamicResource Color.Chart.1}" />
+            <SolidColorBrush x:Key="Brush.Chart.2" Color="{DynamicResource Color.Chart.2}" />
+            <SolidColorBrush x:Key="Brush.Chart.3" Color="{DynamicResource Color.Chart.3}" />
+            <SolidColorBrush x:Key="Brush.Chart.4" Color="{DynamicResource Color.Chart.4}" />
+            <SolidColorBrush x:Key="Brush.Chart.5" Color="{DynamicResource Color.Chart.5}" />
+            <SolidColorBrush x:Key="Brush.Sidebar" Color="{DynamicResource Color.Sidebar}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Foreground" Color="{DynamicResource Color.Sidebar.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary" Color="{DynamicResource Color.Sidebar.Primary}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary.Foreground" Color="{DynamicResource Color.Sidebar.Primary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent" Color="{DynamicResource Color.Sidebar.Accent}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent.Foreground" Color="{DynamicResource Color.Sidebar.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Border" Color="{DynamicResource Color.Sidebar.Border}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Ring" Color="{DynamicResource Color.Sidebar.Ring}" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
@@ -104,10 +129,34 @@
             <SolidColorBrush x:Key="Brush.Foreground" Color="{DynamicResource Color.Foreground}" />
             <SolidColorBrush x:Key="Brush.Card" Color="{DynamicResource Color.Card}" />
             <SolidColorBrush x:Key="Brush.Card.Foreground" Color="{DynamicResource Color.Card.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Popover" Color="{DynamicResource Color.Popover}" />
+            <SolidColorBrush x:Key="Brush.Popover.Foreground" Color="{DynamicResource Color.Popover.Foreground}" />
             <SolidColorBrush x:Key="Brush.Primary" Color="{DynamicResource Color.Primary}" />
             <SolidColorBrush x:Key="Brush.Primary.Foreground" Color="{DynamicResource Color.Primary.Foreground}" />
             <SolidColorBrush x:Key="Brush.Secondary" Color="{DynamicResource Color.Secondary}" />
+            <SolidColorBrush x:Key="Brush.Secondary.Foreground" Color="{DynamicResource Color.Secondary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Muted" Color="{DynamicResource Color.Muted}" />
+            <SolidColorBrush x:Key="Brush.Muted.Foreground" Color="{DynamicResource Color.Muted.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Accent" Color="{DynamicResource Color.Accent}" />
+            <SolidColorBrush x:Key="Brush.Accent.Foreground" Color="{DynamicResource Color.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Destructive" Color="{DynamicResource Color.Destructive}" />
+            <SolidColorBrush x:Key="Brush.Destructive.Foreground" Color="{DynamicResource Color.Destructive.Foreground}" />
             <SolidColorBrush x:Key="Brush.Border" Color="{DynamicResource Color.Border}" />
+            <SolidColorBrush x:Key="Brush.Input" Color="{DynamicResource Color.Input}" />
+            <SolidColorBrush x:Key="Brush.Ring" Color="{DynamicResource Color.Ring}" />
+            <SolidColorBrush x:Key="Brush.Chart.1" Color="{DynamicResource Color.Chart.1}" />
+            <SolidColorBrush x:Key="Brush.Chart.2" Color="{DynamicResource Color.Chart.2}" />
+            <SolidColorBrush x:Key="Brush.Chart.3" Color="{DynamicResource Color.Chart.3}" />
+            <SolidColorBrush x:Key="Brush.Chart.4" Color="{DynamicResource Color.Chart.4}" />
+            <SolidColorBrush x:Key="Brush.Chart.5" Color="{DynamicResource Color.Chart.5}" />
+            <SolidColorBrush x:Key="Brush.Sidebar" Color="{DynamicResource Color.Sidebar}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Foreground" Color="{DynamicResource Color.Sidebar.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary" Color="{DynamicResource Color.Sidebar.Primary}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary.Foreground" Color="{DynamicResource Color.Sidebar.Primary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent" Color="{DynamicResource Color.Sidebar.Accent}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent.Foreground" Color="{DynamicResource Color.Sidebar.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Border" Color="{DynamicResource Color.Sidebar.Border}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Ring" Color="{DynamicResource Color.Sidebar.Ring}" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

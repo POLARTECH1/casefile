@@ -1,0 +1,15 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Button /template/ ContentPresenter">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Normal}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
+    </Style>
+</Styles>
