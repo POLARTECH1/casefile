@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="{DynamicResource Text.2Xl}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="LineHeight" Value="36" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
+    </Style>
+
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Xl}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
+        <Setter Property="LineHeight" Value="30" />
+    </Style>
+
+    <Style Selector="TextBlock.h3">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Lg}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
+        <Setter Property="LineHeight" Value="28" />
+    </Style>
+
+    <Style Selector="TextBlock.h4">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
+        <Setter Property="LineHeight" Value="24" />
+    </Style>
+
+    <Style Selector="TextBlock.label">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+    </Style>
+</Styles>

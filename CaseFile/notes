@@ -4,5 +4,7 @@ DB-used: postgresql (16)
 Packaged: FluentResults : pour ammeliorer l'informations des resultats
             Serilog : pour les logs
             Adalis : pour les filtres des requetes
+            LucideAvalonia : pour les icones (lucide:Lucide Icon="name")
+            Semi.Avalonia : pour le theme
             
         
