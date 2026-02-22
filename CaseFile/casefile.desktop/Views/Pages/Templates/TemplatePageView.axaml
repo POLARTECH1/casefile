@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:casefile.desktop.ViewModels"
+             xmlns:templates="clr-namespace:casefile.desktop.Views.Pages.Templates"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="casefile.desktop.Views.Pages.Templates.TemplatePageView"
              x:DataType="models:TemplatePageViewModel">
@@ -26,6 +27,13 @@
             <!-- Page Content -->
             <Grid Grid.Row="1">
                 <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding ListeTemplate}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <templates:TemplateDossierItem DataContext="{Binding .}"></templates:TemplateDossierItem>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </Grid>
         </Grid>

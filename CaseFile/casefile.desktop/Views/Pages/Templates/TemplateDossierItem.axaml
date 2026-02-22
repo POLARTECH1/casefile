@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:template="clr-namespace:casefile.desktop.ViewModels.Template"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="casefile.desktop.Views.Pages.Templates.TemplateDossierItem"
+             x:DataType="template:TemplateDossierItemViewModel">
+    <Border Classes="AppCard">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto" RowSpacing="12">
+            <!-- Icone et paramètres du dossier -->
+            <Grid ColumnDefinitions="Auto, * , Auto">
+                <Border>
+                    <LucideIcon Kind="FolderTree" Size="22"></LucideIcon>
+                </Border>
+                <Border Grid.Column="2">
+                    <LucideIcon Kind="Settings" Size="22"></LucideIcon>
+                </Border>
+            </Grid>
+            <!-- Titre du template -->
+            <TextBlock Grid.Row="1">
+            </TextBlock>
+            <!-- Description du template -->
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <!-- Nombre de dossiers enfants -->
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <TextBlock>Dossiers</TextBlock>
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding NombreDeDossiers}" />
+                </Grid>
+                <!-- Nombres de documents attendus -->
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <TextBlock>Documents attendus</TextBlock>
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding NombreDocumentsAttendus}" />
+                </Grid>
+                <!-- Nombre de clients utilisant ce template -->
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <TextBlock>Utilisé par</TextBlock>
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding NombreDeClientsQuiUtilisentCeTemplate}" />
+                </Grid>
+            </StackPanel>
+            <!-- Actions sur le template -->
+            <Border Grid.Row="3">
+                <Grid ColumnDefinitions="*, Auto">
+                    <!-- Modifier le template -->
+                    <Button>
+                        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                            <LucideIcon Kind="SquarePen" Size="18"></LucideIcon>
+                            <TextBlock>Modifier</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <!-- Supprimer le template -->
+                    <Button Grid.Column="1">
+                        <LucideIcon Kind="Trash2" Size="18"></LucideIcon>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
