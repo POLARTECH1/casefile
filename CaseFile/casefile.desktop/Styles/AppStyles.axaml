@@ -4,5 +4,5 @@
     <StyleInclude Source="/Styles/Controls/Controls.axaml" />
     <StyleInclude Source="/Styles/Controls/NavBar.axaml" />
     <StyleInclude Source="/Styles/Layout.axaml" />
-    <StyleInclude Source="/Styles/Controls/TemplateDossierItemCard.axaml" />
+    <StyleInclude Source="/Styles/Controls/AppCard.axaml" />
 </Styles>

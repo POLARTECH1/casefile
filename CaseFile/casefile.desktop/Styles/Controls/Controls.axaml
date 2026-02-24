@@ -1,8 +1,17 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Button">
+        <Setter Property="Padding" Value="10,10" />
+    </Style>
+    <Style Selector="Button:pressed">
+        <Setter Property="RenderTransform" Value="None" />
+
+    </Style>
+
     <Style Selector="Button /template/ ContentPresenter">
         <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
-        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Normal}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Weight.Medium}" />
+        <Setter Property="BorderThickness" Value="1" />
     </Style>
 
     <Style Selector="TextBox">
@@ -14,10 +23,9 @@
     </Style>
 
     <Style Selector="Button.Primary /template/ ContentPresenter">
-        <Setter Property="Padding" Value="10,10" />
-        <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Background" Value="{DynamicResource Brush.Primary}" />
         <Setter Property="Foreground" Value="{DynamicResource Brush.Primary.Foreground}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}"></Setter>
     </Style>
 
     <Style Selector="Button.Primary:not(:disabled):pointerover /template/ ContentPresenter">
@@ -30,5 +38,47 @@
         </Setter>
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Foreground" Value="{DynamicResource Brush.Primary.Foreground}" />
+    </Style>
+
+    <Style Selector="Button.Secondary">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Primary}" />
+    </Style>
+    <Style Selector="Button.Secondary /template/ ContentPresenter">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}"></Setter>
+
+    </Style>
+
+    <Style Selector="Button.Secondary:not(:disabled):pointerover /template/ ContentPresenter">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource Color.Secondary}">
+                </SolidColorBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.Danger">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Red-600}" />
+
+    </Style>
+    <Style Selector="Button.Danger /template/ ContentPresenter">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
+    </Style>
+
+    <Style Selector="Button.Danger:not(:disabled):pointerover /template/ ContentPresenter">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush
+                    Color="{DynamicResource Color.Red-50}">
+                </SolidColorBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand" />
     </Style>
 </Styles>

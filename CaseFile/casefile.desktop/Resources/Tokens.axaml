@@ -3,6 +3,7 @@
     <FontWeight x:Key="Font.Weight.Normal">Normal</FontWeight>
     <FontWeight x:Key="Font.Weight.Medium">600</FontWeight>
 
+    <!-- Font Sizes -->
     <x:Double x:Key="Text.Xs">12</x:Double>
     <x:Double x:Key="Text.Sm">14</x:Double>
     <x:Double x:Key="Text.Base">16</x:Double>
@@ -10,9 +11,37 @@
     <x:Double x:Key="Text.Xl">20</x:Double>
     <x:Double x:Key="Text.2Xl">24</x:Double>
 
+    <!-- Component Sizes -->
     <x:Double x:Key="Sidebar.Width.Compact">50</x:Double>
     <x:Double x:Key="Sidebar.Width.Expanded">250</x:Double>
-    <Thickness x:Key="Sidebar.DefaultPadding">16</Thickness>
-    
-    <Thickness x:Key="Page.DefaultPadding">18</Thickness>
+
+    <!-- Spacing -->
+    <Thickness x:Key="Spacing.0">0</Thickness>
+    <Thickness x:Key="Spacing.0-5">2</Thickness>
+    <Thickness x:Key="Spacing.1">4</Thickness>
+    <Thickness x:Key="Spacing.1-5">6</Thickness>
+    <Thickness x:Key="Spacing.2">8</Thickness>
+    <Thickness x:Key="Spacing.2-5">10</Thickness>
+    <Thickness x:Key="Spacing.3">12</Thickness>
+    <Thickness x:Key="Spacing.3-5">14</Thickness>
+    <Thickness x:Key="Spacing.4">16</Thickness>
+    <Thickness x:Key="Spacing.5">20</Thickness>
+    <Thickness x:Key="Spacing.6">24</Thickness>
+    <Thickness x:Key="Spacing.8">32</Thickness>
+    <Thickness x:Key="Spacing.10">40</Thickness>
+    <Thickness x:Key="Spacing.12">48</Thickness>
+    <Thickness x:Key="Spacing.16">64</Thickness>
+
+    <!-- Border Radius -->
+    <CornerRadius x:Key="Radius.Base">10</CornerRadius>
+    <CornerRadius x:Key="Radius.None">0</CornerRadius>
+    <CornerRadius x:Key="Radius.Sm">2</CornerRadius>      <!-- rounded-sm (0.125rem) -->
+    <CornerRadius x:Key="Radius.Default">4</CornerRadius> <!-- rounded (0.25rem) -->
+    <CornerRadius x:Key="Radius.Md">6</CornerRadius>      <!-- rounded-md (0.375rem) -->
+    <CornerRadius x:Key="Radius.Lg">8</CornerRadius>      <!-- rounded-lg (0.5rem) -->
+    <CornerRadius x:Key="Radius.Xl">12</CornerRadius>     <!-- rounded-xl (0.75rem) -->
+    <CornerRadius x:Key="Radius.2Xl">16</CornerRadius>    <!-- rounded-2xl (1rem) -->
+    <CornerRadius x:Key="Radius.3Xl">24</CornerRadius>    <!-- rounded-3xl (1.5rem) -->
+
+
 </ResourceDictionary>

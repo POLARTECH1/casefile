@@ -3,12 +3,6 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
             <x:Double x:Key="Font.Size.Base">16</x:Double>
-            <CornerRadius x:Key="Radius.Base">10</CornerRadius>
-            <CornerRadius x:Key="Radius.Sm">6</CornerRadius>
-            <CornerRadius x:Key="Radius.Md">8</CornerRadius>
-            <CornerRadius x:Key="Radius.Lg">10</CornerRadius>
-            <CornerRadius x:Key="Radius.Xl">14</CornerRadius>
-
             <Color x:Key="Color.Background">#f9fafb</Color>
             <Color x:Key="Color.Foreground">#4b5563</Color>
             <Color x:Key="Color.Card">#FFFFFFFF</Color>
@@ -19,7 +13,7 @@
             <Color x:Key="Color.Primary.Foreground">#FFFFFFFF</Color>
             <Color x:Key="Color.Secondary">#FFF1F2F7</Color>
             <Color x:Key="Color.Secondary.Foreground">#FF030213</Color>
-            <Color x:Key="Color.Muted">#FFECECF0</Color>
+            <Color x:Key="Color.Muted">#FFE5E7EB</Color>
             <Color x:Key="Color.Muted.Foreground">#FF717182</Color>
             <Color x:Key="Color.Accent">#FFE9EBEF</Color>
             <Color x:Key="Color.Accent.Foreground">#FF030213</Color>
@@ -80,6 +74,7 @@
             <SolidColorBrush x:Key="Brush.Sidebar.Accent.Foreground" Color="{DynamicResource Color.Sidebar.Accent.Foreground}" />
             <SolidColorBrush x:Key="Brush.Sidebar.Border" Color="{DynamicResource Color.Sidebar.Border}" />
             <SolidColorBrush x:Key="Brush.Sidebar.Ring" Color="{DynamicResource Color.Sidebar.Ring}" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="{DynamicResource Color.Gray-600}"></SolidColorBrush>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">

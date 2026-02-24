@@ -7,7 +7,7 @@
 
     <Style Selector="Border#IconApp">
         <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
-        <Setter Property="Padding" Value="7" />
+        <Setter Property="Padding" Value="{DynamicResource Spacing.2}" />
         <Setter Property="Background" Value="{DynamicResource Color.Blue-600}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
