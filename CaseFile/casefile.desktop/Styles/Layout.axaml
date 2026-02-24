@@ -7,6 +7,12 @@
         <Setter Property="FontWeight" Value="{DynamicResource Font.Normal}" />
     </Style>
 
+    <Style Selector="Window.DialogWindow">
+        <Setter Property="WindowStartupLocation" Value="CenterOwner"></Setter>
+        <Setter Property="SizeToContent" Value="WidthAndHeight" />
+        <Setter Property="CanResize" Value="False" />
+    </Style>
+
     <Style Selector="Border#IconApp">
         <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
         <Setter Property="Padding" Value="{DynamicResource Spacing.2}" />

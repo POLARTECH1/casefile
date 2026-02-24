@@ -31,5 +31,6 @@
     <Style Selector="TextBlock.label">
         <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
         <Setter Property="FontWeight" Value="{DynamicResource Font.SemiBold}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
     </Style>
 </Styles>
