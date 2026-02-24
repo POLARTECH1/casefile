@@ -6,14 +6,39 @@
         x:Class="casefile.desktop.Views.WindowModal.Template.CreateFolderTemplateWindow"
         Classes="DialogWindow"
         Title="CreateFolderTemplateWindow">
-    <Grid RowDefinitions="Auto,Auto,Auto, Auto" Margin="{DynamicResource Spacing.3}">
-        <TextBlock Classes="h3">Créer un template de dossier</TextBlock>
-        <Grid Grid.Row="1" Grid.RowDefinitions="Auto, Auto">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Classes="label">
-                    Nom du template *
-                </TextBlock>
+    <Grid RowDefinitions="Auto, Auto, Auto" Margin="{DynamicResource Spacing.3}">
+        <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Brush.Border}"
+                Padding="{DynamicResource Spacing.6.Bottom}">
+            <StackPanel Orientation="Vertical" Spacing="{DynamicResource Spacing.3}">
+                <TextBlock Classes="h3">Créer un template de dossier</TextBlock>
+                <Grid RowDefinitions="Auto, Auto">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Classes="FormLabel">
+                            Nom du template *
+                        </TextBlock>
+                        <TextBox Classes="FormTextInput" Name="TemplateNameTextBox" Watermark="Ex: Dossier Standard..." />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Classes="FormLabel">
+                            Nom du template *
+                        </TextBlock>
+                        <TextBox Classes="FormTextInput" Name="TemplateDescriptionBox"
+                                 Watermark="Description du template" />
+                    </StackPanel>
+                </Grid>
             </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" RowDefinitions="Auto, Auto">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <TextBlock Classes="h3">Structure de dossiers</TextBlock>
+                <Button Grid.Column="2" Classes="Primary">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <LucideIcon Kind="Plus"></LucideIcon>
+                    </StackPanel>
+                </Button>
+            </Grid>
         </Grid>
+
     </Grid>
+
 </Window>

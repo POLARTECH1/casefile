@@ -19,7 +19,7 @@
             <Color x:Key="Color.Destructive">#FFD4183D</Color>
             <Color x:Key="Color.Destructive.Foreground">#FFFFFFFF</Color>
             <Color x:Key="Color.Border">#1A000000</Color>
-            <Color x:Key="Color.Input">#00000000</Color>
+            <Color x:Key="Color.Input">#000000</Color>
             <Color x:Key="Color.Input.Background">#FFF3F3F5</Color>
             <Color x:Key="Color.Switch.Background">#FFCBCED4</Color>
             <Color x:Key="Color.Ring">#FFB5B5B5</Color>

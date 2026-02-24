@@ -1,0 +1,22 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="TextBlock.FormLabel">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.SemiBold}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
+    </Style>
+
+    <Style Selector="TextBox.FormTextInput">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Input}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
+        <Setter Property="BorderThickness" Value="0"></Setter>
+    </Style>
+
+    <!--<Style Selector="TextBox.FormTextInput">
+        
+    </Style>-->
+</Styles>
