@@ -25,7 +25,7 @@
                 </StackPanel>
             </Grid>
             <!-- Page Content -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" IsVisible="{Binding !IsListeTemplateEmpty}">
                 <ItemsControl ItemsSource="{Binding ListeTemplate}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -41,6 +41,15 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+
+            </Grid>
+            <Grid Grid.Row="1" IsVisible="{Binding IsListeTemplateEmpty}" VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <StackPanel Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <LucideIcon Kind="FolderOpen" Size="48" Foreground="{DynamicResource  Brush.Muted}"></LucideIcon>
+                    <TextBlock Classes="h2" TextAlignment="Center">Aucun template de dossier</TextBlock>
+                    <TextBlock>Créez des templates pour réutiliser des structures de dossiers</TextBlock>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>
