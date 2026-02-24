@@ -1,9 +1,10 @@
 using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
 
 namespace casefile.desktop.ViewModels;
 
-public abstract class PageViewModelBase : ReactiveObject, IRoutableViewModel
+public abstract class PageViewModelBase : ReactiveObject , IRoutableViewModel
 {
     /// <summary>
     /// Reference to IScreen that owns the routable view model.

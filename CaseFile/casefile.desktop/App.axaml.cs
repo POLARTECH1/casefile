@@ -25,6 +25,8 @@ using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
 using casefile.desktop.Navigation;
+using casefile.desktop.Services;
+using casefile.desktop.Services.Implementation;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using casefile.desktop.ViewModels.Template;
@@ -94,10 +96,9 @@ public partial class App : Application
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
             var appScope = Services.CreateScope();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = appScope.ServiceProvider.GetRequiredService<MainWindowViewModel>(),
-            };
+            var mainWindow = appScope.ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = appScope.ServiceProvider.GetRequiredService<MainWindowViewModel>();
+            desktop.MainWindow = mainWindow;
             desktop.Exit += (_, _) => appScope.Dispose();
         }
 
@@ -192,6 +193,7 @@ public partial class App : Application
     {
         services.AddAutoMapper(cfg => { }, typeof(MapperConfig));
         services.AddScoped<IGetTemplateDossierItems, GetTemplateDossierItems>();
+        services.AddScoped<IDialogWindowService, DialogWindowService>();
     }
 
     /// <summary>
@@ -200,6 +202,7 @@ public partial class App : Application
     /// <param name="services">Le conteneur de services pour l'injection de dépendances.</param>
     private static void ConfigureViewModel(IServiceCollection services)
     {
+        services.AddSingleton<MainWindow>();
         services.AddSingleton<AppScreen>();
         services.AddSingleton<ReactiveUI.IScreen>(sp => sp.GetRequiredService<AppScreen>());
         services.AddSingleton<IAppRouter, AppRouter>();

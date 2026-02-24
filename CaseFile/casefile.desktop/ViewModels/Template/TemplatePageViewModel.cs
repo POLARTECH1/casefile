@@ -1,17 +1,22 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using casefile.application.UseCases.Interfaces;
+using casefile.desktop.Services;
+using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 
 namespace casefile.desktop.ViewModels.Template;
 
-public class TemplatePageViewModel : PageViewModelBase
+public partial class TemplatePageViewModel : PageViewModelBase
 {
     private readonly IGetTemplateDossierItems _getTemplateDossierItems;
+    private readonly IDialogWindowService _dialogWindowService;
 
-    public TemplatePageViewModel(IScreen screen, IGetTemplateDossierItems getTemplateDossierItems) : base(screen)
+    public TemplatePageViewModel(IScreen screen, IGetTemplateDossierItems getTemplateDossierItems,
+        IDialogWindowService dialogWindowService) : base(screen)
     {
         _getTemplateDossierItems = getTemplateDossierItems;
+        _dialogWindowService = dialogWindowService;
         ListeTemplate.CollectionChanged += (_, _) => this.RaisePropertyChanged(nameof(IsListeTemplateEmpty));
         _ = ChargerTemplatesAsync();
     }
@@ -46,6 +51,22 @@ public class TemplatePageViewModel : PageViewModelBase
                 NombreDocumentsAttendus = dto.NombreDocumentsAttendus,
                 NombreDeClientsQuiUtilisentCeTemplate = dto.NombreDeClientsQuiUtilisentCeTemplate
             });
+        }
+    }
+
+    [RelayCommand]
+    private async Task OuvrirWindowCreateTemplateDossier()
+    {
+        var template = await _dialogWindowService.ShowCreateTemplateDossierDialog();
+        if (template != null)
+        {
+            ListeTemplate.Add(new TemplateDossierItemViewModel
+                {
+                    Id = template.Id,
+                    Nom = template.Nom,
+                    Description = template.Description,
+                }
+            );
         }
     }
 }
