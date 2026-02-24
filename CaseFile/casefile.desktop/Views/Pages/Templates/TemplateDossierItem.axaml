@@ -7,7 +7,7 @@
              x:Class="casefile.desktop.Views.Pages.Templates.TemplateDossierItem"
              x:DataType="template:TemplateDossierItemViewModel">
     <Border Classes="app-card">
-        <Grid Classes="app-card-layout" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+        <Grid Classes="app-card-layout" RowDefinitions="Auto, Auto, *, Auto, Auto">
             <!-- Icone et paramètres du dossier -->
             <Grid Classes="app-card-header" ColumnDefinitions="Auto, * , Auto">
                 <Border Classes="app-card-icon-container">

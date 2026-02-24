@@ -1,5 +1,6 @@
 using System;
 using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Template;
 using casefile.desktop.Views.Pages.Clients;
 using casefile.desktop.Views.Pages.Dashboard;
 using casefile.desktop.Views.Pages.Entreprise;

@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:casefile.desktop.ViewModels"
              xmlns:templates="clr-namespace:casefile.desktop.Views.Pages.Templates"
+             xmlns:template="clr-namespace:casefile.desktop.ViewModels.Template"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="casefile.desktop.Views.Pages.Templates.TemplatePageView"
-             x:DataType="models:TemplatePageViewModel">
+             x:DataType="template:TemplatePageViewModel">
     <Border Padding="{DynamicResource Spacing.5}">
         <Grid RowDefinitions="Auto, *">
             <!-- HEADER -->

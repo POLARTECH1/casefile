@@ -19,12 +19,15 @@ using casefile.application.DTOs.TemplateDossierElement.Validation;
 using casefile.application.DTOs.TypeDocument.Validation;
 using casefile.application.DTOs.ValeurAttributClient.Validation;
 using casefile.application.Mapping;
+using casefile.application.UseCases.Interfaces;
+using casefile.application.UseCases.TemplateDossierUseCases;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
 using casefile.desktop.Navigation;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Template;
 using casefile.desktop.Views;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -188,6 +191,7 @@ public partial class App : Application
     private static void ConfigureServices(IServiceCollection services)
     {
         services.AddAutoMapper(cfg => { }, typeof(MapperConfig));
+        services.AddScoped<IGetTemplateDossierItems, GetTemplateDossierItems>();
     }
 
     /// <summary>

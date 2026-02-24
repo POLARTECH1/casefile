@@ -1,0 +1,51 @@
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using casefile.application.UseCases.Interfaces;
+using ReactiveUI;
+
+namespace casefile.desktop.ViewModels.Template;
+
+public class TemplatePageViewModel : PageViewModelBase
+{
+    private readonly IGetTemplateDossierItems _getTemplateDossierItems;
+
+    public TemplatePageViewModel(IScreen screen, IGetTemplateDossierItems getTemplateDossierItems) : base(screen)
+    {
+        _getTemplateDossierItems = getTemplateDossierItems;
+        ListeTemplate.CollectionChanged += (_, _) => this.RaisePropertyChanged(nameof(IsListeTemplateEmpty));
+        _ = ChargerTemplatesAsync();
+    }
+
+    public bool IsListeTemplateEmpty => ListeTemplate.Count == 0;
+
+    /// <summary>
+    /// Propriété représentant une collection observable des modèles de dossiers disponibles.
+    /// Chaque élément de la liste est une instance de <see cref="TemplateDossierItemViewModel"/>,
+    /// qui contient des informations détaillées telles que le nom, la description,
+    /// le nombre de dossiers associés et d'autres métadonnées.
+    /// </summary>
+    public ObservableCollection<TemplateDossierItemViewModel> ListeTemplate { get; } = new();
+
+    private async Task ChargerTemplatesAsync()
+    {
+        var result = await _getTemplateDossierItems.ExecuteAsync();
+        if (result.IsFailed)
+        {
+            return;
+        }
+
+        ListeTemplate.Clear();
+        foreach (var dto in result.Value)
+        {
+            ListeTemplate.Add(new TemplateDossierItemViewModel
+            {
+                Id = dto.Id,
+                Nom = dto.Nom,
+                Description = dto.Description,
+                NombreDeDossiers = dto.NombreDeDossiers,
+                NombreDocumentsAttendus = dto.NombreDocumentsAttendus,
+                NombreDeClientsQuiUtilisentCeTemplate = dto.NombreDeClientsQuiUtilisentCeTemplate
+            });
+        }
+    }
+}
