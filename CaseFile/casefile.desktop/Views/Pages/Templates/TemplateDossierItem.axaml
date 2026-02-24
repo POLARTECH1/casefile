@@ -7,21 +7,22 @@
              x:Class="casefile.desktop.Views.Pages.Templates.TemplateDossierItem"
              x:DataType="template:TemplateDossierItemViewModel">
     <Border Classes="app-card">
-        <Grid Classes="app-card-layout" RowDefinitions="Auto, Auto, Auto, Auto" RowSpacing="12">
+        <Grid Classes="app-card-layout" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
             <!-- Icone et paramètres du dossier -->
             <Grid Classes="app-card-header" ColumnDefinitions="Auto, * , Auto">
                 <Border Classes="app-card-icon-container">
                     <LucideIcon Classes="app-card-icon" Kind="FolderTree"></LucideIcon>
                 </Border>
-                <Border Classes="app-card-settings-container" Grid.Column="2">
-                    <LucideIcon Classes="app-card-settings-icon" Kind="Settings" Size="22"></LucideIcon>
-                </Border>
+                <Button Classes="SecondaryNoBorder app-card-settings-button" Grid.Column="2">
+                    <LucideIcon Classes="app-card-settings-icon" Kind="Settings"></LucideIcon>
+                </Button>
             </Grid>
             <!-- Titre du template -->
-            <TextBlock Classes="app-card-title" Grid.Row="1">
-            </TextBlock>
+            <TextBlock Classes="app-card-title" Grid.Row="1" Text="{Binding Nom}" />
+            <!-- Details sur le template -->
+            <TextBlock Grid.Row="2" Classes="app-card-description" Text="{Binding Description}" />
             <!-- Description du template -->
-            <StackPanel Classes="app-card-details-section" Grid.Row="2" Orientation="Vertical">
+            <StackPanel Classes="app-card-details-section" Grid.Row="3" Orientation="Vertical">
                 <!-- Nombre de dossiers enfants -->
                 <Grid Classes="app-card-detail-row" ColumnDefinitions="Auto, *, Auto">
                     <TextBlock Classes="app-card-detail-label">Dossiers</TextBlock>
@@ -42,7 +43,7 @@
                 </Grid>
             </StackPanel>
             <!-- Actions sur le template -->
-            <Border Classes="app-card-actions-container" Grid.Row="3">
+            <Border Classes="app-card-actions-container" Grid.Row="4">
                 <Grid Classes="app-card-actions-layout" ColumnDefinitions="*, Auto">
                     <!-- Modifier le template -->
                     <Button Classes="Secondary app-card-primary-action-button">

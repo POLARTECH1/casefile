@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
-            <x:Double x:Key="Font.Size.Base">16</x:Double>
             <Color x:Key="Color.Background">#f9fafb</Color>
             <Color x:Key="Color.Foreground">#4b5563</Color>
             <Color x:Key="Color.Card">#FFFFFFFF</Color>
@@ -78,12 +77,6 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
-            <x:Double x:Key="Font.Size.Base">16</x:Double>
-            <CornerRadius x:Key="Radius.Base">10</CornerRadius>
-            <CornerRadius x:Key="Radius.Sm">6</CornerRadius>
-            <CornerRadius x:Key="Radius.Md">8</CornerRadius>
-            <CornerRadius x:Key="Radius.Lg">10</CornerRadius>
-            <CornerRadius x:Key="Radius.Xl">14</CornerRadius>
 
             <Color x:Key="Color.Background">#FF111111</Color>
             <Color x:Key="Color.Foreground">#FFF7F7F7</Color>

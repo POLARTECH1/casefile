@@ -1,8 +1,9 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <StyleInclude Source="/Styles/Typography.axaml" />
     <StyleInclude Source="/Styles/Controls/Controls.axaml" />
-    <StyleInclude Source="/Styles/Controls/NavBar.axaml" />
     <StyleInclude Source="/Styles/Layout.axaml" />
+    <StyleInclude Source="/Styles/Controls/NavBar.axaml" />
     <StyleInclude Source="/Styles/Controls/AppCard.axaml" />
 </Styles>

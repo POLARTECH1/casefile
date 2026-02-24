@@ -41,6 +41,9 @@ public partial class App : Application
 
     public override void Initialize()
     {
+#if DEBUG
+        this.AttachDeveloperTools();
+#endif
         AvaloniaXamlLoader.Load(this);
     }
 

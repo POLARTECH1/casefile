@@ -6,14 +6,14 @@
         <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
         <Setter Property="Background" Value="{DynamicResource Brush.Background}" />
         <Setter Property="Padding" Value="{DynamicResource Spacing.6}" />
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Width">400</Setter>
     </Style>
     <Style Selector="Border.app-card:pointerover">
 
     </Style>
-    <Style Selector=".app-card-layout">
-
+    <Style Selector="Grid.app-card-layout">
+        <Setter Property="RowSpacing" Value="40" />
     </Style>
     <Style Selector=".app-card-header">
 
@@ -32,17 +32,19 @@
         </Setter>
         <Setter Property="Size" Value="28"></Setter>
     </Style>
-    <Style Selector=".app-card-settings-container">
-        
+    <Style Selector="Border.app-card-settings-button">
     </Style>
-    <Style Selector=".app-card-settings-icon">
-        
+    <Style Selector=".app-card-description"></Style>
+    <Style Selector="LucideIcon.app-card-settings-icon">
+        <Setter Property="Size" Value="17" />
     </Style>
-    <Style Selector=".app-card-title">
-
+    <Style Selector="TextBlock.app-card-title">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Xl}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.SemiBold}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Card.Foreground}"></Setter>
     </Style>
-    <Style Selector=".app-card-details-section">
-
+    <Style Selector="StackPanel.app-card-details-section">
+        <Setter Property="Spacing" Value="10"></Setter>
     </Style>
     <Style Selector=".app-card-detail-row">
 
@@ -50,11 +52,14 @@
     <Style Selector=".app-card-detail-label">
 
     </Style>
-    <Style Selector=".app-card-detail-value">
-
+    <Style Selector="TextBlock.app-card-detail-value">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Card.Foreground}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Medium}" />
     </Style>
-    <Style Selector=".app-card-actions-container">
-
+    <Style Selector="Border.app-card-actions-container">
+        <Setter Property="BorderThickness" Value="0, 1, 0, 0" />
+        <Setter Property="Padding" Value="0, 15, 0, 0"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
     </Style>
     <Style Selector=".app-card-actions-layout">
     </Style>

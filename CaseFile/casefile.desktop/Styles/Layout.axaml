@@ -3,6 +3,8 @@
     <Style Selector="Window">
         <Setter Property="Background" Value="{DynamicResource Brush.Background}" />
         <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground}" />
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Normal}" />
     </Style>
 
     <Style Selector="Border#IconApp">

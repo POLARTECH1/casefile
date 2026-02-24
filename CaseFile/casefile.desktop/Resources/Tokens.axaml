@@ -1,7 +1,15 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <FontWeight x:Key="Font.Weight.Normal">Normal</FontWeight>
-    <FontWeight x:Key="Font.Weight.Medium">600</FontWeight>
+    <FontWeight x:Key="Font.Thin">100</FontWeight>
+    <FontWeight x:Key="Font.ExtraLight">200</FontWeight>
+    <FontWeight x:Key="Font.Light">300</FontWeight>
+    <FontWeight x:Key="Font.Normal">400</FontWeight>
+    <FontWeight x:Key="Font.Medium">500</FontWeight>
+    <FontWeight x:Key="Font.SemiBold">600</FontWeight>
+    <FontWeight x:Key="Font.Bold">700</FontWeight>
+    <FontWeight x:Key="Font.ExtraBold">800</FontWeight>
+    <FontWeight x:Key="Font.Black">900</FontWeight>
+
 
     <!-- Font Sizes -->
     <x:Double x:Key="Text.Xs">12</x:Double>
