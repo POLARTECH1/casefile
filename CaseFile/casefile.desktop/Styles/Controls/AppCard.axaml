@@ -4,7 +4,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
-        <Setter Property="Background" Value="{DynamicResource Brush.Background}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
         <Setter Property="Padding" Value="{DynamicResource Spacing.6}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Width">400</Setter>
