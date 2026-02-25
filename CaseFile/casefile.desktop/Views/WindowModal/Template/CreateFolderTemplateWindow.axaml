@@ -2,10 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:template="clr-namespace:casefile.desktop.ViewModels.Template"
         mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350"
         x:Class="casefile.desktop.Views.WindowModal.Template.CreateFolderTemplateWindow"
         Classes="DialogWindow"
-        Title="CreateFolderTemplateWindow">
+        x:DataType="template:CreateFolderTemplateWindowViewModel"
+        Title="Nouveau template de dossier">
+
     <Grid RowDefinitions="Auto, Auto, Auto" Margin="{DynamicResource Spacing.3}">
         <!-- Creation du template -->
         <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Brush.Border}"
@@ -43,10 +46,43 @@
                     </StackPanel>
                 </Button>
             </Grid>
-            <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border}"
-                    Padding="{DynamicResource Spacing.8}"
-                    CornerRadius="{DynamicResource Radius.Lg}">
-            </Border>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding FolderTemplateElements}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Spacing="8" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource Brush.Border}"
+                                Padding="{DynamicResource Spacing.8}"
+                                CornerRadius="{DynamicResource Radius.Lg}">
+                            <Grid ColumnDefinitions="Auto, *">
+                                <Border VerticalAlignment="Top">
+                                    <LucideIcon Kind="Folder" Size="20" Foreground="{DynamicResource Brush.Blue-600}" />
+                                </Border>
+                                <Grid Grid.Column="1" RowDefinitions="Auto, Auto, *">
+                                    <!-- Nom du dossier et bouton supprimer, up and down -->
+                                    <Grid ColumnDefinitions="*, Auto, Auto, Auto" VerticalAlignment="Center">
+                                        <TextBox Grid.Column="0" Classes="FormTextInput" Watermark="Nom du dossier" />
+                                        <Button Grid.Column="1" Classes="Secondary">
+                                            <LucideIcon Kind="ArrowUp" Size="18" />
+                                        </Button>
+                                        <Button Grid.Column="1" Classes="Secondary">
+                                            <LucideIcon Kind="ArrowDown" Size="18" />
+                                        </Button>
+                                        <Button Classes="Danger" Grid.Column="1" VerticalAlignment="Center">
+                                            <LucideIcon Classes="app-card-secondary-action-button-icon" Kind="Trash2"
+                                                        Size="18" />
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
         </Grid>
         <Button Grid.Row="2" Classes="Primary">
             <TextBlock>Créer le template</TextBlock>

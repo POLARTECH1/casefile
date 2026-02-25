@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace casefile.desktop.ViewModels.Template;
 
@@ -9,6 +10,16 @@ namespace casefile.desktop.ViewModels.Template;
 /// </summary>
 public partial class CreateFolderTemplateElementItemViewModel : ObservableObject
 {
+    /// <summary>
+    /// Les documents attendus associés à cet élément de modèle de dossier.
+    /// </summary>
+    public ObservableCollection<CreateFolderTemplateElementItemDocumentAttenduViewModel> DocumentsAttendus { get; } =
+        new();
+
+    public CreateFolderTemplateElementItemViewModel()
+    {
+    }
+
     /// <summary>
     /// Nom de l'élément de modèle de dossier.
     /// </summary>
