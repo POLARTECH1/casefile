@@ -10,13 +10,15 @@ namespace casefile.desktop.ViewModels.Template;
 public partial class TemplatePageViewModel : PageViewModelBase
 {
     private readonly IGetTemplateDossierItems _getTemplateDossierItems;
+    private readonly IGetTemplateDossierItem _getTemplateDossierItem;
     private readonly IDialogWindowService _dialogWindowService;
 
     public TemplatePageViewModel(IScreen screen, IGetTemplateDossierItems getTemplateDossierItems,
-        IDialogWindowService dialogWindowService) : base(screen)
+        IDialogWindowService dialogWindowService, IGetTemplateDossierItem getTemplateDossierItem) : base(screen)
     {
         _getTemplateDossierItems = getTemplateDossierItems;
         _dialogWindowService = dialogWindowService;
+        _getTemplateDossierItem = getTemplateDossierItem;
         ListeTemplate.CollectionChanged += (_, _) => this.RaisePropertyChanged(nameof(IsListeTemplateEmpty));
         _ = ChargerTemplatesAsync();
     }
@@ -60,11 +62,20 @@ public partial class TemplatePageViewModel : PageViewModelBase
         var template = await _dialogWindowService.ShowCreateTemplateDossierDialog();
         if (template != null)
         {
+            var result = await _getTemplateDossierItem.ExecuteAsync(template.Id);
+            if (result.IsFailed)
+            {
+                return;
+            }
+
             ListeTemplate.Add(new TemplateDossierItemViewModel
                 {
-                    Id = template.Id,
-                    Nom = template.Nom,
-                    Description = template.Description,
+                    Id = result.Value.Id,
+                    Nom = result.Value.Nom,
+                    Description = result.Value.Description,
+                    NombreDeDossiers = result.Value.NombreDeDossiers,
+                    NombreDocumentsAttendus = result.Value.NombreDocumentsAttendus,
+                    NombreDeClientsQuiUtilisentCeTemplate = result.Value.NombreDeClientsQuiUtilisentCeTemplate
                 }
             );
         }

@@ -21,6 +21,7 @@ using casefile.application.DTOs.ValeurAttributClient.Validation;
 using casefile.application.Mapping;
 using casefile.application.UseCases.Interfaces;
 using casefile.application.UseCases.TemplateDossierUseCases;
+using casefile.application.UseCases.TypeDocumentUseCases;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
@@ -193,6 +194,9 @@ public partial class App : Application
     {
         services.AddAutoMapper(cfg => { }, typeof(MapperConfig));
         services.AddScoped<IGetTemplateDossierItems, GetTemplateDossierItems>();
+        services.AddScoped<IGetTemplateDossierItem, GetTemplateDossierItem>();
+        services.AddScoped<IGetTypeDocuments, GetTypeDocuments>();
+        services.AddScoped<ICreateTemplateDossier, CreateTemplateDossier>();
         services.AddScoped<IDialogWindowService, DialogWindowService>();
     }
 

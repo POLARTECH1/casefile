@@ -16,7 +16,13 @@
         <Setter Property="BorderThickness" Value="0"></Setter>
     </Style>
 
-    <!--<Style Selector="TextBox.FormTextInput">
-        
-    </Style>-->
+    <Style Selector="TextBox.FormTextInput:focus-within">
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+    </Style>
+    <Style Selector="TextBox.FormTextInput:pointerover">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+    </Style>
 </Styles>

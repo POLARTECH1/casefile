@@ -123,6 +123,15 @@
     <Thickness x:Key="Spacing.6.TopBottom">0,24,0,24</Thickness>
     <Thickness x:Key="Spacing.6.Horizontal">24,0,24,0</Thickness>
     <Thickness x:Key="Spacing.6.Vertical">0,24,0,24</Thickness>
+    <Thickness x:Key="Spacing.7">28</Thickness>
+    <Thickness x:Key="Spacing.7.Left">28,0,0,0</Thickness>
+    <Thickness x:Key="Spacing.7.Top">0,28,0,0</Thickness>
+    <Thickness x:Key="Spacing.7.Right">0,0,28,0</Thickness>
+    <Thickness x:Key="Spacing.7.Bottom">0,0,0,28</Thickness>
+    <Thickness x:Key="Spacing.7.LeftRight">28,0,28,0</Thickness>
+    <Thickness x:Key="Spacing.7.TopBottom">0,28,0,28</Thickness>
+    <Thickness x:Key="Spacing.7.Horizontal">28,0,28,0</Thickness>
+    <Thickness x:Key="Spacing.7.Vertical">0,28,0,28</Thickness>
     <Thickness x:Key="Spacing.8">32</Thickness>
     <Thickness x:Key="Spacing.8.Left">32,0,0,0</Thickness>
     <Thickness x:Key="Spacing.8.Top">0,32,0,0</Thickness>

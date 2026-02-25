@@ -11,6 +11,8 @@
         <Setter Property="WindowStartupLocation" Value="CenterOwner"></Setter>
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
         <Setter Property="CanResize" Value="False" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+
     </Style>
 
     <Style Selector="Border#IconApp">

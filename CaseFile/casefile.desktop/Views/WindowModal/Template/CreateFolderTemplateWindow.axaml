@@ -3,90 +3,222 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:template="clr-namespace:casefile.desktop.ViewModels.Template"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350"
+        mc:Ignorable="d" d:DesignWidth="580" d:DesignHeight="700"
         x:Class="casefile.desktop.Views.WindowModal.Template.CreateFolderTemplateWindow"
         Classes="DialogWindow"
         x:DataType="template:CreateFolderTemplateWindowViewModel"
-        Title="Nouveau template de dossier">
+        Title="Nouveau template de dossier"
+        Width="580"
+        MaxHeight="740"
+        SizeToContent="Height">
 
-    <Grid RowDefinitions="Auto, Auto, Auto" Margin="{DynamicResource Spacing.3}">
-        <!-- Creation du template -->
-        <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Brush.Border}"
-                Padding="{DynamicResource Spacing.6.Bottom}">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Classes="h3" Margin="{DynamicResource Spacing.4.Bottom}" TextAlignment="Center">Créer un template de dossier</TextBlock>
-                <Grid RowDefinitions="Auto, Auto">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Classes="FormLabel">
-                            Nom du template *
-                        </TextBlock>
-                        <TextBox Classes="FormTextInput" Name="TemplateNameTextBox" Watermark="Ex: Dossier Standard..." />
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Vertical">
-                        <TextBlock Classes="FormLabel">
-                            Nom du template *
-                        </TextBlock>
-                        <TextBox Classes="FormTextInput" Name="TemplateDescriptionBox"
-                                 Watermark="Description du template" />
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-        </Border>
+    <Grid RowDefinitions="*, Auto" Margin="{DynamicResource Spacing.5}">
 
-        <!-- Structure de dossiers -->
-        <Grid Grid.Row="1" RowDefinitions="Auto, Auto">
-            <Grid ColumnDefinitions="Auto, *, Auto" VerticalAlignment="Center">
-                <Border>
-                    <TextBlock Classes="h3" VerticalAlignment="Center">Structure de dossiers</TextBlock>
-                </Border>
-                <Button Grid.Column="2" Classes="Secondary">
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                        <LucideIcon Kind="Plus"></LucideIcon>
-                        <TextBlock>Ajouter un dossier</TextBlock>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="20">
+
+                <!-- ── Section 1 : Infos du template ── -->
+                <StackPanel Spacing="12">
+
+                    <!-- Nom du template -->
+                    <StackPanel Spacing="4">
+                        <TextBlock Classes="FormLabel">Nom du template *</TextBlock>
+                        <TextBox Classes="FormTextInput"
+                                 Text="{Binding Nom}"
+                                 Watermark="Ex: Dossier Standard..." />
+                        <TextBlock IsVisible="{Binding HasNomError}"
+                                   Text="{Binding NomError}"
+                                   Foreground="{DynamicResource Brush.Red-600}"
+                                   FontSize="12"
+                                   Margin="2,0,0,0" />
                     </StackPanel>
-                </Button>
-            </Grid>
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding FolderTemplateElements}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" Spacing="8" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="{DynamicResource Brush.Border}"
-                                Padding="{DynamicResource Spacing.8}"
-                                CornerRadius="{DynamicResource Radius.Lg}">
-                            <Grid ColumnDefinitions="Auto, *">
-                                <Border VerticalAlignment="Top">
-                                    <LucideIcon Kind="Folder" Size="20" Foreground="{DynamicResource Brush.Blue-600}" />
+
+                    <!-- Description -->
+                    <StackPanel Spacing="4">
+                        <TextBlock Classes="FormLabel">Description</TextBlock>
+                        <TextBox Classes="FormTextInput"
+                                 Text="{Binding Description}"
+                                 Watermark="Description du template (optionnel)" />
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- ── Section 2 : Structure de dossiers ── -->
+                <StackPanel Spacing="12">
+
+                    <!-- En-tête de section -->
+                    <Border BorderThickness="0,1,0,0"
+                            BorderBrush="{DynamicResource Brush.Border}"
+                            Padding="{DynamicResource Spacing.4.Top}">
+                        <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center">
+                            <TextBlock Classes="h3" VerticalAlignment="Center">Structure de dossiers</TextBlock>
+                            <Button Grid.Column="1" Classes="Secondary"
+                                    Command="{Binding AjouterDossierCommand}">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <LucideIcon Kind="Plus" Size="14" />
+                                    <TextBlock>Ajouter un dossier</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Erreur dossiers -->
+                    <TextBlock IsVisible="{Binding HasDossiersError}"
+                               Text="{Binding DossiersError}"
+                               Foreground="{DynamicResource Brush.Red-600}"
+                               FontSize="{StaticResource Text.Xs}"
+                               Margin="{StaticResource Spacing.0-5.Left}" />
+
+                    <!-- Liste des dossiers -->
+                    <ItemsControl ItemsSource="{Binding FolderTemplateElements}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" Spacing="10" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="template:CreateFolderTemplateElementItemViewModel">
+                                <Border BorderThickness="1"
+                                        BorderBrush="{DynamicResource Brush.Border}"
+                                        CornerRadius="{DynamicResource Radius.Lg}"
+                                        Padding="{DynamicResource Spacing.4}">
+                                    <StackPanel Spacing="10">
+
+                                        <!-- Ligne : icône + nom + supprimer -->
+                                        <Grid ColumnDefinitions="Auto, *, Auto">
+                                            <Border VerticalAlignment="Center"
+                                                    Margin="{StaticResource Spacing.2-5.Right}">
+                                                <LucideIcon Kind="Folder"
+                                                            Size="20"
+                                                            Foreground="{DynamicResource Brush.Blue-600}" />
+                                            </Border>
+                                            <TextBox Grid.Column="1"
+                                                     Classes="FormTextInput"
+                                                     Text="{Binding Nom}"
+                                                     Watermark="Nom du dossier" />
+                                            <Button Grid.Column="2"
+                                                    Classes="Danger"
+                                                    Command="{Binding RemoveCommand}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="{StaticResource Spacing.2.Left}">
+                                                <LucideIcon Kind="Trash2" Size="16" />
+                                            </Button>
+                                        </Grid>
+
+                                        <!-- Erreur nom du dossier -->
+                                        <TextBlock IsVisible="{Binding HasNomError}"
+                                                   Text="{Binding NomError}"
+                                                   Foreground="{DynamicResource Brush.Red-600}"
+                                                   FontSize="{StaticResource Text.Xs}"
+                                                   Margin="{StaticResource Spacing.7.Left}" />
+
+                                        <!-- Sous-section documents attendus -->
+                                        <StackPanel Spacing="8" Margin="{StaticResource Spacing.7.Left}">
+
+                                            <!-- En-tête documents -->
+                                            <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center">
+                                                <TextBlock VerticalAlignment="Center"
+                                                           FontSize="{StaticResource Text.Sm}">
+                                                    Documents attendus
+                                                </TextBlock>
+                                                <Button Grid.Column="1"
+                                                        Classes="Secondary"
+                                                        Command="{Binding AjouterDocumentCommand}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="4" >
+                                                        <LucideIcon Kind="Plus" Size="{StaticResource Text.Sm}" />
+                                                        <TextBlock FontSize="{StaticResource Text.Sm}">Ajouter</TextBlock>
+                                                    </StackPanel>
+                                                </Button>
+                                            </Grid>
+
+                                            <!-- Liste des documents attendus -->
+                                            <ItemsControl ItemsSource="{Binding DocumentsAttendus}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical" Spacing="6" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate
+                                                        x:DataType="template:CreateFolderTemplateElementItemDocumentAttenduViewModel">
+                                                        <Border Background="{DynamicResource Brush.Slate-50}"
+                                                                CornerRadius="{DynamicResource Radius.Md}"
+                                                                Padding="{DynamicResource Spacing.3}">
+                                                            <Grid ColumnDefinitions="Auto, *, Auto, Auto"
+                                                                  VerticalAlignment="Center">
+
+                                                                <!-- Icône document -->
+                                                                <Border VerticalAlignment="Center"
+                                                                        Margin="0,0,8,0">
+                                                                    <LucideIcon Kind="FileText"
+                                                                            Size="16"
+                                                                            Foreground="{DynamicResource Brush.Muted}" />
+                                                                </Border>
+
+                                                                <!-- Sélecteur de type de document -->
+                                                                <ComboBox Grid.Column="1"
+                                                                          ItemsSource="{Binding TypesDocument}"
+                                                                          SelectedItem="{Binding SelectedTypeDocument}"
+                                                                          PlaceholderText="Type de document"
+                                                                          HorizontalAlignment="Stretch">
+                                                                    <ComboBox.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock Text="{Binding Nom}" />
+                                                                        </DataTemplate>
+                                                                    </ComboBox.ItemTemplate>
+                                                                </ComboBox>
+
+                                                                <!-- Toggle Requis -->
+                                                                <StackPanel Grid.Column="2"
+                                                                            Orientation="Horizontal"
+                                                                            Spacing="6"
+                                                                            VerticalAlignment="Center"
+                                                                            Margin="10,0">
+                                                                    <ToggleSwitch IsChecked="{Binding EstRequis}"
+                                                                            OffContent=""
+                                                                            OnContent="" />
+                                                                    <TextBlock VerticalAlignment="Center"
+                                                                               FontSize="12">
+                                                                        Requis
+                                                                    </TextBlock>
+                                                                </StackPanel>
+
+                                                                <!-- Bouton supprimer document -->
+                                                                <Button Grid.Column="3"
+                                                                        Classes="Danger"
+                                                                        Command="{Binding RemoveCommand}"
+                                                                        VerticalAlignment="Center">
+                                                                    <LucideIcon Kind="Trash2" Size="14" />
+                                                                </Button>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+                                        </StackPanel>
+                                    </StackPanel>
                                 </Border>
-                                <Grid Grid.Column="1" RowDefinitions="Auto, Auto, *">
-                                    <!-- Nom du dossier et bouton supprimer, up and down -->
-                                    <Grid ColumnDefinitions="*, Auto, Auto, Auto" VerticalAlignment="Center">
-                                        <TextBox Grid.Column="0" Classes="FormTextInput" Watermark="Nom du dossier" />
-                                        <Button Grid.Column="1" Classes="Secondary">
-                                            <LucideIcon Kind="ArrowUp" Size="18" />
-                                        </Button>
-                                        <Button Grid.Column="1" Classes="Secondary">
-                                            <LucideIcon Kind="ArrowDown" Size="18" />
-                                        </Button>
-                                        <Button Classes="Danger" Grid.Column="1" VerticalAlignment="Center">
-                                            <LucideIcon Classes="app-card-secondary-action-button-icon" Kind="Trash2"
-                                                        Size="18" />
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-        </Grid>
-        <Button Grid.Row="2" Classes="Primary">
-            <TextBlock>Créer le template</TextBlock>
-        </Button>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Bouton de soumission -->
+        <Border Grid.Row="1"
+                BorderThickness="0,1,0,0"
+                BorderBrush="{DynamicResource Brush.Border}"
+                Padding="{DynamicResource Spacing.4.Top}"
+                Margin="{DynamicResource Spacing.4.Top}">
+            <Button Classes="Primary"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding CreerTemplateCommand}">
+                <TextBlock TextAlignment="Center">Créer le template</TextBlock>
+            </Button>
+        </Border>
 
     </Grid>
 
