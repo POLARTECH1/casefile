@@ -11,7 +11,7 @@
         <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Brush.Border}"
                 Padding="{DynamicResource Spacing.6.Bottom}">
             <StackPanel Orientation="Vertical">
-                <TextBlock Classes="h3" Margin="{DynamicResource Spacing.4.Bottom}">Créer un template de dossier</TextBlock>
+                <TextBlock Classes="h3" Margin="{DynamicResource Spacing.4.Bottom}" TextAlignment="Center">Créer un template de dossier</TextBlock>
                 <Grid RowDefinitions="Auto, Auto">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Classes="FormLabel">
@@ -44,9 +44,13 @@
                 </Button>
             </Grid>
             <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border}"
-                    Padding="{DynamicResource Spacing.8}">
+                    Padding="{DynamicResource Spacing.8}"
+                    CornerRadius="{DynamicResource Radius.Lg}">
             </Border>
         </Grid>
+        <Button Grid.Row="2" Classes="Primary">
+            <TextBlock>Créer le template</TextBlock>
+        </Button>
 
     </Grid>
 

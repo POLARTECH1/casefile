@@ -10,4 +10,5 @@ Packaged: FluentResults : pour ammeliorer l'informations des resultats
         
 environnement variable:  
  MIGRATION_CONNECTION_STRING="Host=localhost;Port=55432;Database=casefile;Username=casefile;Password=casefile_dev_pw"
+ ajouter aussi la variable d'environnement pour le mode: DOTNET_ENVIRONMENT=Development
  

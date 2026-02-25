@@ -1,8 +1,8 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="TextBlock.FormLabel">
-        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
-        <Setter Property="FontWeight" Value="{DynamicResource Font.SemiBold}" />
+        <Setter Property="FontSize" Value="{DynamicResource Text.Sm}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Normal}" />
         <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
     </Style>
 
