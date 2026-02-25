@@ -8,3 +8,6 @@ Packaged: FluentResults : pour ammeliorer l'informations des resultats
             Semi.Avalonia : pour le theme
             
         
+environnement variable:  
+ MIGRATION_CONNECTION_STRING="Host=localhost;Port=55432;Database=casefile;Username=casefile;Password=casefile_dev_pw"
+ 
