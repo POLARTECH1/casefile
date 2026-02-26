@@ -97,7 +97,7 @@ public partial class ShowFolderTemplateWindowViewModel : ViewModelBase
                     {
                         Nom = typeNom,
                         Extensions = extensions,
-                        IsRequired = false
+                        IsRequired = d.EstRequis
                     };
                 })
                 .ToList();

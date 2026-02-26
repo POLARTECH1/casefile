@@ -28,26 +28,22 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
     public ObservableCollection<TypeDocumentDto> TypesDocument { get; } = new();
 
     /// <summary>Nom du template de dossier.</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNomError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string _nom = string.Empty;
 
     /// <summary>Description du template de dossier.</summary>
     [ObservableProperty] private string _description = string.Empty;
 
     /// <summary>Message d'erreur sur le nom (null si valide).</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNomError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string? _nomError;
 
     /// <summary>Message d'erreur sur la description (null si valide).</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasDescriptionError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasDescriptionError))]
     private string? _descriptionError;
 
     /// <summary>Message d'erreur sur la liste des dossiers (null si valide).</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasDossiersError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasDossiersError))]
     private string? _dossiersError;
 
     public bool HasNomError => NomError != null;
@@ -65,7 +61,8 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
         _ = InitialiserAsync(getTypeDocuments, getTemplateDossierForEdit);
     }
 
-    private async Task InitialiserAsync(IGetTypeDocuments getTypeDocuments, IGetTemplateDossierForEdit getTemplateDossierForEdit)
+    private async Task InitialiserAsync(IGetTypeDocuments getTypeDocuments,
+        IGetTemplateDossierForEdit getTemplateDossierForEdit)
     {
         var typesResult = await getTypeDocuments.ExecuteAsync();
         if (typesResult.IsSuccess)
@@ -97,7 +94,8 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
                 var docVm = new CreateFolderTemplateElementItemDocumentAttenduViewModel(
                     elementVm.DocumentsAttendus, TypesDocument)
                 {
-                    SelectedTypeDocument = TypesDocument.FirstOrDefault(t => t.Id == d.IdTypeDocument)
+                    SelectedTypeDocument = TypesDocument.FirstOrDefault(t => t.Id == d.IdTypeDocument),
+                    EstRequis = d.EstRequis
                 };
                 elementVm.DocumentsAttendus.Add(docVm);
             }
@@ -137,7 +135,8 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
                         .Where(d => d.SelectedTypeDocument != null)
                         .Select(d => new CreateDocumentAttenduDto
                         {
-                            IdTypeDocument = d.SelectedTypeDocument!.Id
+                            IdTypeDocument = d.SelectedTypeDocument!.Id,
+                            EstRequis = d.EstRequis
                         }).ToList()
                 }).ToList()
         };

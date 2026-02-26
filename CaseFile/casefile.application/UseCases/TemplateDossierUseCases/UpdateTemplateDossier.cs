@@ -51,7 +51,8 @@ public class UpdateTemplateDossier(
                 Ordre = e.Ordre,
                 DocumentsAttendus = e.CreateDocumentAttendusDto.Select(d => new DocumentAttendu()
                 {
-                    IdTypeDocument = d.IdTypeDocument
+                    IdTypeDocument = d.IdTypeDocument,
+                    EstRequis = d.EstRequis
                 }).ToList()
             });
         }

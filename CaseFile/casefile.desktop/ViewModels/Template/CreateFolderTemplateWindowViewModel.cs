@@ -101,7 +101,8 @@ public partial class CreateFolderTemplateWindowViewModel : ViewModelBase
                         .Where(d => d.SelectedTypeDocument != null)
                         .Select(d => new CreateDocumentAttenduDto
                         {
-                            IdTypeDocument = d.SelectedTypeDocument!.Id
+                            IdTypeDocument = d.SelectedTypeDocument!.Id,
+                            EstRequis = d.EstRequis
                         }).ToList()
                 }).ToList()
         };

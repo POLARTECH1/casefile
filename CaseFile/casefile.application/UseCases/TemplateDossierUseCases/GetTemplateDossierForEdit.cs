@@ -41,7 +41,8 @@ public class GetTemplateDossierForEdit(ITemplateDossierRepository templateDossie
                     CreateDocumentAttendusDto = e.DocumentsAttendus
                         .Select(d => new CreateDocumentAttenduDto
                         {
-                            IdTypeDocument = d.IdTypeDocument
+                            IdTypeDocument = d.IdTypeDocument,
+                            EstRequis = d.EstRequis
                         }).ToList()
                 }).ToList()
         };
