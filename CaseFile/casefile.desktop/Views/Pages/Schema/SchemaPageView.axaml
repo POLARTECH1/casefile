@@ -2,10 +2,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:casefile.desktop.ViewModels"
+             xmlns:schemas="clr-namespace:casefile.desktop.Views.Pages.Schema"
+             xmlns:schema="clr-namespace:casefile.desktop.ViewModels.Schema"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="casefile.desktop.Views.Pages.Schema.SchemaPageView"
-             x:DataType="models:SchemaPageViewModel">
+             x:DataType="schema:SchemaPageViewModel">
+    <Border Padding="{DynamicResource Spacing.5}">
+        <Grid RowDefinitions="Auto, *">
+            <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center"
+                  Margin="{DynamicResource Spacing.5.Bottom}">
+                <StackPanel Spacing="8">
+                    <TextBlock Classes="h1">Schémas de clients</TextBlock>
+                    <TextBlock>Définissez les propriétés personnalisées pour vos clients</TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Button Classes="Primary" Command="{Binding OuvrirWindowCreateSchemaClientCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <LucideIcon Kind="Plus" Size="16"></LucideIcon>
+                            <TextBlock>Nouveau schéma</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
 
-   PAge des schemas
+            <ScrollViewer Grid.Row="1">
+                <Grid IsVisible="{Binding !IsListeSchemasEmpty}">
+                    <ItemsControl ItemsSource="{Binding ListeSchemas}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"
+                                           HorizontalAlignment="Left"
+                                           LineSpacing="16"
+                                           ItemSpacing="16" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <schemas:SchemaClientItem />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </ScrollViewer>
+
+            <Grid Grid.Row="1" IsVisible="{Binding IsListeSchemasEmpty}" VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <StackPanel Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <LucideIcon Kind="FileStack" Size="48" Foreground="{DynamicResource  Brush.Muted}"></LucideIcon>
+                    <TextBlock Classes="h2" TextAlignment="Center">Aucun schéma client</TextBlock>
+                    <TextBlock>Créez des schémas pour structurer vos propriétés client</TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

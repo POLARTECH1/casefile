@@ -2,6 +2,7 @@ using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Schema;
 using casefile.desktop.ViewModels.Template;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;

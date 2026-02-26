@@ -1,3 +1,4 @@
+using casefile.application.DTOs.DefinitionAttribut;
 using FluentValidation;
 
 namespace casefile.application.DTOs.SchemaClient.Validation;
@@ -7,9 +8,9 @@ namespace casefile.application.DTOs.SchemaClient.Validation;
 /// </summary>
 public class UpdateSchemaClientDtoValidator : AbstractValidator<UpdateSchemaClientDto>
 {
-    public UpdateSchemaClientDtoValidator()
+    public UpdateSchemaClientDtoValidator(IValidator<CreateDefinitionAttributDto> definitionAttributValidator)
     {
-        Include(new CreateSchemaClientDtoValidator());
+        Include(new CreateSchemaClientDtoValidator( definitionAttributValidator));
         RuleFor(x => x.Id)
             .NotEmpty()
             .WithMessage("L'identifiant du schéma client est obligatoire.");

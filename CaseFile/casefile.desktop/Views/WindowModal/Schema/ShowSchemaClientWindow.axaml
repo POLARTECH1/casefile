@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:schema="clr-namespace:casefile.desktop.ViewModels.Schema"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="casefile.desktop.Views.WindowModal.Schema.ShowSchemaClientWindow"
+        Title="Schéma client"
+        x:DataType="schema:ShowSchemaClientWindowViewModel"
+        Classes="DialogWindow"
+        Width="580"
+        MaxHeight="740"
+        SizeToContent="Height"
+        CornerRadius="{StaticResource Radius.Lg}">
+    <Grid RowDefinitions="Auto, *" Margin="{StaticResource Spacing.5}">
+
+        <StackPanel Orientation="Vertical">
+            <TextBlock Classes="h2" Text="{Binding Nom}" />
+            <TextBlock Text="Propriétés personnalisées du schéma" />
+            <TextBlock Text="{Binding LoadingError}"
+                       IsVisible="{Binding HasLoadingError}"
+                       Foreground="{DynamicResource Brush.Red-600}"
+                       FontSize="{StaticResource Text.Sm}" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
+            <StackPanel Spacing="{StaticResource Space.4}">
+                <ItemsControl ItemsSource="{Binding Proprietes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" Spacing="{StaticResource Space.2-5}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="schema:ShowSchemaClientPropertyItemViewModel">
+                            <Border BorderThickness="1"
+                                    BorderBrush="{DynamicResource Brush.Border}"
+                                    CornerRadius="{DynamicResource Radius.Lg}"
+                                    Padding="{DynamicResource Spacing.4}">
+                                <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="8" VerticalAlignment="Center">
+                                    <Border VerticalAlignment="Center">
+                                        <LucideIcon Kind="Shapes" Size="18" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" Spacing="2">
+                                        <TextBlock Classes="h4" Text="{Binding Libelle}" />
+                                        <TextBlock Text="{Binding Type}" />
+                                    </StackPanel>
+                                    <Border Classes="Badge Danger" Grid.Column="2" IsVisible="{Binding EstRequis}">
+                                        <TextBlock>Requis</TextBlock>
+                                    </Border>
+                                    <TextBlock Grid.Column="3"
+                                               Text="{Binding ValeurDefaut}"
+                                               FontSize="{StaticResource Text.Xs}"
+                                               Foreground="{DynamicResource Brush.Muted.Foreground}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,5 +1,5 @@
 using Avalonia.Markup.Xaml;
-using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Schema;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
 
