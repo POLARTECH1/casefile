@@ -195,6 +195,7 @@ public partial class App : Application
         services.AddAutoMapper(cfg => { }, typeof(MapperConfig));
         services.AddScoped<IGetTemplateDossierItems, GetTemplateDossierItems>();
         services.AddScoped<IGetTemplateDossierItem, GetTemplateDossierItem>();
+        services.AddScoped<IDeleteTemplateDossier, DeleteTemplateDossier>();
         services.AddScoped<IGetTypeDocuments, GetTypeDocuments>();
         services.AddScoped<ICreateTemplateDossier, CreateTemplateDossier>();
         services.AddScoped<IDialogWindowService, DialogWindowService>();

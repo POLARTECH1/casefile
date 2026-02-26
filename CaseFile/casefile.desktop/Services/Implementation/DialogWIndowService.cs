@@ -6,6 +6,8 @@ using Avalonia.Controls.ApplicationLifetimes;
 using casefile.application.DTOs.TemplateDossier;
 using casefile.application.UseCases.Interfaces;
 using casefile.desktop.ViewModels.Template;
+using casefile.desktop.ViewModels.WindowModal;
+using casefile.desktop.Views.WindowModal;
 using casefile.desktop.Views.WindowModal.Template;
 
 namespace casefile.desktop.Services.Implementation;
@@ -27,6 +29,17 @@ public class DialogWindowService : IDialogWindowService
         var viewModel = new CreateFolderTemplateWindowViewModel(_createTemplateDossier, _getTypeDocuments);
         var dialog = new CreateFolderTemplateWindow(viewModel);
         return await dialog.ShowDialog<TemplateDossierDto?>(owner);
+    }
+
+    public async Task<bool?> ShowConfirmationDialog(string message, string? confirmButtonText = null,
+        string? cancelButtonText = null, string? title = null, bool? result = null,
+        Action<bool?>? closeRequested = null)
+    {
+        var owner = GetMainWindow();
+        var viewModel = new ConfirmDialogWindowViewModel(message, confirmButtonText, cancelButtonText, title, result,
+            closeRequested);
+        var dialog = new ConfirmDialogWindow(viewModel);
+        return await dialog.ShowDialog<bool?>(owner);
     }
 
     private static Window GetMainWindow()

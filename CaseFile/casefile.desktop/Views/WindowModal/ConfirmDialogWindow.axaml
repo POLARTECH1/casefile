@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:windowModal="clr-namespace:casefile.desktop.ViewModels.WindowModal"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="casefile.desktop.Views.WindowModal.ConfirmDialogWindow"
+        Classes="DialogWindow"
+        Title="{Binding Title}"
+        SizeToContent="WidthAndHeight"
+        x:DataType="windowModal:ConfirmDialogWindowViewModel" CornerRadius="{StaticResource Radius.Lg}">
+    <Grid Margin="{StaticResource Spacing.5}" RowDefinitions="*, Auto" RowSpacing="{StaticResource Space.5}">
+        <TextBlock TextAlignment="Center" Text="{Binding Message}" />
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center"
+                    Spacing="{StaticResource Space.3}"
+                    Orientation="Horizontal">
+            <Button Classes="Primary" Command="{Binding ConfirmCommand}">
+                <TextBlock Text="{Binding ConfirmButtonText}" />
+            </Button>
+            <Button Classes="Danger" Command="{Binding CancelCommand}">
+                <TextBlock Text="{Binding CancelButtonText}" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

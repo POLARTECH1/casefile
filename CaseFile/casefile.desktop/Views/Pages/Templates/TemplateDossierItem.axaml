@@ -54,7 +54,7 @@
                         </StackPanel>
                     </Button>
                     <!-- Supprimer le template -->
-                    <Button Classes="Danger app-card-secondary-action-button" Grid.Column="1">
+                    <Button Classes="Danger app-card-secondary-action-button" Grid.Column="1" Command="{Binding SupprimerCommand}">
                         <LucideIcon Classes="app-card-secondary-action-button-icon" Kind="Trash2" Size="18"></LucideIcon>
                     </Button>
                 </Grid>

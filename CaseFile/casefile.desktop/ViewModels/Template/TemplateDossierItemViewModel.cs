@@ -1,4 +1,6 @@
 using System;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace casefile.desktop.ViewModels.Template;
 
@@ -33,4 +35,9 @@ public class TemplateDossierItemViewModel
     /// Nombre total de clients utilisant ce template.
     /// </summary>
     public int NombreDeClientsQuiUtilisentCeTemplate { get; set; }
+
+    /// <summary>
+    /// Commande utilisée pour supprimer un élément associé au modèle de dossier.
+    /// </summary>
+    public IAsyncRelayCommand? SupprimerCommand { get; set; }
 }
