@@ -153,12 +153,12 @@
                                                                 <Border VerticalAlignment="Center"
                                                                         Margin="0,0,8,0">
                                                                     <LucideIcon Kind="FileText"
-                                                                            Size="16"
-                                                                            Foreground="{DynamicResource Brush.Muted}" />
+                                                                            Size="18"/>
                                                                 </Border>
 
                                                                 <!-- Sélecteur de type de document -->
-                                                                <ComboBox Grid.Column="1"
+                                                                <ComboBox  Grid.Column="1"
+                                                                           Classes="FormComboBox"
                                                                           ItemsSource="{Binding TypesDocument}"
                                                                           SelectedItem="{Binding SelectedTypeDocument}"
                                                                           PlaceholderText="Type de document"

@@ -100,7 +100,8 @@ public partial class TemplatePageViewModel : PageViewModelBase
             Description = dto.Description,
             NombreDeDossiers = dto.NombreDeDossiers,
             NombreDocumentsAttendus = dto.NombreDocumentsAttendus,
-            NombreDeClientsQuiUtilisentCeTemplate = dto.NombreDeClientsQuiUtilisentCeTemplate,
+            NombreDeClientsQuiUtilisentCeTemplate = dto.NombreDeClientsQuiUtilisentCeTemplate +
+                                                    $" client{(dto.NombreDeClientsQuiUtilisentCeTemplate > 1 ? "s" : "")}",
             SupprimerCommand = new AsyncRelayCommand(() => SupprimerTemplateDossier(dto.Id))
         };
     }

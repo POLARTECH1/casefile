@@ -6,6 +6,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
     </Style>
 
+    <!-- TextInput-->
     <Style Selector="TextBox.FormTextInput">
         <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
         <Setter Property="Padding" Value="12,8" />
@@ -22,7 +23,31 @@
         <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
     </Style>
     <Style Selector="TextBox.FormTextInput:pointerover">
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
     </Style>
+
+    <!-- ComboBox -->
+    <Style Selector="ComboBox.FormComboBox">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Input}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Md}" />
+        <Setter Property="BorderThickness" Value="0"></Setter>
+    </Style>
+
+    <Style Selector="ComboBox.FormComboBox:focus-within">
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+    </Style>
+    <Style Selector="ComboBox.FormComboBox:focus-within:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
+    </Style>
+    
+    
 </Styles>

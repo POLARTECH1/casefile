@@ -34,7 +34,7 @@ public class TemplateDossierItemViewModel
     /// <summary>
     /// Nombre total de clients utilisant ce template.
     /// </summary>
-    public int NombreDeClientsQuiUtilisentCeTemplate { get; set; }
+    public string NombreDeClientsQuiUtilisentCeTemplate { get; set; }
 
     /// <summary>
     /// Commande utilisée pour supprimer un élément associé au modèle de dossier.
