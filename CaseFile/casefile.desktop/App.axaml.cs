@@ -205,6 +205,8 @@ public partial class App : Application
             CreateTemplateDossierDialogWindowService>();
         services.AddScoped<IDialogWindowService<Guid, TemplateDossierDto?>,
             EditTemplateDossierDialogWindowService>();
+        services.AddScoped<IDialogWindowService<Guid, object?>,
+            ShowTemplateDossierDialogWindowService>();
         services.AddScoped<IDialogWindowService<ConfirmationDialogRequest, bool?>,
             ConfirmationDialogWindowService>();
     }

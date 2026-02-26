@@ -1,0 +1,167 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================================ -->
+    <!--  Base Badge — à combiner avec une variante de couleur        -->
+    <!--  Usage : <TextBox Classes="Badge Danger" />                  -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge">
+        <Setter Property="FontSize"       Value="{DynamicResource Text.Xs}" />
+        <Setter Property="FontWeight"     Value="{DynamicResource Font.Medium}" />
+        <Setter Property="Padding"        Value="10,3" />
+        <Setter Property="MinHeight"      Value="0" />
+        <Setter Property="CornerRadius"   Value="{DynamicResource Radius.3Xl}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IsReadOnly"     Value="True" />
+        <Setter Property="Cursor"         Value="Arrow" />
+        <!-- couleur par défaut : Secondary -->
+        <Setter Property="Background"     Value="{DynamicResource Brush.Secondary}" />
+        <Setter Property="Foreground"     Value="{DynamicResource Brush.Secondary.Foreground}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Border}" />
+    </Style>
+
+    <!-- Supprime l'anneau de focus et le survol pour la base -->
+    <Style Selector="TextBox.Badge:pointerover">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Secondary}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Border}" />
+    </Style>
+    <Style Selector="TextBox.Badge:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Secondary}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Danger  (rouge)                                             -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Danger">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Red-100}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Red-700}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Red-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Danger:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Red-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Red-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Danger:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Red-100}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Red-200}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Warning  (ambre)                                            -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Warning">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Amber-100}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Amber-700}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Amber-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Warning:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Amber-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Amber-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Warning:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Amber-100}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Amber-200}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Success  (vert — Lime)                                      -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Success">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Lime-100}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Lime-700}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Lime-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Success:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Lime-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Lime-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Success:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Lime-100}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Lime-200}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Info  (bleu)                                                -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Info">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Blue-100}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Blue-700}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Blue-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Info:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Blue-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Blue-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Info:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Blue-100}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Blue-200}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Primary  (sombre / neutre principal du thème)               -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Primary">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Primary}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Primary.Foreground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Primary}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Primary:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Primary}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Primary:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Primary}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Primary}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Muted  (gris atténué)                                       -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Muted">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Muted}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Muted.Foreground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Muted:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Muted}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Muted:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Muted}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Purple  (violet)                                            -->
+    <!-- ============================================================ -->
+    <Style Selector="TextBox.Badge.Purple">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Purple-100}" />
+        <Setter Property="Foreground"  Value="{DynamicResource Brush.Purple-700}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Purple-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Purple:pointerover">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Purple-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Purple-200}" />
+    </Style>
+    <Style Selector="TextBox.Badge.Purple:focus-within">
+        <Setter Property="Background"     Value="{DynamicResource Brush.Purple-100}" />
+        <Setter Property="BorderBrush"    Value="{DynamicResource Brush.Purple-200}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+</Styles>

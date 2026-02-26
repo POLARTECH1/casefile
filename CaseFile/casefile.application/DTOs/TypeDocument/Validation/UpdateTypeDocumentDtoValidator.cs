@@ -10,6 +10,8 @@ public class UpdateTypeDocumentDtoValidator : AbstractValidator<UpdateTypeDocume
     public UpdateTypeDocumentDtoValidator()
     {
         Include(new CreateTypeDocumentDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du type de document est obligatoire.");
     }
 }

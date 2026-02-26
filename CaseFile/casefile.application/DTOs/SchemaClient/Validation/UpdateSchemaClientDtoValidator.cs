@@ -10,6 +10,8 @@ public class UpdateSchemaClientDtoValidator : AbstractValidator<UpdateSchemaClie
     public UpdateSchemaClientDtoValidator()
     {
         Include(new CreateSchemaClientDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du schéma client est obligatoire.");
     }
 }

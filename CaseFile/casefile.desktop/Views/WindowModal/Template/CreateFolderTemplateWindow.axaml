@@ -37,9 +37,14 @@
                     <!-- Description -->
                     <StackPanel Spacing="{ StaticResource Space.1}">
                         <TextBlock Classes="FormLabel">Description</TextBlock>
-                        <TextBox Classes="FormTextInput"
+                        <TextBox Classes="FormTextInput Multiline"
                                  Text="{Binding Description}"
                                  Watermark="Description du template (optionnel)" />
+                        <TextBlock IsVisible="{Binding HasDescriptionError}"
+                                   Text="{Binding DescriptionError}"
+                                   Foreground="{DynamicResource Brush.Red-600}"
+                                   FontSize="{StaticResource Text.Xs}"
+                                   Margin="{StaticResource Spacing.0-5.Left}" />
                     </StackPanel>
 
                 </StackPanel>

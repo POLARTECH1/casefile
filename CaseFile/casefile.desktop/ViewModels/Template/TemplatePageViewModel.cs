@@ -15,12 +15,14 @@ public partial class TemplatePageViewModel : PageViewModelBase
     private readonly IGetTemplateDossierItem _getTemplateDossierItem;
     private readonly IDialogWindowService<NoDialogRequest, TemplateDossierDto?> _createTemplateDossierDialogService;
     private readonly IDialogWindowService<Guid, TemplateDossierDto?> _editTemplateDossierDialogService;
+    private readonly IDialogWindowService<Guid, object?> _showTemplateDossierDialogService;
     private readonly IDialogWindowService<ConfirmationDialogRequest, bool?> _confirmationDialogService;
     private readonly IDeleteTemplateDossier _deleteTemplateDossier;
 
     public TemplatePageViewModel(IScreen screen, IGetTemplateDossierItems getTemplateDossierItems,
         IDialogWindowService<NoDialogRequest, TemplateDossierDto?> createTemplateDossierDialogService,
         IDialogWindowService<Guid, TemplateDossierDto?> editTemplateDossierDialogService,
+        IDialogWindowService<Guid, object?> showTemplateDossierDialogService,
         IDialogWindowService<ConfirmationDialogRequest, bool?> confirmationDialogService,
         IGetTemplateDossierItem getTemplateDossierItem,
         IDeleteTemplateDossier deleteTemplateDossier) : base(screen)
@@ -28,6 +30,7 @@ public partial class TemplatePageViewModel : PageViewModelBase
         _getTemplateDossierItems = getTemplateDossierItems;
         _createTemplateDossierDialogService = createTemplateDossierDialogService;
         _editTemplateDossierDialogService = editTemplateDossierDialogService;
+        _showTemplateDossierDialogService = showTemplateDossierDialogService;
         _confirmationDialogService = confirmationDialogService;
         _getTemplateDossierItem = getTemplateDossierItem;
         _deleteTemplateDossier = deleteTemplateDossier;
@@ -106,8 +109,13 @@ public partial class TemplatePageViewModel : PageViewModelBase
         }
     }
 
+    private async Task OuvrirWindowShowTemplateDossier(Guid templateId)
+    {
+        await _showTemplateDossierDialogService.Show(templateId);
+    }
+
     #region MappingMethods
-    
+
     private TemplateDossierItemViewModel Map(TemplateDossierItemDto dto)
     {
         return new TemplateDossierItemViewModel
@@ -119,6 +127,7 @@ public partial class TemplatePageViewModel : PageViewModelBase
             NombreDocumentsAttendus = dto.NombreDocumentsAttendus,
             NombreDeClientsQuiUtilisentCeTemplate = dto.NombreDeClientsQuiUtilisentCeTemplate +
                                                     $" client{(dto.NombreDeClientsQuiUtilisentCeTemplate > 1 ? "s" : "")}",
+            OuvrirCommand = new AsyncRelayCommand(() => OuvrirWindowShowTemplateDossier(dto.Id)),
             SupprimerCommand = new AsyncRelayCommand(() => SupprimerTemplateDossier(dto.Id)),
             ModifierCommand = new AsyncRelayCommand(() => ModifierTemplateDossier(dto.Id))
         };

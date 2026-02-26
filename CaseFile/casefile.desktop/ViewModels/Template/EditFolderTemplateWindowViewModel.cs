@@ -40,12 +40,18 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string? _nomError;
 
+    /// <summary>Message d'erreur sur la description (null si valide).</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasDescriptionError))]
+    private string? _descriptionError;
+
     /// <summary>Message d'erreur sur la liste des dossiers (null si valide).</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasDossiersError))]
     private string? _dossiersError;
 
     public bool HasNomError => NomError != null;
+    public bool HasDescriptionError => DescriptionError != null;
     public bool HasDossiersError => DossiersError != null;
 
     public EditFolderTemplateWindowViewModel(
@@ -100,30 +106,6 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
         }
     }
 
-    partial void OnNomChanged(string value)
-    {
-        if (NomError != null)
-            ValidateNom();
-    }
-
-    private bool ValidateNom()
-    {
-        if (string.IsNullOrWhiteSpace(Nom))
-        {
-            NomError = "Le nom du template est obligatoire.";
-            return false;
-        }
-
-        if (Nom.Length > 150)
-        {
-            NomError = "Le nom ne peut pas dépasser 150 caractères.";
-            return false;
-        }
-
-        NomError = null;
-        return true;
-    }
-
     [RelayCommand]
     private void AjouterDossier()
     {
@@ -138,23 +120,8 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
     private async Task ModifierTemplate()
     {
         NomError = null;
+        DescriptionError = null;
         DossiersError = null;
-
-        var estValide = ValidateNom();
-
-        if (FolderTemplateElements.Count == 0)
-        {
-            DossiersError = "Le template doit contenir au moins un dossier.";
-            estValide = false;
-        }
-
-        foreach (var element in FolderTemplateElements)
-        {
-            element.ValidateNom();
-            if (element.HasNomError) estValide = false;
-        }
-
-        if (!estValide) return;
 
         var dto = new UpdateTemplateDossierDto
         {
@@ -185,12 +152,44 @@ public partial class EditFolderTemplateWindowViewModel : ViewModelBase
         }
         catch (ValidationException ex)
         {
-            DossiersError = string.Join(" ", ex.Errors.Select(e => e.ErrorMessage));
+            ApplyValidationErrors(ex);
         }
         catch (Exception)
         {
             DossiersError = "Une erreur inattendue s'est produite. Veuillez réessayer.";
         }
+    }
+
+    /// <summary>
+    /// Analyse et applique les erreurs de validation reçues, en extrayant
+    /// les messages d'erreur spécifiques au nom ainsi que ceux relatifs
+    /// aux autres propriétés du template.
+    /// </summary>
+    /// <param name="ex">
+    /// L'exception de validation contenant les erreurs à analyser.
+    /// </param>
+    private void ApplyValidationErrors(ValidationException ex)
+    {
+        var nomErrors = ex.Errors
+            .Where(e => e.PropertyName == nameof(UpdateTemplateDossierDto.Nom))
+            .Select(e => e.ErrorMessage)
+            .Distinct()
+            .ToList();
+        var descriptionErrors = ex.Errors
+            .Where(e => e.PropertyName == nameof(UpdateTemplateDossierDto.Description))
+            .Select(e => e.ErrorMessage)
+            .Distinct()
+            .ToList();
+        var otherErrors = ex.Errors
+            .Where(e => e.PropertyName != nameof(UpdateTemplateDossierDto.Nom)
+                        && e.PropertyName != nameof(UpdateTemplateDossierDto.Description))
+            .Select(e => e.ErrorMessage)
+            .Distinct()
+            .ToList();
+
+        NomError = nomErrors.Count > 0 ? string.Join(" ", nomErrors) : null;
+        DescriptionError = descriptionErrors.Count > 0 ? string.Join(" ", descriptionErrors) : null;
+        DossiersError = otherErrors.Count > 0 ? string.Join(" ", otherErrors) : null;
     }
 
     [RelayCommand]

@@ -10,6 +10,8 @@ public class UpdateDossierClientDtoValidator : AbstractValidator<UpdateDossierCl
     public UpdateDossierClientDtoValidator()
     {
         Include(new CreateDossierClientDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du dossier client est obligatoire.");
     }
 }

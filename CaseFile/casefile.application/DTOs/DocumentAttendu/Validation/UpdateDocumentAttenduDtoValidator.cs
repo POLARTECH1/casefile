@@ -10,6 +10,8 @@ public class UpdateDocumentAttenduDtoValidator : AbstractValidator<UpdateDocumen
     public UpdateDocumentAttenduDtoValidator()
     {
         Include(new CreateDocumentAttenduDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du document attendu est obligatoire.");
     }
 }

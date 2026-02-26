@@ -14,6 +14,7 @@ public partial class ShowFolderTemplateWindow : Window
 
     public ShowFolderTemplateWindow(ShowFolderTemplateWindowViewModel viewModel)
     {
+        InitializeComponent();
         DataContext = viewModel;
     }
 }

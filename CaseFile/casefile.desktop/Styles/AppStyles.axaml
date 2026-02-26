@@ -7,4 +7,5 @@
     <StyleInclude Source="/Styles/Layout.axaml" />
     <StyleInclude Source="/Styles/Controls/NavBar.axaml" />
     <StyleInclude Source="/Styles/Controls/AppCard.axaml" />
+    <StyleInclude Source="/Styles/Controls/Badges.axaml" />
 </Styles>

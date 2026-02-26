@@ -45,4 +45,9 @@ public class TemplateDossierItemViewModel
     /// Commande utilisée pour ouvrir la fenêtre de modification du modèle de dossier.
     /// </summary>
     public IAsyncRelayCommand? ModifierCommand { get; set; }
+
+    /// <summary>
+    /// Commande utilisée pour ouvrir la fenêtre d'affichage du modèle de dossier.
+    /// </summary>
+    public IAsyncRelayCommand? OuvrirCommand { get; set; }
 }

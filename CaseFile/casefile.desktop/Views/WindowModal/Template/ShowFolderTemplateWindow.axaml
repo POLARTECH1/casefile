@@ -5,7 +5,50 @@
         xmlns:template="clr-namespace:casefile.desktop.ViewModels.Template"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="casefile.desktop.Views.WindowModal.Template.ShowFolderTemplateWindow"
-        Title="ShowFolderTemplateWindow"
-        x:DataType="template:ShowFolderTemplateWindowViewModel">
-    Welcome to Avalonia!
+        Title="Structure de dossier"
+        x:DataType="template:ShowFolderTemplateWindowViewModel"
+        Classes="DialogWindow"
+        Width="580"
+        MaxHeight="740"
+        SizeToContent="Height"
+        CornerRadius="{StaticResource Radius.Lg}">
+    <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="{StaticResource Space.4}">
+                <TextBlock Classes="h2" Text="{Binding Nom}" />
+                <TextBlock Text="{Binding Description}" IsVisible="{Binding HasDescription}" />
+                <TextBlock Text="{Binding LoadingError}"
+                           IsVisible="{Binding HasLoadingError}"
+                           Foreground="{DynamicResource Brush.Red-600}"
+                           FontSize="{StaticResource Text.Sm}" />
+
+                <ItemsControl ItemsSource="{Binding Dossiers}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" Spacing="{StaticResource Space.2-5}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="template:ShowTemplateDossierFolderItemViewModel">
+                            <Border BorderThickness="1"
+                                    BorderBrush="{DynamicResource Brush.Border}"
+                                    CornerRadius="{DynamicResource Radius.Lg}"
+                                    Padding="{DynamicResource Spacing.4}">
+                                <StackPanel Spacing="{StaticResource Space.2}">
+                                    <TextBlock Classes="h4" Text="{Binding NomDossier}" />
+                                    <ItemsControl ItemsSource="{Binding DocumentsAttendus}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="template:ShowTemplateDossierFolderDocumentAttenduItemViewModel">
+                                                <TextBlock Text="{Binding Type}" FontSize="{StaticResource Text.Sm}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>

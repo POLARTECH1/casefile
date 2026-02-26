@@ -9,6 +9,8 @@ public class CreateSchemaClientDtoValidator : AbstractValidator<CreateSchemaClie
 {
     public CreateSchemaClientDtoValidator()
     {
-        RuleFor(x => x.Nom).NotEmpty().MaximumLength(150);
+        RuleFor(x => x.Nom)
+            .NotEmpty().WithMessage("Le nom du schéma client est obligatoire.")
+            .MaximumLength(150).WithMessage("Le nom du schéma client ne peut pas dépasser 150 caractères.");
     }
 }

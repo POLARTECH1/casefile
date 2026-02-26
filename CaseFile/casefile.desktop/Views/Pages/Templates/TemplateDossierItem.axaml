@@ -13,7 +13,7 @@
                 <Border Classes="app-card-icon-container">
                     <LucideIcon Classes="app-card-icon" Kind="FolderTree"></LucideIcon>
                 </Border>
-                <Button Classes="SecondaryNoBorder app-card-settings-button" Grid.Column="2">
+                <Button Classes="SecondaryNoBorder app-card-settings-button" Grid.Column="2" Command="{Binding OuvrirCommand}">
                     <LucideIcon Classes="app-card-settings-icon" Kind="Eye"/>
                 </Button>
             </Grid>

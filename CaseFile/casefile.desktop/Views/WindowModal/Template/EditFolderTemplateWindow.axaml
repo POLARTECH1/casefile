@@ -16,7 +16,7 @@
     <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}">
 
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="{StaticResource Spacing.2-5.Horizontal}">
-            <StackPanel Spacing="{StaticResource Space.5}" >
+            <StackPanel Spacing="{StaticResource Space.5}">
 
                 <!-- ── Section 1 : Infos du template ── -->
                 <StackPanel Spacing="{StaticResource Space.3}">
@@ -37,9 +37,14 @@
                     <!-- Description -->
                     <StackPanel Spacing="{StaticResource Space.1}">
                         <TextBlock Classes="FormLabel">Description</TextBlock>
-                        <TextBox Classes="FormTextInput"
+                        <TextBox Classes="FormTextInput Multiline"
                                  Text="{Binding Description}"
                                  Watermark="Description du template (optionnel)" />
+                        <TextBlock IsVisible="{Binding HasDescriptionError}"
+                                   Text="{Binding DescriptionError}"
+                                   Foreground="{DynamicResource Brush.Red-600}"
+                                   FontSize="{StaticResource Text.Xs}"
+                                   Margin="{StaticResource Spacing.0-5.Left}" />
                     </StackPanel>
 
                 </StackPanel>
@@ -153,7 +158,7 @@
                                                                 <Border VerticalAlignment="Center"
                                                                         Margin="0,0,8,0">
                                                                     <LucideIcon Kind="FileText"
-                                                                            Size="18"/>
+                                                                            Size="18" />
                                                                 </Border>
 
                                                                 <!-- Sélecteur de type de document -->

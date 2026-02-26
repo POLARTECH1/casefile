@@ -17,6 +17,14 @@
         <Setter Property="BorderThickness" Value="0"></Setter>
     </Style>
 
+    <Style Selector="TextBox.Multiline">
+
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="MaxLines" Value="4"/>
+
+    </Style>
+
     <Style Selector="TextBox.FormTextInput:focus-within">
         <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
         <Setter Property="BorderThickness" Value="1"></Setter>
@@ -48,6 +56,6 @@
         <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="Background" Value="{DynamicResource Brush.Input.Background}" />
     </Style>
-    
-    
+
+
 </Styles>
