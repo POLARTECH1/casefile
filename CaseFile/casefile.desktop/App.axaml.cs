@@ -199,6 +199,7 @@ public partial class App : Application
         services.AddScoped<IGetTypeDocuments, GetTypeDocuments>();
         services.AddScoped<ICreateTemplateDossier, CreateTemplateDossier>();
         services.AddScoped<IUpdateTemplateDossier, UpdateTemplateDossier>();
+        services.AddScoped<IGetTemplateDossierForEdit, GetTemplateDossierForEdit>();
         services.AddScoped<IDialogWindowService, DialogWindowService>();
     }
 

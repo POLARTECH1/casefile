@@ -15,12 +15,20 @@ namespace casefile.desktop.Services.Implementation;
 public class DialogWindowService : IDialogWindowService
 {
     private readonly ICreateTemplateDossier _createTemplateDossier;
+    private readonly IUpdateTemplateDossier _updateTemplateDossier;
     private readonly IGetTypeDocuments _getTypeDocuments;
+    private readonly IGetTemplateDossierForEdit _getTemplateDossierForEdit;
 
-    public DialogWindowService(ICreateTemplateDossier createTemplateDossier, IGetTypeDocuments getTypeDocuments)
+    public DialogWindowService(
+        ICreateTemplateDossier createTemplateDossier,
+        IUpdateTemplateDossier updateTemplateDossier,
+        IGetTypeDocuments getTypeDocuments,
+        IGetTemplateDossierForEdit getTemplateDossierForEdit)
     {
         _createTemplateDossier = createTemplateDossier;
+        _updateTemplateDossier = updateTemplateDossier;
         _getTypeDocuments = getTypeDocuments;
+        _getTemplateDossierForEdit = getTemplateDossierForEdit;
     }
 
     public async Task<TemplateDossierDto?> ShowCreateTemplateDossierDialog()
@@ -28,6 +36,14 @@ public class DialogWindowService : IDialogWindowService
         var owner = GetMainWindow();
         var viewModel = new CreateFolderTemplateWindowViewModel(_createTemplateDossier, _getTypeDocuments);
         var dialog = new CreateFolderTemplateWindow(viewModel);
+        return await dialog.ShowDialog<TemplateDossierDto?>(owner);
+    }
+
+    public async Task<TemplateDossierDto?> ShowEditTemplateDossierDialog(Guid id)
+    {
+        var owner = GetMainWindow();
+        var viewModel = new EditFolderTemplateWindowViewModel(_updateTemplateDossier, _getTypeDocuments, _getTemplateDossierForEdit, id);
+        var dialog = new EditFolderTemplateWindow(viewModel);
         return await dialog.ShowDialog<TemplateDossierDto?>(owner);
     }
 

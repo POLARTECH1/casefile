@@ -13,6 +13,13 @@ public interface IDialogWindowService
     Task<TemplateDossierDto?> ShowCreateTemplateDossierDialog();
 
     /// <summary>
+    /// Ouvre la fenêtre de modification d'un template de dossier existant, pré-remplie avec ses données.
+    /// Retourne le template modifié, ou null si l'utilisateur annule.
+    /// </summary>
+    /// <param name="id">L'identifiant du template à modifier.</param>
+    Task<TemplateDossierDto?> ShowEditTemplateDossierDialog(Guid id);
+
+    /// <summary>
     /// Affiche une boîte de dialogue de confirmation.
     /// Retourne un booléen indiquant la décision de l'utilisateur, ou null si la boîte de dialogue est fermée sans réponse explicite.
     /// </summary>

@@ -40,4 +40,9 @@ public class TemplateDossierItemViewModel
     /// Commande utilisée pour supprimer un élément associé au modèle de dossier.
     /// </summary>
     public IAsyncRelayCommand? SupprimerCommand { get; set; }
+
+    /// <summary>
+    /// Commande utilisée pour ouvrir la fenêtre de modification du modèle de dossier.
+    /// </summary>
+    public IAsyncRelayCommand? ModifierCommand { get; set; }
 }

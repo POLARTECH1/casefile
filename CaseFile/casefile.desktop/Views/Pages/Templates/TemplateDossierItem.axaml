@@ -46,7 +46,7 @@
             <Border Classes="app-card-actions-container" Grid.Row="4">
                 <Grid Classes="app-card-actions-layout" ColumnDefinitions="*, Auto">
                     <!-- Modifier le template -->
-                    <Button Classes="Secondary app-card-primary-action-button">
+                    <Button Classes="Secondary app-card-primary-action-button" Command="{Binding ModifierCommand}">
                         <StackPanel Classes="app-card-primary-action-button-content" Orientation="Horizontal"
                                     Spacing="8" HorizontalAlignment="Center">
                             <LucideIcon Classes="app-card-primary-action-button-icon" Kind="SquarePen" Size="18"></LucideIcon>

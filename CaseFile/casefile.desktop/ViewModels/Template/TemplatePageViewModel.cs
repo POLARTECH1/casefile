@@ -71,6 +71,16 @@ public partial class TemplatePageViewModel : PageViewModelBase
     }
 
     [RelayCommand]
+    private async Task ModifierTemplateDossier(Guid templateId)
+    {
+        var result = await _dialogWindowService.ShowEditTemplateDossierDialog(templateId);
+        if (result != null)
+        {
+            await ChargerTemplatesAsync();
+        }
+    }
+
+    [RelayCommand]
     private async Task SupprimerTemplateDossier(Guid templateId)
     {
         var deleteResult = await _dialogWindowService.ShowConfirmationDialog(
@@ -102,7 +112,8 @@ public partial class TemplatePageViewModel : PageViewModelBase
             NombreDocumentsAttendus = dto.NombreDocumentsAttendus,
             NombreDeClientsQuiUtilisentCeTemplate = dto.NombreDeClientsQuiUtilisentCeTemplate +
                                                     $" client{(dto.NombreDeClientsQuiUtilisentCeTemplate > 1 ? "s" : "")}",
-            SupprimerCommand = new AsyncRelayCommand(() => SupprimerTemplateDossier(dto.Id))
+            SupprimerCommand = new AsyncRelayCommand(() => SupprimerTemplateDossier(dto.Id)),
+            ModifierCommand = new AsyncRelayCommand(() => ModifierTemplateDossier(dto.Id))
         };
     }
 
