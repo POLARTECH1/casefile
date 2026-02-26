@@ -78,7 +78,7 @@
                                                                    Classes="Badge Success">
                                                             Requis
                                                         </TextBlock>
-                                                        <TextBlock Grid.Column="4" Text="{Binding Type}"
+                                                        <TextBlock Grid.Column="4" Text="{Binding Extensions}"
                                                                    FontSize="{StaticResource Text.Xs}"
                                                                    Foreground="{DynamicResource Brush.Muted.Foreground}"/>
                                                     </Grid>

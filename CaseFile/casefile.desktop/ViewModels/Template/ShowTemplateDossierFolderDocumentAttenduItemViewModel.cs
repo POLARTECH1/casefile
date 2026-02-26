@@ -16,9 +16,9 @@ public class ShowTemplateDossierFolderDocumentAttenduItemViewModel
     public required bool IsRequired { get; set; }
 
     /// <summary>
-    /// Le type de document attendu
+    /// Les extensions permises pour ce document attendu
     /// </summary>
-    public required string Type { get; set; }
+    public required string Extensions { get; set; }
     
     
 }

@@ -61,8 +61,13 @@ public partial class ShowFolderTemplateWindowViewModel : ViewModelBase
 
         var typesResult = await _getTypeDocuments.ExecuteAsync();
         var typeById = typesResult.IsSuccess
-            ? typesResult.Value.ToDictionary(t => t.Id, t => t.Nom)
-            : new Dictionary<Guid, string>();
+            ? typesResult.Value.ToDictionary(
+                t => t.Id,
+                t => (
+                    Nom: t.Nom,
+                    Extensions: string.IsNullOrWhiteSpace(t.ExtensionsPermises) ? "-" : t.ExtensionsPermises!
+                ))
+            : new Dictionary<Guid, (string Nom, string Extensions)>();
 
         var templateResult = await _getTemplateDossierForEdit.ExecuteAsync(_templateId);
         if (templateResult.IsFailed)
@@ -80,14 +85,18 @@ public partial class ShowFolderTemplateWindowViewModel : ViewModelBase
             var documents = element.CreateDocumentAttendusDto
                 .Select(d =>
                 {
-                    var typeNom = d.IdTypeDocument is not null && typeById.TryGetValue(d.IdTypeDocument.Value, out var value)
-                        ? value
-                        : "Type de document inconnu";
+                    var typeNom = "Type de document inconnu";
+                    var extensions = "-";
+                    if (d.IdTypeDocument is not null && typeById.TryGetValue(d.IdTypeDocument.Value, out var value))
+                    {
+                        typeNom = value.Nom;
+                        extensions = value.Extensions;
+                    }
 
                     return new ShowTemplateDossierFolderDocumentAttenduItemViewModel
                     {
                         Nom = typeNom,
-                        Type = typeNom,
+                        Extensions = extensions,
                         IsRequired = false
                     };
                 })
