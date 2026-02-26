@@ -22,6 +22,7 @@ using casefile.application.Mapping;
 using casefile.application.UseCases.Interfaces;
 using casefile.application.UseCases.TemplateDossierUseCases;
 using casefile.application.UseCases.TypeDocumentUseCases;
+using casefile.application.DTOs.TemplateDossier;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
@@ -200,7 +201,12 @@ public partial class App : Application
         services.AddScoped<ICreateTemplateDossier, CreateTemplateDossier>();
         services.AddScoped<IUpdateTemplateDossier, UpdateTemplateDossier>();
         services.AddScoped<IGetTemplateDossierForEdit, GetTemplateDossierForEdit>();
-        services.AddScoped<IDialogWindowService, DialogWindowService>();
+        services.AddScoped<IDialogWindowService<NoDialogRequest, TemplateDossierDto?>,
+            CreateTemplateDossierDialogWindowService>();
+        services.AddScoped<IDialogWindowService<Guid, TemplateDossierDto?>,
+            EditTemplateDossierDialogWindowService>();
+        services.AddScoped<IDialogWindowService<ConfirmationDialogRequest, bool?>,
+            ConfirmationDialogWindowService>();
     }
 
     /// <summary>

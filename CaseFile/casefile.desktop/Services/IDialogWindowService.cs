@@ -1,36 +1,13 @@
-using System;
 using System.Threading.Tasks;
-using casefile.application.DTOs.TemplateDossier;
 
 namespace casefile.desktop.Services;
 
-public interface IDialogWindowService
+/// <summary>
+/// Interface qui définit un service pour afficher une fenêtre de dialogue.
+/// </summary>
+/// <typeparam name="TRequest">Type de la requête utilisée pour configurer la fenêtre de dialogue.</typeparam>
+/// <typeparam name="TResult">Type du résultat retourné après la fermeture de la fenêtre de dialogue.</typeparam>
+public interface IDialogWindowService<in TRequest, TResult>
 {
-    /// <summary>
-    /// Ouvre la fenêtre de création d'un template de dossier.
-    /// Retourne le template créé, ou null si l'utilisateur annule.
-    /// </summary>
-    Task<TemplateDossierDto?> ShowCreateTemplateDossierDialog();
-
-    /// <summary>
-    /// Ouvre la fenêtre de modification d'un template de dossier existant, pré-remplie avec ses données.
-    /// Retourne le template modifié, ou null si l'utilisateur annule.
-    /// </summary>
-    /// <param name="id">L'identifiant du template à modifier.</param>
-    Task<TemplateDossierDto?> ShowEditTemplateDossierDialog(Guid id);
-
-    /// <summary>
-    /// Affiche une boîte de dialogue de confirmation.
-    /// Retourne un booléen indiquant la décision de l'utilisateur, ou null si la boîte de dialogue est fermée sans réponse explicite.
-    /// </summary>
-    /// <param name="message">Le message affiché dans la boîte de dialogue.</param>
-    /// <param name="confirmButtonText">Le texte du bouton de confirmation. Peut être null pour utiliser la valeur par défaut.</param>
-    /// <param name="cancelButtonText">Le texte du bouton d'annulation. Peut être null pour utiliser la valeur par défaut.</param>
-    /// <param name="title">Le titre de la boîte de dialogue. Peut être null affichera "Confirmation" comme valeur pardefaut</param>
-    /// <param name="result">Valeur booléenne initiale à passer à la boîte de dialogue. Peut être null.</param>
-    /// <param name="closeRequested">Action facultative déclenchée lors de la fermeture de la boîte de dialogue avec une valeur sélectionnée.</param>
-    /// <returns>Une tâche qui résout un booléen indiquant la sélection de l'utilisateur (true pour confirmer, false pour annuler), ou null si aucune sélection n'a été effectuée.</returns>
-    Task<bool?> ShowConfirmationDialog(string message, string? confirmButtonText = null,
-        string? cancelButtonText = null, string? title = null, bool? result = null,
-        Action<bool?>? closeRequested = null);
+    Task<TResult> Show(TRequest request);
 }

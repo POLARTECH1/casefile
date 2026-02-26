@@ -13,15 +13,22 @@ public partial class TemplatePageViewModel : PageViewModelBase
 {
     private readonly IGetTemplateDossierItems _getTemplateDossierItems;
     private readonly IGetTemplateDossierItem _getTemplateDossierItem;
-    private readonly IDialogWindowService _dialogWindowService;
+    private readonly IDialogWindowService<NoDialogRequest, TemplateDossierDto?> _createTemplateDossierDialogService;
+    private readonly IDialogWindowService<Guid, TemplateDossierDto?> _editTemplateDossierDialogService;
+    private readonly IDialogWindowService<ConfirmationDialogRequest, bool?> _confirmationDialogService;
     private readonly IDeleteTemplateDossier _deleteTemplateDossier;
 
     public TemplatePageViewModel(IScreen screen, IGetTemplateDossierItems getTemplateDossierItems,
-        IDialogWindowService dialogWindowService, IGetTemplateDossierItem getTemplateDossierItem,
+        IDialogWindowService<NoDialogRequest, TemplateDossierDto?> createTemplateDossierDialogService,
+        IDialogWindowService<Guid, TemplateDossierDto?> editTemplateDossierDialogService,
+        IDialogWindowService<ConfirmationDialogRequest, bool?> confirmationDialogService,
+        IGetTemplateDossierItem getTemplateDossierItem,
         IDeleteTemplateDossier deleteTemplateDossier) : base(screen)
     {
         _getTemplateDossierItems = getTemplateDossierItems;
-        _dialogWindowService = dialogWindowService;
+        _createTemplateDossierDialogService = createTemplateDossierDialogService;
+        _editTemplateDossierDialogService = editTemplateDossierDialogService;
+        _confirmationDialogService = confirmationDialogService;
         _getTemplateDossierItem = getTemplateDossierItem;
         _deleteTemplateDossier = deleteTemplateDossier;
         ListeTemplate.CollectionChanged += (_, _) => this.RaisePropertyChanged(nameof(IsListeTemplateEmpty));
@@ -56,7 +63,7 @@ public partial class TemplatePageViewModel : PageViewModelBase
     [RelayCommand]
     private async Task OuvrirWindowCreateTemplateDossier()
     {
-        var template = await _dialogWindowService.ShowCreateTemplateDossierDialog();
+        var template = await _createTemplateDossierDialogService.Show(new NoDialogRequest());
         if (template != null)
         {
             var result = await _getTemplateDossierItem.ExecuteAsync(template.Id);
@@ -73,7 +80,7 @@ public partial class TemplatePageViewModel : PageViewModelBase
     [RelayCommand]
     private async Task ModifierTemplateDossier(Guid templateId)
     {
-        var result = await _dialogWindowService.ShowEditTemplateDossierDialog(templateId);
+        var result = await _editTemplateDossierDialogService.Show(templateId);
         if (result != null)
         {
             await ChargerTemplatesAsync();
@@ -83,8 +90,8 @@ public partial class TemplatePageViewModel : PageViewModelBase
     [RelayCommand]
     private async Task SupprimerTemplateDossier(Guid templateId)
     {
-        var deleteResult = await _dialogWindowService.ShowConfirmationDialog(
-            "Êtes-vous sûr de vouloir supprimer ce template de dossier ? Cette action est irréversible.");
+        var deleteResult = await _confirmationDialogService.Show(new ConfirmationDialogRequest(
+            "Êtes-vous sûr de vouloir supprimer ce template de dossier ? Cette action est irréversible."));
         if (deleteResult == true)
         {
             var result = await _deleteTemplateDossier.ExecuteAsync(templateId);
