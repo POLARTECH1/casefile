@@ -89,7 +89,6 @@
                                         CornerRadius="{DynamicResource Radius.Lg}"
                                         Padding="{DynamicResource Spacing.4}">
                                     <StackPanel Spacing="10">
-
                                         <!-- Ligne : icône + nom + supprimer -->
                                         <Grid ColumnDefinitions="Auto, *, Auto">
                                             <Border VerticalAlignment="Center"

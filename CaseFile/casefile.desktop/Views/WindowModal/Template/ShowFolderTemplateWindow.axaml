@@ -13,15 +13,20 @@
         SizeToContent="Height"
         CornerRadius="{StaticResource Radius.Lg}">
     <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}">
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <StackPanel Spacing="{StaticResource Space.4}">
-                <TextBlock Classes="h2" Text="{Binding Nom}" />
-                <TextBlock Text="{Binding Description}" IsVisible="{Binding HasDescription}" />
-                <TextBlock Text="{Binding LoadingError}"
-                           IsVisible="{Binding HasLoadingError}"
-                           Foreground="{DynamicResource Brush.Red-600}"
-                           FontSize="{StaticResource Text.Sm}" />
 
+        <!-- Header Nom et description -->
+        <StackPanel Orientation="Vertical">
+            <TextBlock Classes="h2" Text="{Binding Nom}" />
+            <TextBlock Text="{Binding Description}" IsVisible="{Binding HasDescription}" />
+            <TextBlock Text="{Binding LoadingError}"
+                       IsVisible="{Binding HasLoadingError}"
+                       Foreground="{DynamicResource Brush.Red-600}"
+                       FontSize="{StaticResource Text.Sm}" />
+        </StackPanel>
+
+        <!-- Liste des dossiers et documents attendus -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="{StaticResource Space.4}">
                 <ItemsControl ItemsSource="{Binding Dossiers}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -30,16 +35,56 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="template:ShowTemplateDossierFolderItemViewModel">
+                            <!-- Card pour chaque dossier -->
                             <Border BorderThickness="1"
                                     BorderBrush="{DynamicResource Brush.Border}"
                                     CornerRadius="{DynamicResource Radius.Lg}"
                                     Padding="{DynamicResource Spacing.4}">
-                                <StackPanel Spacing="{StaticResource Space.2}">
-                                    <TextBlock Classes="h4" Text="{Binding NomDossier}" />
+                                <!-- Contenu du dossier avec icône et nom -->
+                                <StackPanel Spacing="{StaticResource Space.8}">
+                                    <!-- En-tête du dossier avec icône et nom -->
+                                    <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2-5}">
+                                        <Border VerticalAlignment="Center"
+                                                Margin="{StaticResource Spacing.2-5.Right}">
+                                            <LucideIcon Kind="Folder"
+                                                        Size="20"
+                                                        Foreground="{DynamicResource Brush.Blue-600}" />
+                                        </Border>
+                                        <TextBlock Classes="h4" Text="{Binding NomDossier}" />
+                                    </StackPanel>
+                                    <!-- Liste des documents attendus dans le dossier -->
                                     <ItemsControl ItemsSource="{Binding DocumentsAttendus}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Vertical" Spacing="{StaticResource Space.2-5}" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate x:DataType="template:ShowTemplateDossierFolderDocumentAttenduItemViewModel">
-                                                <TextBlock Text="{Binding Type}" FontSize="{StaticResource Text.Sm}" />
+                                            <DataTemplate
+                                                x:DataType="template:ShowTemplateDossierFolderDocumentAttenduItemViewModel">
+                                                <Border BorderThickness="0"
+                                                        Background="{DynamicResource Brush.Background}"
+                                                        CornerRadius="{DynamicResource Radius.Md}"
+                                                        Padding="{StaticResource Spacing.2-5}">
+                                                    <Grid ColumnDefinitions="Auto, Auto, Auto, *, Auto"
+                                                          ColumnSpacing="{StaticResource Space.2-5}"
+                                                          VerticalAlignment="Center">
+                                                        <Border VerticalAlignment="Center">
+                                                            <LucideIcon Kind="FileText"
+                                                                        Size="18" />
+                                                        </Border>
+                                                        <TextBlock Grid.Column="1" Text="{Binding Nom}" />
+                                                        <TextBlock Grid.Column="2" IsVisible="{Binding IsRequired}"
+                                                                   Classes="Badge Success">
+                                                            Requis
+                                                        </TextBlock>
+                                                        <TextBlock Grid.Column="4" Text="{Binding Type}"
+                                                                   FontSize="{StaticResource Text.Xs}"
+                                                                   Foreground="{DynamicResource Brush.Muted.Foreground}"/>
+                                                    </Grid>
+
+
+                                                </Border>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

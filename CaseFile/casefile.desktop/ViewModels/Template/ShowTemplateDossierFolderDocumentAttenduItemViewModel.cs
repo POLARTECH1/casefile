@@ -19,4 +19,6 @@ public class ShowTemplateDossierFolderDocumentAttenduItemViewModel
     /// Le type de document attendu
     /// </summary>
     public required string Type { get; set; }
+    
+    
 }
