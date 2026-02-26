@@ -7,6 +7,11 @@ namespace casefile.desktop.Views.WindowModal;
 
 public partial class ConfirmDialogWindow : Window
 {
+    public ConfirmDialogWindow()
+    {
+        InitializeComponent();
+    }
+
     public ConfirmDialogWindow(ConfirmDialogWindowViewModel viewModel)
     {
         DataContext = viewModel;

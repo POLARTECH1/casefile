@@ -5,6 +5,11 @@ namespace casefile.desktop.Views.WindowModal.Template;
 
 public partial class CreateFolderTemplateWindow : Window
 {
+    public CreateFolderTemplateWindow()
+    {
+        InitializeComponent();
+    }
+
     public CreateFolderTemplateWindow(CreateFolderTemplateWindowViewModel viewModel)
     {
         InitializeComponent();

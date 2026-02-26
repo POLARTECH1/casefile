@@ -26,7 +26,7 @@ public interface IDialogWindowService
     /// <param name="message">Le message affiché dans la boîte de dialogue.</param>
     /// <param name="confirmButtonText">Le texte du bouton de confirmation. Peut être null pour utiliser la valeur par défaut.</param>
     /// <param name="cancelButtonText">Le texte du bouton d'annulation. Peut être null pour utiliser la valeur par défaut.</param>
-    /// <param name="title">Le titre de la boîte de dialogue. Peut être null affichera "COnfirmation" comme valeur pardefaut</param>
+    /// <param name="title">Le titre de la boîte de dialogue. Peut être null affichera "Confirmation" comme valeur pardefaut</param>
     /// <param name="result">Valeur booléenne initiale à passer à la boîte de dialogue. Peut être null.</param>
     /// <param name="closeRequested">Action facultative déclenchée lors de la fermeture de la boîte de dialogue avec une valeur sélectionnée.</param>
     /// <returns>Une tâche qui résout un booléen indiquant la sélection de l'utilisateur (true pour confirmer, false pour annuler), ou null si aucune sélection n'a été effectuée.</returns>

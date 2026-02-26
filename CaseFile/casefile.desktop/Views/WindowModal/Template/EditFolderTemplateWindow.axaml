@@ -15,8 +15,8 @@
 
     <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}">
 
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <StackPanel Spacing="{StaticResource Space.5}">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="{StaticResource Spacing.2-5.Horizontal}">
+            <StackPanel Spacing="{StaticResource Space.5}" >
 
                 <!-- ── Section 1 : Infos du template ── -->
                 <StackPanel Spacing="{StaticResource Space.3}">

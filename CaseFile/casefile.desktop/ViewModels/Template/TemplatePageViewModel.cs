@@ -100,7 +100,7 @@ public partial class TemplatePageViewModel : PageViewModelBase
     }
 
     #region MappingMethods
-
+    
     private TemplateDossierItemViewModel Map(TemplateDossierItemDto dto)
     {
         return new TemplateDossierItemViewModel

@@ -5,6 +5,11 @@ namespace casefile.desktop.Views.WindowModal.Template;
 
 public partial class EditFolderTemplateWindow : Window
 {
+    public EditFolderTemplateWindow()
+    {
+        InitializeComponent();
+    }
+
     public EditFolderTemplateWindow(EditFolderTemplateWindowViewModel viewModel)
     {
         InitializeComponent();

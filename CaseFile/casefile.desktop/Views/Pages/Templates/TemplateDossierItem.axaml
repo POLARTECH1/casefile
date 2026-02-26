@@ -8,13 +8,13 @@
              x:DataType="template:TemplateDossierItemViewModel">
     <Border Classes="app-card">
         <Grid Classes="app-card-layout" RowDefinitions="Auto, Auto, *, Auto, Auto">
-            <!-- Icone et paramètres du dossier -->
+            <!-- Icone et voir du dossier -->
             <Grid Classes="app-card-header" ColumnDefinitions="Auto, * , Auto">
                 <Border Classes="app-card-icon-container">
                     <LucideIcon Classes="app-card-icon" Kind="FolderTree"></LucideIcon>
                 </Border>
                 <Button Classes="SecondaryNoBorder app-card-settings-button" Grid.Column="2">
-                    <LucideIcon Classes="app-card-settings-icon" Kind="Settings"></LucideIcon>
+                    <LucideIcon Classes="app-card-settings-icon" Kind="Eye"/>
                 </Button>
             </Grid>
             <!-- Titre du template -->
