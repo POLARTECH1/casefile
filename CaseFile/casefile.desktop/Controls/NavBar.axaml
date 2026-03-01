@@ -1,0 +1,82 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lucide="using:Lucide.Avalonia"
+             xmlns:viewModels="clr-namespace:casefile.desktop.ViewModels"
+             x:Class="casefile.desktop.Controls.NavBar"
+             x:DataType="viewModels:NavBarViewModel">
+    <Border Classes="Sidebar">
+        <Grid RowDefinitions="Auto, * , Auto">
+            <!-- HEADER -->
+            <Border Padding="{DynamicResource Spacing.4}"
+                    BorderBrush="{DynamicResource Color.Sidebar.Border}"
+                    BorderThickness="0,0,0,1">
+                <Grid ColumnDefinitions="Auto, *"
+                      ColumnSpacing="12"
+                      VerticalAlignment="Center">
+                    <!-- LOGO -->
+                    <Border Name="IconApp">
+                        <lucide:LucideIcon Kind="FolderOpen" Foreground="White" Size="25"></lucide:LucideIcon>
+                    </Border>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <TextBlock Classes="h1">CaseFile</TextBlock>
+                        <TextBlock FontSize="{DynamicResource Text.Xs}" FontWeight="SemiLight">Gestion de dossier</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <!-- NAVIGATION -->
+            <Border Grid.Row="1" Padding="{DynamicResource Spacing.4}"
+                    BorderBrush="{DynamicResource Color.Sidebar.Border}"
+                    BorderThickness="0,0,0,1">
+                <StackPanel Spacing="4">
+                    <Button Classes="NavItem"
+                            Classes.Selected="{Binding IsDashboardActive}"
+                            Command="{Binding NavigateToDashboardPage}"
+                            IsEnabled="{Binding !IsDashboardActive}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="LayoutDashboard" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Tableau de bord" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsClientActive}"
+                            Command="{Binding NavigateToClientPage}"
+                            IsEnabled="{Binding !IsClientActive}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="Users" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Clients" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsSchemaActive}"
+                            Command="{Binding NavigateToSchemaPage}"
+                            IsEnabled="{Binding !IsSchemaActive}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="FileStack" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Schemas" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsTemplateActive}"
+                            Command="{Binding NavigateToTemplatePage}"
+                            IsEnabled="{Binding !IsTemplateActive}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="FolderTree" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Templates" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NavItem" Classes.Selected="{Binding IsEntrepriseActive}"
+                            Command="{Binding NavigateToEntreprisePage}"
+                            IsEnabled="{Binding !IsEntrepriseActive}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <lucide:LucideIcon Kind="Building2" Size="22"></lucide:LucideIcon>
+                            <TextBlock Text="Entreprise" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <!-- FOOTER -->
+            <Border Grid.Row="2" Padding="{DynamicResource Spacing.4}" HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                <TextBlock FontSize="{DynamicResource Text.Xs}" Foreground="{DynamicResource Brush.Muted.Foreground}">Version 1.0.0</TextBlock>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

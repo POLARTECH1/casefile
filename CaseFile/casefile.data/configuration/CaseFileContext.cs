@@ -119,6 +119,7 @@ public class CaseFileContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.EstRequis).HasDefaultValue(false);
 
             entity.HasOne(e => e.TypeDocument)
                 .WithMany()

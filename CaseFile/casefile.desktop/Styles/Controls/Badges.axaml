@@ -1,0 +1,115 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        Usage :
+            <Border Classes="Badge Danger">
+                <TextBlock Text="Erreur" />
+            </Border>
+    -->
+
+    <!-- ============================================================ -->
+    <!--  Base Badge — conteneur Border                               -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge">
+        <Setter Property="CornerRadius"    Value="{DynamicResource Radius.3Xl}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding"         Value="10,3" />
+        <!-- couleur par défaut : Secondary -->
+        <Setter Property="Background"      Value="{DynamicResource Brush.Secondary}" />
+        <Setter Property="BorderBrush"     Value="{DynamicResource Brush.Border}" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- TextBlock enfant — base -->
+    <Style Selector="Border.Badge > TextBlock">
+        <Setter Property="FontSize"   Value="{DynamicResource Text.Xs}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Medium}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Secondary.Foreground}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Danger  (rouge)                                             -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Danger">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Red-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Red-200}" />
+    </Style>
+    <Style Selector="Border.Badge.Danger > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Red-700}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Warning  (ambre)                                            -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Warning">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Amber-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Amber-200}" />
+    </Style>
+    <Style Selector="Border.Badge.Warning > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Amber-700}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Success  (vert — Lime)                                      -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Success">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Lime-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Lime-200}" />
+    </Style>
+    <Style Selector="Border.Badge.Success > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Lime-700}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Info  (bleu)                                                -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Info">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Blue-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Blue-200}" />
+    </Style>
+    <Style Selector="Border.Badge.Info > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Blue-700}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Primary  (sombre / principal du thème)                      -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Primary">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Primary}" />
+    </Style>
+    <Style Selector="Border.Badge.Primary > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Primary.Foreground}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Muted  (gris atténué)                                       -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Muted">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Muted}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+    </Style>
+    <Style Selector="Border.Badge.Muted > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Muted.Foreground}" />
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  Purple  (violet)                                            -->
+    <!-- ============================================================ -->
+    <Style Selector="Border.Badge.Purple">
+        <Setter Property="Background"  Value="{DynamicResource Brush.Purple-100}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Purple-200}" />
+    </Style>
+    <Style Selector="Border.Badge.Purple > TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Purple-700}" />
+    </Style>
+
+</Styles>

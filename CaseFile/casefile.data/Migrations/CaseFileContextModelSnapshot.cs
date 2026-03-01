@@ -178,6 +178,12 @@ namespace casefile.data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<bool>("EstRequis")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("est_requis");
+
                     b.Property<Guid?>("IdTypeDocument")
                         .HasColumnType("uuid")
                         .HasColumnName("id_type_document");

@@ -1,0 +1,162 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="Color.Background">#f9fafb</Color>
+            <Color x:Key="Color.Button.Secondary.Background">#FFFFFFFF</Color>
+            <Color x:Key="Color.Foreground">#4b5563</Color>
+            <Color x:Key="Color.Card">#FFFFFFFF</Color>
+            <Color x:Key="Color.Card.Foreground">#FF0B0B0B</Color>
+            <Color x:Key="Color.Popover">#FFFFFFFF</Color>
+            <Color x:Key="Color.Popover.Foreground">#FF0B0B0B</Color>
+            <Color x:Key="Color.Primary">#FF030213</Color>
+            <Color x:Key="Color.Primary.Foreground">#FFFFFFFF</Color>
+            <Color x:Key="Color.Secondary">#FFF1F2F7</Color> <!-- Plus sur les hover state :) -->
+            <Color x:Key="Color.Secondary.Foreground">#FF030213</Color>
+            <Color x:Key="Color.Muted">#FFE5E7EB</Color>
+            <Color x:Key="Color.Muted.Foreground">#FF717182</Color>
+            <Color x:Key="Color.Accent">#FFE9EBEF</Color>
+            <Color x:Key="Color.Accent.Foreground">#FF030213</Color>
+            <Color x:Key="Color.Destructive">#FFD4183D</Color>
+            <Color x:Key="Color.Destructive.Foreground">#FFFFFFFF</Color>
+            <Color x:Key="Color.Border">#1A000000</Color>
+            <Color x:Key="Color.Input">#000000</Color>
+            <Color x:Key="Color.Input.Background">#FFF3F3F5</Color>
+            <Color x:Key="Color.Switch.Background">#FFCBCED4</Color>
+            <Color x:Key="Color.Ring">#FFB5B5B5</Color>
+
+            <Color x:Key="Color.Chart.1">#FFB45309</Color>
+            <Color x:Key="Color.Chart.2">#FF0E7490</Color>
+            <Color x:Key="Color.Chart.3">#FF1F3A5F</Color>
+            <Color x:Key="Color.Chart.4">#FFEAB308</Color>
+            <Color x:Key="Color.Chart.5">#FFF59E0B</Color>
+
+            <Color x:Key="Color.Sidebar">#FFFFFFFF</Color>
+            <Color x:Key="Color.Sidebar.Foreground">#FF0B0B0B</Color>
+            <Color x:Key="Color.Sidebar.Primary">#FF030213</Color>
+            <Color x:Key="Color.Sidebar.Primary.Foreground">#FFF9FAFB</Color>
+            <Color x:Key="Color.Sidebar.Accent">#FFF5F6F8</Color>
+            <Color x:Key="Color.Sidebar.Accent.Foreground">#FF1A1A1A</Color>
+            <Color x:Key="Color.Sidebar.Border">#FFE5E7EB</Color>
+            <Color x:Key="Color.Sidebar.Ring">#FFB5B5B5</Color>
+
+            <SolidColorBrush x:Key="Brush.Button.Secondary.Background"
+                             Color="{DynamicResource Color.Button.Secondary.Background}" />
+            <SolidColorBrush x:Key="Brush.Background" Color="{DynamicResource Color.Background}" />
+            <SolidColorBrush x:Key="Brush.Foreground" Color="{DynamicResource Color.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Card" Color="{DynamicResource Color.Card}" />
+            <SolidColorBrush x:Key="Brush.Card.Foreground" Color="{DynamicResource Color.Card.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Popover" Color="{DynamicResource Color.Popover}" />
+            <SolidColorBrush x:Key="Brush.Popover.Foreground" Color="{DynamicResource Color.Popover.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Primary" Color="{DynamicResource Color.Primary}" />
+            <SolidColorBrush x:Key="Brush.Primary.Foreground" Color="{DynamicResource Color.Primary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Secondary" Color="{DynamicResource Color.Secondary}" />
+            <SolidColorBrush x:Key="Brush.Secondary.Foreground" Color="{DynamicResource Color.Secondary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Muted" Color="{DynamicResource Color.Muted}" />
+            <SolidColorBrush x:Key="Brush.Muted.Foreground" Color="{DynamicResource Color.Muted.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Accent" Color="{DynamicResource Color.Accent}" />
+            <SolidColorBrush x:Key="Brush.Accent.Foreground" Color="{DynamicResource Color.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Destructive" Color="{DynamicResource Color.Destructive}" />
+            <SolidColorBrush x:Key="Brush.Destructive.Foreground"
+                             Color="{DynamicResource Color.Destructive.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Border" Color="{DynamicResource Color.Border}" />
+            <SolidColorBrush x:Key="Brush.Input" Color="{DynamicResource Color.Input}" />
+            <SolidColorBrush x:Key="Brush.Input.Background" Color="{DynamicResource Color.Input.Background}" />
+            <SolidColorBrush x:Key="Brush.Switch.Background" Color="{DynamicResource Color.Switch.Background}" />
+            <SolidColorBrush x:Key="Brush.Ring" Color="{DynamicResource Color.Ring}" />
+            <SolidColorBrush x:Key="Brush.Chart.1" Color="{DynamicResource Color.Chart.1}" />
+            <SolidColorBrush x:Key="Brush.Chart.2" Color="{DynamicResource Color.Chart.2}" />
+            <SolidColorBrush x:Key="Brush.Chart.3" Color="{DynamicResource Color.Chart.3}" />
+            <SolidColorBrush x:Key="Brush.Chart.4" Color="{DynamicResource Color.Chart.4}" />
+            <SolidColorBrush x:Key="Brush.Chart.5" Color="{DynamicResource Color.Chart.5}" />
+            <SolidColorBrush x:Key="Brush.Sidebar" Color="{DynamicResource Color.Sidebar}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Foreground" Color="{DynamicResource Color.Sidebar.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary" Color="{DynamicResource Color.Sidebar.Primary}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary.Foreground"
+                             Color="{DynamicResource Color.Sidebar.Primary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent" Color="{DynamicResource Color.Sidebar.Accent}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent.Foreground"
+                             Color="{DynamicResource Color.Sidebar.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Border" Color="{DynamicResource Color.Sidebar.Border}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Ring" Color="{DynamicResource Color.Sidebar.Ring}" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="{DynamicResource Color.Gray-600}"></SolidColorBrush>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+
+            <Color x:Key="Color.Background">#FF111111</Color>
+            <Color x:Key="Color.Button.Secondary.Background"> #FF111111</Color>
+            <Color x:Key="Color.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Card">#FF111111</Color>
+            <Color x:Key="Color.Card.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Popover">#FF111111</Color>
+            <Color x:Key="Color.Popover.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Primary">#FFF7F7F7</Color>
+            <Color x:Key="Color.Primary.Foreground">#FF2A2A2A</Color>
+            <Color x:Key="Color.Secondary">#FF2B2B2B</Color>
+            <Color x:Key="Color.Secondary.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Muted">#FF2B2B2B</Color>
+            <Color x:Key="Color.Muted.Foreground">#FFB5B5B5</Color>
+            <Color x:Key="Color.Accent">#FF2B2B2B</Color>
+            <Color x:Key="Color.Accent.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Destructive">#FF5A1F2B</Color>
+            <Color x:Key="Color.Destructive.Foreground">#FFD94A4A</Color>
+            <Color x:Key="Color.Border">#FF2B2B2B</Color>
+            <Color x:Key="Color.Input">#FF2B2B2B</Color>
+            <Color x:Key="Color.Ring">#FF707070</Color>
+
+            <Color x:Key="Color.Chart.1">#FF4F46E5</Color>
+            <Color x:Key="Color.Chart.2">#FF10B981</Color>
+            <Color x:Key="Color.Chart.3">#FFF59E0B</Color>
+            <Color x:Key="Color.Chart.4">#FFA855F7</Color>
+            <Color x:Key="Color.Chart.5">#FFEF4444</Color>
+
+            <Color x:Key="Color.Sidebar">#FF1A1A1A</Color>
+            <Color x:Key="Color.Sidebar.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Sidebar.Primary">#FF4F46E5</Color>
+            <Color x:Key="Color.Sidebar.Primary.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Sidebar.Accent">#FF2B2B2B</Color>
+            <Color x:Key="Color.Sidebar.Accent.Foreground">#FFF7F7F7</Color>
+            <Color x:Key="Color.Sidebar.Border">#FF2B2B2B</Color>
+            <Color x:Key="Color.Sidebar.Ring">#FF707070</Color>
+
+            <SolidColorBrush x:Key="Brush.Button.Secondary.Background"
+                             Color="{DynamicResource Color.Button.Secondary.Background}" />
+            <SolidColorBrush x:Key="Brush.Background" Color="{DynamicResource Color.Background}" />
+            <SolidColorBrush x:Key="Brush.Foreground" Color="{DynamicResource Color.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Card" Color="{DynamicResource Color.Card}" />
+            <SolidColorBrush x:Key="Brush.Card.Foreground" Color="{DynamicResource Color.Card.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Popover" Color="{DynamicResource Color.Popover}" />
+            <SolidColorBrush x:Key="Brush.Popover.Foreground" Color="{DynamicResource Color.Popover.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Primary" Color="{DynamicResource Color.Primary}" />
+            <SolidColorBrush x:Key="Brush.Primary.Foreground" Color="{DynamicResource Color.Primary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Secondary" Color="{DynamicResource Color.Secondary}" />
+            <SolidColorBrush x:Key="Brush.Secondary.Foreground" Color="{DynamicResource Color.Secondary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Muted" Color="{DynamicResource Color.Muted}" />
+            <SolidColorBrush x:Key="Brush.Muted.Foreground" Color="{DynamicResource Color.Muted.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Accent" Color="{DynamicResource Color.Accent}" />
+            <SolidColorBrush x:Key="Brush.Accent.Foreground" Color="{DynamicResource Color.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Destructive" Color="{DynamicResource Color.Destructive}" />
+            <SolidColorBrush x:Key="Brush.Destructive.Foreground"
+                             Color="{DynamicResource Color.Destructive.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Border" Color="{DynamicResource Color.Border}" />
+            <SolidColorBrush x:Key="Brush.Input" Color="{DynamicResource Color.Input}" />
+            <SolidColorBrush x:Key="Brush.Ring" Color="{DynamicResource Color.Ring}" />
+            <SolidColorBrush x:Key="Brush.Chart.1" Color="{DynamicResource Color.Chart.1}" />
+            <SolidColorBrush x:Key="Brush.Chart.2" Color="{DynamicResource Color.Chart.2}" />
+            <SolidColorBrush x:Key="Brush.Chart.3" Color="{DynamicResource Color.Chart.3}" />
+            <SolidColorBrush x:Key="Brush.Chart.4" Color="{DynamicResource Color.Chart.4}" />
+            <SolidColorBrush x:Key="Brush.Chart.5" Color="{DynamicResource Color.Chart.5}" />
+            <SolidColorBrush x:Key="Brush.Sidebar" Color="{DynamicResource Color.Sidebar}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Foreground" Color="{DynamicResource Color.Sidebar.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary" Color="{DynamicResource Color.Sidebar.Primary}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Primary.Foreground"
+                             Color="{DynamicResource Color.Sidebar.Primary.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent" Color="{DynamicResource Color.Sidebar.Accent}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Accent.Foreground"
+                             Color="{DynamicResource Color.Sidebar.Accent.Foreground}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Border" Color="{DynamicResource Color.Sidebar.Border}" />
+            <SolidColorBrush x:Key="Brush.Sidebar.Ring" Color="{DynamicResource Color.Sidebar.Ring}" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

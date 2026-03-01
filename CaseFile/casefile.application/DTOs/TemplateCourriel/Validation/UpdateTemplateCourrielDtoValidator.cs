@@ -10,6 +10,8 @@ public class UpdateTemplateCourrielDtoValidator : AbstractValidator<UpdateTempla
     public UpdateTemplateCourrielDtoValidator()
     {
         Include(new CreateTemplateCourrielDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du template de courriel est obligatoire.");
     }
 }

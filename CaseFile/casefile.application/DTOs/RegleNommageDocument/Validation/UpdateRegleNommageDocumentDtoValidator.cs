@@ -10,6 +10,8 @@ public class UpdateRegleNommageDocumentDtoValidator : AbstractValidator<UpdateRe
     public UpdateRegleNommageDocumentDtoValidator()
     {
         Include(new CreateRegleNommageDocumentDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant de la règle de nommage est obligatoire.");
     }
 }

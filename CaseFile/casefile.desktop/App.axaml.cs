@@ -19,11 +19,22 @@ using casefile.application.DTOs.TemplateDossierElement.Validation;
 using casefile.application.DTOs.TypeDocument.Validation;
 using casefile.application.DTOs.ValeurAttributClient.Validation;
 using casefile.application.Mapping;
+using casefile.application.UseCases.Interfaces;
+using casefile.application.UseCases.SchemaClientUseCases;
+using casefile.application.UseCases.TemplateDossierUseCases;
+using casefile.application.UseCases.TypeDocumentUseCases;
+using casefile.application.DTOs.SchemaClient;
+using casefile.application.DTOs.TemplateDossier;
 using casefile.data.configuration;
 using casefile.data.Repositories;
 using casefile.data.Repositories.Interface;
+using casefile.desktop.Navigation;
+using casefile.desktop.Services;
+using casefile.desktop.Services.Implementation;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Schema;
+using casefile.desktop.ViewModels.Template;
 using casefile.desktop.Views;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +51,9 @@ public partial class App : Application
 
     public override void Initialize()
     {
+#if DEBUG
+        this.AttachDeveloperTools();
+#endif
         AvaloniaXamlLoader.Load(this);
     }
 
@@ -86,10 +100,11 @@ public partial class App : Application
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = Services.GetRequiredService<MainWindowViewModel>(),
-            };
+            var appScope = Services.CreateScope();
+            var mainWindow = appScope.ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = appScope.ServiceProvider.GetRequiredService<MainWindowViewModel>();
+            desktop.MainWindow = mainWindow;
+            desktop.Exit += (_, _) => appScope.Dispose();
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -182,6 +197,33 @@ public partial class App : Application
     private static void ConfigureServices(IServiceCollection services)
     {
         services.AddAutoMapper(cfg => { }, typeof(MapperConfig));
+        services.AddScoped<IGetTemplateDossierItems, GetTemplateDossierItems>();
+        services.AddScoped<IGetTemplateDossierItem, GetTemplateDossierItem>();
+        services.AddScoped<IDeleteTemplateDossier, DeleteTemplateDossier>();
+        services.AddScoped<IGetTypeDocuments, GetTypeDocuments>();
+        services.AddScoped<ICreateTemplateDossier, CreateTemplateDossier>();
+        services.AddScoped<IUpdateTemplateDossier, UpdateTemplateDossier>();
+        services.AddScoped<IGetTemplateDossierForEdit, GetTemplateDossierForEdit>();
+        services.AddScoped<IGetSchemaClientItems, GetSchemaClientItems>();
+        services.AddScoped<IGetSchemaClientItem, GetSchemaClientItem>();
+        services.AddScoped<IGetSchemaClientForEdit, GetSchemaClientForEdit>();
+        services.AddScoped<ICreateSchemaClient, CreateSchemaClient>();
+        services.AddScoped<IUpdateSchemaClient, UpdateSchemaClient>();
+        services.AddScoped<IDeleteSchemaClient, DeleteSchemaClient>();
+        services.AddScoped<IDialogWindowService<NoDialogRequest, TemplateDossierDto?>,
+            CreateTemplateDossierDialogWindowService>();
+        services.AddScoped<IDialogWindowService<Guid, TemplateDossierDto?>,
+            EditTemplateDossierDialogWindowService>();
+        services.AddScoped<IDialogWindowService<Guid, object?>,
+            ShowTemplateDossierDialogWindowService>();
+        services.AddScoped<IDialogWindowService<NoDialogRequest, SchemaClientDto?>,
+            CreateSchemaClientDialogWindowService>();
+        services.AddScoped<IDialogWindowService<Guid, SchemaClientDto?>,
+            EditSchemaClientDialogWindowService>();
+        services.AddScoped<IDialogWindowService<SchemaClientDialogRequest, object?>,
+            ShowSchemaClientDialogWindowService>();
+        services.AddScoped<IDialogWindowService<ConfirmationDialogRequest, bool?>,
+            ConfirmationDialogWindowService>();
     }
 
     /// <summary>
@@ -190,7 +232,17 @@ public partial class App : Application
     /// <param name="services">Le conteneur de services pour l'injection de dépendances.</param>
     private static void ConfigureViewModel(IServiceCollection services)
     {
+        services.AddSingleton<MainWindow>();
+        services.AddSingleton<AppScreen>();
+        services.AddSingleton<ReactiveUI.IScreen>(sp => sp.GetRequiredService<AppScreen>());
+        services.AddSingleton<IAppRouter, AppRouter>();
+        services.AddScoped<NavBarViewModel>();
         services.AddScoped<MainWindowViewModel>();
+        services.AddScoped<DashboardPageViewModel>();
+        services.AddScoped<TemplatePageViewModel>();
+        services.AddScoped<ClientPageViewModel>();
+        services.AddScoped<SchemaPageViewModel>();
+        services.AddScoped<EntreprisePageViewModel>();
     }
 
     /// <summary>

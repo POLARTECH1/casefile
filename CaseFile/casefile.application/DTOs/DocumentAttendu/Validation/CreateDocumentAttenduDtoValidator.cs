@@ -9,5 +9,8 @@ public class CreateDocumentAttenduDtoValidator : AbstractValidator<CreateDocumen
 {
     public CreateDocumentAttenduDtoValidator()
     {
+        RuleFor(x => x.IdTypeDocument)
+            .NotNull()
+            .WithMessage("Le type de document attendu est obligatoire.");
     }
 }
