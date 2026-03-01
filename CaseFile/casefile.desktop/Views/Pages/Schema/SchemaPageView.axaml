@@ -9,6 +9,7 @@
              x:DataType="schema:SchemaPageViewModel">
     <Border Padding="{DynamicResource Spacing.5}">
         <Grid RowDefinitions="Auto, *">
+            <!-- Entete -->
             <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center"
                   Margin="{DynamicResource Spacing.5.Bottom}">
                 <StackPanel Spacing="8">

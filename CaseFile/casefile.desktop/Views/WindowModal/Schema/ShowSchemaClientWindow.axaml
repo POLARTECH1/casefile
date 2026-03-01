@@ -10,10 +10,10 @@
         Classes="DialogWindow"
         Width="580"
         MaxHeight="740"
-        SizeToContent="Height"
-        CornerRadius="{StaticResource Radius.Lg}">
+        SizeToContent="Height">
     <Grid RowDefinitions="Auto, *" Margin="{StaticResource Spacing.5}">
 
+        <!-- En-tête de la fenêtre -->
         <StackPanel Orientation="Vertical">
             <TextBlock Classes="h2" Text="{Binding Nom}" />
             <TextBlock Text="Propriétés personnalisées du schéma" />
@@ -23,6 +23,7 @@
                        FontSize="{StaticResource Text.Sm}" />
         </StackPanel>
 
+        <!-- Liste des propriétés personnalisées -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
             <StackPanel Spacing="{StaticResource Space.4}">
                 <ItemsControl ItemsSource="{Binding Proprietes}">
@@ -37,6 +38,7 @@
                                     BorderBrush="{DynamicResource Brush.Border}"
                                     CornerRadius="{DynamicResource Radius.Lg}"
                                     Padding="{DynamicResource Spacing.4}">
+                                <!-- Contenu de chaque propriété personnalisée -->
                                 <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="8"
                                       VerticalAlignment="Center">
                                     <Border VerticalAlignment="Center">
@@ -49,8 +51,10 @@
                                     <Border Classes="Badge Danger" Grid.Column="2" IsVisible="{Binding EstRequis}">
                                         <TextBlock>Requis</TextBlock>
                                     </Border>
+                                    <!-- Affichage de la valeur par défaut si elle existe -->
                                     <TextBlock Grid.Column="3"
                                                Text="{Binding ValeurDefaut}"
+                                               VerticalAlignment="Center"
                                                FontSize="{StaticResource Text.Xs}"
                                                Foreground="{DynamicResource Brush.Muted.Foreground}" />
                                 </Grid>
