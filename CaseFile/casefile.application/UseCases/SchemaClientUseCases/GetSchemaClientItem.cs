@@ -7,6 +7,23 @@ using FluentResults;
 
 namespace casefile.application.UseCases.SchemaClientUseCases;
 
+/// <summary>
+/// Représente une classe permettant de récupérer un élément de type SchemaClient avec ses informations associées.
+/// </summary>
+/// <remarks>
+/// Cette classe implémente l'interface <c>IGetSchemaClientItem</c> et utilise deux repositories :
+/// <list type="bullet">
+/// <item><description><c>ISchemaClientRepository</c> pour interagir avec les entités SchemaClient.</description></item>
+/// <item><description><c>IClientRepository</c> pour compter les clients liés à un SchemaClient donné.</description></item>
+/// </list>
+/// La méthode <c>ExecuteAsync</c> permet d'exécuter la logique de récupération d'un élément SchemaClient spécifique.
+/// </remarks>
+/// <param name="schemaClientRepository">
+/// Repository utilisé pour interroger les entités SchemaClient à partir de la base de données.
+/// </param>
+/// <param name="clientRepository">
+/// Repository utilisé pour compter le nombre de clients liés à un SchemaClient.
+/// </param>
 public class GetSchemaClientItem(
     ISchemaClientRepository schemaClientRepository,
     IClientRepository clientRepository) : IGetSchemaClientItem

@@ -12,7 +12,7 @@
         MaxHeight="740"
         SizeToContent="Height"
         CornerRadius="{StaticResource Radius.Lg}">
-    <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}">
+    <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}" RowSpacing="{StaticResource Space.4}">
 
         <!-- Header Nom et description -->
         <StackPanel Orientation="Vertical">

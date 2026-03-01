@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using casefile.application.DTOs.DefinitionAttribut;
 using casefile.application.DTOs.SchemaClient;
 using casefile.application.UseCases.Interfaces;
+using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -23,16 +24,13 @@ public partial class CreateSchemaClientWindowViewModel : ViewModelBase
 
     public ObservableCollection<SchemaPropertyItemViewModel> Proprietes { get; } = new();
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNomError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string _nom = string.Empty;
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNomError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string? _nomError;
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasProprietesError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasProprietesError))]
     private string? _proprietesError;
 
     public bool HasNomError => NomError != null;
@@ -62,7 +60,7 @@ public partial class CreateSchemaClientWindowViewModel : ViewModelBase
             CreateDefinitionAttributDtos = Proprietes.Select((propriete, index) => new CreateDefinitionAttributDto
             {
                 Libelle = propriete.Libelle.Trim(),
-                Cle = BuildKey(propriete.Libelle, index),
+                Cle = propriete.Libelle.BuildKey(index, 100),
                 Type = propriete.Type,
                 EstRequis = propriete.EstRequis,
                 ValeurDefaut = string.IsNullOrWhiteSpace(propriete.ValeurDefaut)
@@ -109,29 +107,4 @@ public partial class CreateSchemaClientWindowViewModel : ViewModelBase
 
     [RelayCommand]
     private void Annuler() => CloseRequested?.Invoke(null);
-
-    private static string BuildKey(string label, int index)
-    {
-        var normalized = label.Normalize(NormalizationForm.FormD);
-        var builder = new StringBuilder(normalized.Length);
-
-        foreach (var c in normalized)
-        {
-            var category = CharUnicodeInfo.GetUnicodeCategory(c);
-            if (category != UnicodeCategory.NonSpacingMark)
-            {
-                builder.Append(c);
-            }
-        }
-
-        var ascii = builder.ToString().Normalize(NormalizationForm.FormC).ToLowerInvariant().Trim();
-        ascii = Regex.Replace(ascii, "[^a-z0-9]+", "_").Trim('_');
-
-        if (string.IsNullOrWhiteSpace(ascii))
-        {
-            ascii = $"propriete_{index + 1}";
-        }
-
-        return ascii.Length <= 100 ? ascii : ascii[..100];
-    }
 }

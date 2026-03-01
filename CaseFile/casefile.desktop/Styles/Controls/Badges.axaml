@@ -18,6 +18,7 @@
         <!-- couleur par défaut : Secondary -->
         <Setter Property="Background"      Value="{DynamicResource Brush.Secondary}" />
         <Setter Property="BorderBrush"     Value="{DynamicResource Brush.Border}" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <!-- TextBlock enfant — base -->

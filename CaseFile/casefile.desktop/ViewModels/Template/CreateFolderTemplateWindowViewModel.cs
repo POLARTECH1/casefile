@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using FluentValidation;
 using casefile.application.DTOs.DocumentAttendu;
 using casefile.application.DTOs.TemplateDossier;
@@ -26,26 +27,22 @@ public partial class CreateFolderTemplateWindowViewModel : ViewModelBase
     public ObservableCollection<TypeDocumentDto> TypesDocument { get; } = new();
 
     /// <summary>Nom du template de dossier.</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNomError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string _nom = string.Empty;
 
     /// <summary>Description du template de dossier.</summary>
     [ObservableProperty] private string _description = string.Empty;
 
     /// <summary>Message d'erreur sur le nom (null si valide).</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNomError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasNomError))]
     private string? _nomError;
 
     /// <summary>Message d'erreur sur la description (null si valide).</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasDescriptionError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasDescriptionError))]
     private string? _descriptionError;
 
     /// <summary>Message d'erreur sur la liste des dossiers (null si valide).</summary>
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasDossiersError))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasDossiersError))]
     private string? _dossiersError;
 
     public bool HasNomError => NomError != null;
@@ -74,10 +71,11 @@ public partial class CreateFolderTemplateWindowViewModel : ViewModelBase
     [RelayCommand]
     private void AjouterDossier()
     {
-        FolderTemplateElements.Add(new CreateFolderTemplateElementItemViewModel(FolderTemplateElements, TypesDocument)
-        {
-            Ordre = FolderTemplateElements.Count
-        });
+        FolderTemplateElements.Insert(0,
+            new CreateFolderTemplateElementItemViewModel(FolderTemplateElements, TypesDocument)
+            {
+                Ordre = FolderTemplateElements.Count
+            });
         DossiersError = null;
     }
 

@@ -37,7 +37,8 @@
                                     BorderBrush="{DynamicResource Brush.Border}"
                                     CornerRadius="{DynamicResource Radius.Lg}"
                                     Padding="{DynamicResource Spacing.4}">
-                                <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="8" VerticalAlignment="Center">
+                                <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="8"
+                                      VerticalAlignment="Center">
                                     <Border VerticalAlignment="Center">
                                         <LucideIcon Kind="Shapes" Size="18" />
                                     </Border>
