@@ -1,0 +1,61 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- DataGrid : fond blanc, séparateurs horizontaux uniquement (divide-y) -->
+  <Style Selector="DataGrid">
+    <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+    <Setter Property="GridLinesVisibility" Value="Horizontal" />
+    <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Brush.Gray-200}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="SelectionMode" Value="Single" />
+  </Style>
+
+  <!-- En-têtes de colonnes : bg-gray-50, text-xs, font-medium, text-gray-500 -->
+  <Style Selector="DataGridColumnHeader">
+    <Setter Property="Background" Value="{DynamicResource Brush.Background}" />
+    <Setter Property="Foreground" Value="{DynamicResource Brush.Muted.Foreground}" />
+    <Setter Property="FontSize" Value="{DynamicResource Text.Xs}" />
+    <Setter Property="FontWeight" Value="{DynamicResource Font.Medium}" />
+    <Setter Property="Padding" Value="24,0,0,0" />
+    <Setter Property="MinHeight" Value="44" />
+    <Setter Property="SeparatorBrush" Value="{DynamicResource Brush.Gray-200}" />
+  </Style>
+
+  <Style Selector="DataGridColumnHeader:pointerover /template/ Grid#PART_ColumnHeaderRoot">
+    <Setter Property="Background" Value="{DynamicResource Brush.Secondary}" />
+  </Style>
+
+  <!-- Cellules : px-6 py-4, text-sm, text-gray-600 -->
+  <Style Selector="DataGridCell">
+    <Setter Property="Padding" Value="24,16,24,16" />
+    <Setter Property="FontSize" Value="{DynamicResource Text.Sm}" />
+    <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground}" />
+    <Setter Property="MinHeight" Value="56" />
+  </Style>
+
+  <!-- Lignes : fond blanc, hover:bg-gray-50 -->
+  <Style Selector="DataGridRow">
+    <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+  </Style>
+
+  <Style Selector="DataGridRow:pointerover /template/ Rectangle#BackgroundRectangle">
+    <Setter Property="Fill" Value="{DynamicResource Brush.Secondary}" />
+  </Style>
+
+  <!-- Sélection : bleu léger au lieu de l'accent fort par défaut -->
+  <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
+    <Setter Property="Fill" Value="{DynamicResource Brush.Blue-50}" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+  <Style Selector="DataGridRow:selected:pointerover /template/ Rectangle#BackgroundRectangle">
+    <Setter Property="Fill" Value="{DynamicResource Brush.Blue-100}" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+  <Style Selector="DataGridRow:selected:focus /template/ Rectangle#BackgroundRectangle">
+    <Setter Property="Fill" Value="{DynamicResource Brush.Blue-100}" />
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+
+</Styles>

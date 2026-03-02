@@ -20,6 +20,7 @@ using casefile.application.DTOs.TypeDocument.Validation;
 using casefile.application.DTOs.ValeurAttributClient.Validation;
 using casefile.application.Mapping;
 using casefile.application.UseCases.Interfaces;
+using casefile.application.UseCases.ClientUseCases;
 using casefile.application.UseCases.SchemaClientUseCases;
 using casefile.application.UseCases.TemplateDossierUseCases;
 using casefile.application.UseCases.TypeDocumentUseCases;
@@ -209,6 +210,7 @@ public partial class App : Application
         services.AddScoped<IGetSchemaClientItems, GetSchemaClientItems>();
         services.AddScoped<IGetSchemaClientItem, GetSchemaClientItem>();
         services.AddScoped<IGetSchemaClientForEdit, GetSchemaClientForEdit>();
+        services.AddScoped<IGetClientItems, GetClientItems>();
         services.AddScoped<ICreateSchemaClient, CreateSchemaClient>();
         services.AddScoped<IUpdateSchemaClient, UpdateSchemaClient>();
         services.AddScoped<IDeleteSchemaClient, DeleteSchemaClient>();

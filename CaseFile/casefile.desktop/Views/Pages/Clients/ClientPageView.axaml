@@ -45,7 +45,7 @@
             <!-- Filtres -->
             <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="{DynamicResource Space.5}">
                 <!-- Barre de recherche -->
-                <TextBox Classes="FormTextInput" Watermark="Rechercher un client..." >
+                <TextBox Classes="FormTextInput" Watermark="Rechercher un client...">
                     <TextBox.InnerLeftContent>
                         <LucideIcon Kind="Search" Size="16" Margin="{StaticResource Spacing.4.Horizontal}" />
                     </TextBox.InnerLeftContent>
@@ -56,6 +56,23 @@
                         <TextBlock>Filtres</TextBlock>
                     </StackPanel>
                 </Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid ItemsSource="{Binding ListeClients}"
+                          AutoGenerateColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserSortColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Client" Binding="{Binding NomPrenom}" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                        <DataGridTextColumn Header="Schéma" Binding="{Binding NomSchema}" />
+                        <DataGridTextColumn Header="Documents" Binding="{Binding NombreDocuments}" />
+                        <DataGridTextColumn Header="Actions" />
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
             </Grid>
         </Grid>
     </Border>

@@ -100,11 +100,11 @@ public partial class TemplatePageViewModel : PageViewModelBase
             var result = await _deleteTemplateDossier.ExecuteAsync(templateId);
             if (result.IsFailed)
             {
-                //TODO: Afficher un message d'erreur'
+                //TODO: Afficher un message d'erreur' (Implementer une gestion des erreurs plus tard)
                 return;
             }
 
-            //TODO: Afficher un message de succès
+            //TODO: Afficher un message de succès (Implementer une gestion des succès plus tard)
             await ChargerTemplatesAsync();
         }
     }
