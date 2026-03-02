@@ -30,6 +30,11 @@
             <Color x:Key="Color.Chart.3">#FF1F3A5F</Color>
             <Color x:Key="Color.Chart.4">#FFEAB308</Color>
             <Color x:Key="Color.Chart.5">#FFF59E0B</Color>
+            <Color x:Key="Color.Chart.1.Muted">#33B45309</Color>
+            <Color x:Key="Color.Chart.2.Muted">#330E7490</Color>
+            <Color x:Key="Color.Chart.3.Muted">#331F3A5F</Color>
+            <Color x:Key="Color.Chart.4.Muted">#33EAB308</Color>
+            <Color x:Key="Color.Chart.5.Muted">#33F59E0B</Color>
 
             <Color x:Key="Color.Sidebar">#FFFFFFFF</Color>
             <Color x:Key="Color.Sidebar.Foreground">#FF0B0B0B</Color>
@@ -69,6 +74,11 @@
             <SolidColorBrush x:Key="Brush.Chart.3" Color="{DynamicResource Color.Chart.3}" />
             <SolidColorBrush x:Key="Brush.Chart.4" Color="{DynamicResource Color.Chart.4}" />
             <SolidColorBrush x:Key="Brush.Chart.5" Color="{DynamicResource Color.Chart.5}" />
+            <SolidColorBrush x:Key="Brush.Chart.1.Muted" Color="{DynamicResource Color.Chart.1.Muted}" />
+            <SolidColorBrush x:Key="Brush.Chart.2.Muted" Color="{DynamicResource Color.Chart.2.Muted}" />
+            <SolidColorBrush x:Key="Brush.Chart.3.Muted" Color="{DynamicResource Color.Chart.3.Muted}" />
+            <SolidColorBrush x:Key="Brush.Chart.4.Muted" Color="{DynamicResource Color.Chart.4.Muted}" />
+            <SolidColorBrush x:Key="Brush.Chart.5.Muted" Color="{DynamicResource Color.Chart.5.Muted}" />
             <SolidColorBrush x:Key="Brush.Sidebar" Color="{DynamicResource Color.Sidebar}" />
             <SolidColorBrush x:Key="Brush.Sidebar.Foreground" Color="{DynamicResource Color.Sidebar.Foreground}" />
             <SolidColorBrush x:Key="Brush.Sidebar.Primary" Color="{DynamicResource Color.Sidebar.Primary}" />
@@ -110,6 +120,12 @@
             <Color x:Key="Color.Chart.3">#FFF59E0B</Color>
             <Color x:Key="Color.Chart.4">#FFA855F7</Color>
             <Color x:Key="Color.Chart.5">#FFEF4444</Color>
+            <Color x:Key="Color.Chart.1.Muted">#334F46E5</Color>
+            <Color x:Key="Color.Chart.2.Muted">#3310B981</Color>
+            <Color x:Key="Color.Chart.3.Muted">#33F59E0B</Color>
+            <Color x:Key="Color.Chart.4.Muted">#33A855F7</Color>
+            <Color x:Key="Color.Chart.5.Muted">#33EF4444</Color>    
+
 
             <Color x:Key="Color.Sidebar">#FF1A1A1A</Color>
             <Color x:Key="Color.Sidebar.Foreground">#FFF7F7F7</Color>
@@ -147,6 +163,11 @@
             <SolidColorBrush x:Key="Brush.Chart.3" Color="{DynamicResource Color.Chart.3}" />
             <SolidColorBrush x:Key="Brush.Chart.4" Color="{DynamicResource Color.Chart.4}" />
             <SolidColorBrush x:Key="Brush.Chart.5" Color="{DynamicResource Color.Chart.5}" />
+            <SolidColorBrush x:Key="Brush.Chart.1.Muted" Color="{DynamicResource Color.Chart.1.Muted}"/>
+            <SolidColorBrush x:Key="Brush.Chart.2.Muted" Color="{DynamicResource Color.Chart.2.Muted}"/>
+            <SolidColorBrush x:Key="Brush.Chart.3.Muted" Color="{DynamicResource Color.Chart.3.Muted}"/>
+            <SolidColorBrush x:Key="Brush.Chart.4.Muted" Color="{DynamicResource Color.Chart.4.Muted}"/>
+            <SolidColorBrush x:Key="Brush.Chart.5.Muted" Color="{DynamicResource Color.Chart.5.Muted}"/>
             <SolidColorBrush x:Key="Brush.Sidebar" Color="{DynamicResource Color.Sidebar}" />
             <SolidColorBrush x:Key="Brush.Sidebar.Foreground" Color="{DynamicResource Color.Sidebar.Foreground}" />
             <SolidColorBrush x:Key="Brush.Sidebar.Primary" Color="{DynamicResource Color.Sidebar.Primary}" />

@@ -58,20 +58,69 @@
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
-                <DataGrid ItemsSource="{Binding ListeClients}"
-                          AutoGenerateColumns="False"
-                          CanUserResizeColumns="False"
-                          CanUserReorderColumns="False"
-                          CanUserSortColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Client" Binding="{Binding NomPrenom}" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                        <DataGridTextColumn Header="Schéma" Binding="{Binding NomSchema}" />
-                        <DataGridTextColumn Header="Documents" Binding="{Binding NombreDocuments}" />
-                        <DataGridTextColumn Header="Actions" />
+                <Border BorderBrush="{DynamicResource Brush.Border}"
+                        BorderThickness="1"
+                        CornerRadius="{DynamicResource Radius.Lg}">
+                    <DataGrid ItemsSource="{Binding ListeClients}"
+                              AutoGenerateColumns="False"
+                              CanUserResizeColumns="False"
+                              CanUserReorderColumns="False"
+                              CanUserSortColumns="False">
+                        <DataGrid.Columns>
+                            <!-- Nom et prénom avec icone -->
+                            <DataGridTemplateColumn Header="Client">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Border Padding="{StaticResource Spacing.2-5}"
+                                                    Background="{DynamicResource Brush.Chart.2.Muted}"
+                                                    CornerRadius="{StaticResource Radius.Full}">
+                                                <LucideIcon Kind="UserRound" Size="{StaticResource Text.Xl}"
+                                                            Foreground="{DynamicResource Brush.Chart.2}" />
+                                            </Border>
+                                            <TextBlock Text="{Binding NomPrenom}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!-- Email -->
+                            <DataGridTemplateColumn Header="Email">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Email}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!-- Schéma -->
+                            <DataGridTemplateColumn Header="Schéma">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Classes="Badge Purple">
+                                            <TextBlock Text="{Binding NomSchema}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!-- Nombre de dossiers -->
+                            <DataGridTemplateColumn Header="Documents">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding NombreDocuments}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!-- Actions -->
+                            <DataGridTemplateColumn Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox></TextBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                    </DataGrid.Columns>
-                </DataGrid>
+                </Border>
 
             </Grid>
         </Grid>

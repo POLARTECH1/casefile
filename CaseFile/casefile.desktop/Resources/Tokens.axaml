@@ -197,6 +197,7 @@
     <CornerRadius x:Key="Radius.Xl">12</CornerRadius>     <!-- rounded-xl (0.75rem) -->
     <CornerRadius x:Key="Radius.2Xl">16</CornerRadius>    <!-- rounded-2xl (1rem) -->
     <CornerRadius x:Key="Radius.3Xl">24</CornerRadius>    <!-- rounded-3xl (1.5rem) -->
+    <CornerRadius x:Key="Radius.Full">9999</CornerRadius>
 
 
 </ResourceDictionary>

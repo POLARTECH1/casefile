@@ -34,7 +34,7 @@
                             Command="{Binding NavigateToDashboardPage}"
                             IsEnabled="{Binding !IsDashboardActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
-                            <lucide:LucideIcon Kind="LayoutDashboard" Size="22"></lucide:LucideIcon>
+                            <lucide:LucideIcon Kind="LayoutDashboard" Size="22"/>
                             <TextBlock Text="Tableau de bord" />
                         </StackPanel>
                     </Button>
@@ -42,7 +42,7 @@
                             Command="{Binding NavigateToClientPage}"
                             IsEnabled="{Binding !IsClientActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
-                            <lucide:LucideIcon Kind="Users" Size="22"></lucide:LucideIcon>
+                            <lucide:LucideIcon Kind="Users" Size="22"/>
                             <TextBlock Text="Clients" />
                         </StackPanel>
                     </Button>
@@ -50,7 +50,7 @@
                             Command="{Binding NavigateToSchemaPage}"
                             IsEnabled="{Binding !IsSchemaActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
-                            <lucide:LucideIcon Kind="FileStack" Size="22"></lucide:LucideIcon>
+                            <lucide:LucideIcon Kind="FileStack" Size="22"/>
                             <TextBlock Text="Schemas" />
                         </StackPanel>
                     </Button>
@@ -58,7 +58,7 @@
                             Command="{Binding NavigateToTemplatePage}"
                             IsEnabled="{Binding !IsTemplateActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
-                            <lucide:LucideIcon Kind="FolderTree" Size="22"></lucide:LucideIcon>
+                            <lucide:LucideIcon Kind="FolderTree" Size="22"/>
                             <TextBlock Text="Templates" />
                         </StackPanel>
                     </Button>
@@ -66,7 +66,7 @@
                             Command="{Binding NavigateToEntreprisePage}"
                             IsEnabled="{Binding !IsEntrepriseActive}">
                         <StackPanel Orientation="Horizontal" Spacing="12">
-                            <lucide:LucideIcon Kind="Building2" Size="22"></lucide:LucideIcon>
+                            <lucide:LucideIcon Kind="Building2" Size="22"/>
                             <TextBlock Text="Entreprise" />
                         </StackPanel>
                     </Button>
