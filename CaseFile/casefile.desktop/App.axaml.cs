@@ -211,6 +211,7 @@ public partial class App : Application
         services.AddScoped<IGetSchemaClientItem, GetSchemaClientItem>();
         services.AddScoped<IGetSchemaClientForEdit, GetSchemaClientForEdit>();
         services.AddScoped<IGetClientItems, GetClientItems>();
+        services.AddScoped<IDeleteClient, DeleteClient>();
         services.AddScoped<ICreateSchemaClient, CreateSchemaClient>();
         services.AddScoped<IUpdateSchemaClient, UpdateSchemaClient>();
         services.AddScoped<IDeleteSchemaClient, DeleteSchemaClient>();

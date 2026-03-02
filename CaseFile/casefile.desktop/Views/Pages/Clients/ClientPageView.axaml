@@ -142,7 +142,7 @@
                                                             Exporter Dossier
                                                         </TextBlock>
                                                     </Button>
-                                                    <Button Classes="SecondaryNoBorder">
+                                                    <Button Classes="SecondaryNoBorder" Command="{Binding SupprimerClientCommand}">
                                                         <TextBlock HorizontalAlignment="Left"
                                                                    FontSize="{StaticResource Text.Xs}"
                                                                    Foreground="{DynamicResource Brush.Red-500}">
