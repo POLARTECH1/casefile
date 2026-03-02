@@ -1,0 +1,9 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="FlyoutPresenter.CaseFileFlyoutPresenter">
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+        <Setter Property="Padding" Value="{DynamicResource Spacing.2}" />
+    </Style>
+</Styles>

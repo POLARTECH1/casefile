@@ -7,7 +7,7 @@
         <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
         <Setter Property="Padding" Value="{DynamicResource Spacing.6}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Width">400</Setter>
+        <Setter Property="Width">500</Setter>
     </Style>
     <Style Selector="Border.app-card:pointerover">
 

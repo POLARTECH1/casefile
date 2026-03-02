@@ -5,7 +5,7 @@
   <Style Selector="DataGrid">
     <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
     <Setter Property="GridLinesVisibility" Value="Horizontal" />
-    <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Brush.Gray-200}" />
+    <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Brush.Border}" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="SelectionMode" Value="Single" />
   </Style>
@@ -18,7 +18,7 @@
     <Setter Property="FontWeight" Value="{DynamicResource Font.Medium}" />
     <Setter Property="Padding" Value="24,0,0,0" />
     <Setter Property="MinHeight" Value="44" />
-    <Setter Property="SeparatorBrush" Value="{DynamicResource Brush.Gray-200}" />
+    <Setter Property="SeparatorBrush" Value="{DynamicResource Brush.Border}" />
   </Style>
 
   <Style Selector="DataGridColumnHeader:pointerover /template/ Grid#PART_ColumnHeaderRoot">
@@ -56,6 +56,12 @@
   <Style Selector="DataGridRow:selected:focus /template/ Rectangle#BackgroundRectangle">
     <Setter Property="Fill" Value="{DynamicResource Brush.Blue-100}" />
     <Setter Property="Opacity" Value="1" />
+  </Style>
+  
+  <Style Selector="DataGrid.WithBorder /template/ Border">
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
   </Style>
 
 </Styles>

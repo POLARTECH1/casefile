@@ -58,69 +58,107 @@
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Border BorderBrush="{DynamicResource Brush.Border}"
-                        BorderThickness="1"
-                        CornerRadius="{DynamicResource Radius.Lg}">
-                    <DataGrid ItemsSource="{Binding ListeClients}"
-                              AutoGenerateColumns="False"
-                              CanUserResizeColumns="False"
-                              CanUserReorderColumns="False"
-                              CanUserSortColumns="False">
-                        <DataGrid.Columns>
-                            <!-- Nom et prénom avec icone -->
-                            <DataGridTemplateColumn Header="Client">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <Border Padding="{StaticResource Spacing.2-5}"
-                                                    Background="{DynamicResource Brush.Chart.2.Muted}"
-                                                    CornerRadius="{StaticResource Radius.Full}">
-                                                <LucideIcon Kind="UserRound" Size="{StaticResource Text.Xl}"
-                                                            Foreground="{DynamicResource Brush.Chart.2}" />
-                                            </Border>
-                                            <TextBlock Text="{Binding NomPrenom}" VerticalAlignment="Center" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!-- Email -->
-                            <DataGridTemplateColumn Header="Email">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Email}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!-- Schéma -->
-                            <DataGridTemplateColumn Header="Schéma">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
+                <DataGrid ItemsSource="{Binding ListeClients}"
+                          AutoGenerateColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserSortColumns="False"
+                          Classes="WithBorder">
+                    <DataGrid.Columns>
+                        <!-- Nom et prénom avec icone -->
+                        <DataGridTemplateColumn Header="Client" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Border Padding="{StaticResource Spacing.2-5}"
+                                                Background="{DynamicResource Brush.Chart.2.Muted}"
+                                                CornerRadius="{StaticResource Radius.Full}">
+                                            <LucideIcon Kind="UserRound" Size="{StaticResource Text.Xl}"
+                                                        Foreground="{DynamicResource Brush.Chart.2}" />
+                                        </Border>
+                                        <TextBlock Text="{Binding NomPrenom}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Email -->
+                        <DataGridTemplateColumn Header="Email" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Email}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Schéma -->
+                        <DataGridTemplateColumn Header="Schéma" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                                         <Border Classes="Badge Purple">
                                             <TextBlock Text="{Binding NomSchema}" />
                                         </Border>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!-- Nombre de dossiers -->
-                            <DataGridTemplateColumn Header="Documents">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding NombreDocuments}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!-- Actions -->
-                            <DataGridTemplateColumn Header="Actions">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox></TextBox>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                    </StackPanel>
 
-                </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Nombre de dossiers -->
+                        <DataGridTemplateColumn Header="Documents" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding NombreDocuments}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Actions -->
+                        <DataGridTemplateColumn Header="Actions" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DropDownButton Classes="CaseFileDropDown SecondaryNoBorder">
+                                        <DropDownButton.Content>
+                                            <LucideIcon Kind="EllipsisVertical" Size="{StaticResource Text.Lg}" />
+                                        </DropDownButton.Content>
+                                        <DropDownButton.Flyout>
+                                            <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                                                <StackPanel Orientation="Vertical"
+                                                            Spacing="{StaticResource Space.2-5}"
+                                                            Background="{DynamicResource Brush.Card}"
+                                                >
+                                                    <Button Classes="SecondaryNoBorder">
+                                                        <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                   HorizontalAlignment="Left">
+                                                            Voir détails
+                                                        </TextBlock>
+                                                    </Button>
+                                                    <Button Classes="SecondaryNoBorder">
+                                                        <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                   HorizontalAlignment="Left">
+                                                            Modifier
+                                                        </TextBlock>
+                                                    </Button>
+                                                    <Button Classes="SecondaryNoBorder">
+                                                        <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                   HorizontalAlignment="Left">
+                                                            Exporter Dossier
+                                                        </TextBlock>
+                                                    </Button>
+                                                    <Button Classes="SecondaryNoBorder">
+                                                        <TextBlock HorizontalAlignment="Left"
+                                                                   FontSize="{StaticResource Text.Xs}"
+                                                                   Foreground="{DynamicResource Brush.Red-500}">
+                                                            Supprimer
+                                                        </TextBlock>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Flyout>
+                                        </DropDownButton.Flyout>
+                                    </DropDownButton>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
 
             </Grid>
         </Grid>
