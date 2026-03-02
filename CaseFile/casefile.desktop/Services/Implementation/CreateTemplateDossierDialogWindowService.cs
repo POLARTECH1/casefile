@@ -6,6 +6,13 @@ using casefile.desktop.Views.WindowModal.Template;
 
 namespace casefile.desktop.Services.Implementation;
 
+/// <summary>
+/// Service permettant d'afficher une fenêtre de dialogue pour la création d'un modèle de dossier.
+/// </summary>
+/// <remarks>
+/// Cette classe implémente le service de dialogue générique en utilisant une requête sans paramètres
+/// et en fournissant un modèle de dossier (TemplateDossierDto) en résultat.
+/// </remarks>
 public sealed class CreateTemplateDossierDialogWindowService
     : DialogWindowServiceBase, IDialogWindowService<NoDialogRequest, TemplateDossierDto?>
 {

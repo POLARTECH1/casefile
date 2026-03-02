@@ -13,7 +13,6 @@ using casefile.desktop.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentValidation;
-
 namespace casefile.desktop.ViewModels.Schema;
 
 public partial class CreateSchemaClientWindowViewModel : ViewModelBase

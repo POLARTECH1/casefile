@@ -1,0 +1,76 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:clients="clr-namespace:casefile.desktop.ViewModels.Clients"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="casefile.desktop.Views.WindowModal.Client.CreateClientWindow"
+        x:DataType="clients:CreateClientWindowViewModel"
+        Title="Nouveau Client"
+        Width="580"
+        MaxHeight="740"
+        SizeToContent="Height"
+        Classes="DialogWindow">
+    <Grid RowDefinitions="Auto, *" Margin="{StaticResource Spacing.5}" RowSpacing="{StaticResource Space.4}">
+        <TextBlock FontSize="{StaticResource Text.Lg}"
+                   FontWeight="{StaticResource Font.SemiBold}">
+            Créer un nouveau client
+        </TextBlock>
+        <StackPanel Grid.Row="1" Spacing="{StaticResource Space.4}">
+            <!-- Nom et prenom -->
+            <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="{StaticResource Space.3}">
+                <StackPanel Spacing="{StaticResource Space.2}">
+                    <TextBlock Text="Nom *" />
+                    <TextBox Classes="FormTextInput" Watermark="Dupont" Text="{Binding Nom}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Spacing="{StaticResource Space.2}">
+                    <TextBlock Text="Prenom *" />
+                    <TextBox Classes="FormTextInput" Watermark="Dupont" Text="{Binding Prenom}" />
+                </StackPanel>
+            </Grid>
+            <!-- Email -->
+            <StackPanel Spacing="{StaticResource Space.2}">
+                <TextBlock Text="Email *" />
+                <TextBox Classes="FormTextInput" Watermark="jean.dupont@email.com" Text="{Binding Email}" />
+            </StackPanel>
+            <!-- Telephone -->
+            <StackPanel Spacing="{StaticResource Space.2}">
+                <TextBlock Text="Téléphone *" />
+                <TextBox Classes="FormTextInput" Watermark="+33 6 12 34 56 78" Text="{Binding Telephone}" />
+            </StackPanel>
+            <!-- Champs d'attributs personnalisés en fonction du model d'attributs choisi -->
+            <ItemsControl ItemsSource="{Binding ChampsDAttributs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="{StaticResource Space.3}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Spacing="{StaticResource Space.2}"
+                                        IsVisible="{Binding IsChampTexte}">
+                                <TextBlock Text="{Binding Libelle}" />
+                                <TextBox Classes="FormTextInput" Text="{Binding StringValue }" />
+                            </StackPanel>
+                            <StackPanel Spacing="{StaticResource Space.2}"
+                                        IsVisible="{Binding IsChampNombre}">
+                                <TextBlock Text="{Binding Libelle}" />
+                                <NumericUpDown Classes="FormTextInput" Text="{Binding NumberValue }" />
+                            </StackPanel>
+                            <StackPanel Spacing="{StaticResource Space.2}"
+                                        IsVisible="{Binding IsChampDate}">
+                                <TextBlock Text="{Binding Libelle}" />
+                                <DatePicker SelectedDate="{Binding DateValue}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Button Classes="Primary">
+                <TextBlock>Créer le client</TextBlock>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

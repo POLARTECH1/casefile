@@ -33,19 +33,34 @@ public partial class ClientPageViewModel : PageViewModelBase
         _ = ChargerClientsAsync();
     }
 
+    /// <summary>
+    /// ViewModel dédié à l'état des filtres (schémas, documents, recherche texte).
+    /// </summary>
+    public ClientFiltreViewModel Filtre { get; } = new();
+
+    /// <summary>
+    /// La liste des clients à afficher dans la page.
+    /// </summary>
+    public ObservableCollection<ClientListItemViewModel> ListeClients { get; } = new();
+
     private async Task ChargerClientsAsync()
     {
-        var result = await _getClientItems.ExecuteAsync();
-        if (result.IsFailed)
-        {
-            return;
-        }
+        var filtre = Filtre.VersDto();
+        var result = await _getClientItems.ExecuteAsync(filtre);
+        if (result.IsFailed) return;
 
         ListeClients.Clear();
         foreach (var client in result.Value)
         {
+            if (!Filtre.CorrespondAuFiltreDocuments(client.NombreDocuments)) continue;
             ListeClients.Add(Map(client));
         }
+    }
+
+    [RelayCommand]
+    private async Task AppliquerFiltres()
+    {
+        await ChargerClientsAsync();
     }
 
     [RelayCommand]
@@ -56,10 +71,7 @@ public partial class ClientPageViewModel : PageViewModelBase
         if (deleteResult == true)
         {
             var result = await _deleteClient.ExecuteAsync(clientId);
-            if (result.IsFailed)
-            {
-                return;
-            }
+            if (result.IsFailed) return;
 
             await ChargerClientsAsync();
         }
@@ -77,9 +89,4 @@ public partial class ClientPageViewModel : PageViewModelBase
             SupprimerClientCommand = new AsyncRelayCommand(() => SupprimerClient(client.Id))
         };
     }
-
-    /// <summary>
-    /// La liste des clients à afficher dans la page. Chaque élément de la liste est représenté par un ClientListItemViewModel, qui contient les informations nécessaires pour afficher les détails d'un client dans la liste. Cette collection est observable, ce qui permet à l'interface utilisateur de se mettre à jour automatiquement lorsque des clients sont ajoutés, modifiés ou supprimés de la liste.
-    /// </summary>
-    public ObservableCollection<ClientListItemViewModel> ListeClients { get; } = new();
 }

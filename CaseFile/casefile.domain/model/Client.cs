@@ -35,10 +35,16 @@ public class Client
     /// </summary>
     public DateTime CreeLe { get; set; }
 
+
     /// <summary>
     /// Schéma d'attributs utilisé pour ce client.
     /// </summary>
     public SchemaClient? SchemaClient { get; set; }
+
+    /// <summary>
+    /// L'identifiant du schéma d'attributs utilisé pour ce client.,
+    /// </summary>
+    public Guid? SchemaClientId { get; set; }
 
     /// <summary>
     /// Valeurs d'attributs renseignées pour ce client.
@@ -49,6 +55,11 @@ public class Client
     /// Dossiers virtuels rattachés au client.
     /// </summary>
     public ICollection<DossierClient> Dossiers { get; set; } = new List<DossierClient>();
+
+    /// <summary>
+    /// Identifiant du modèle de dossier virtuel associé au client.
+    /// </summary>
+    public Guid? TemplateDossierId { get; set; }
 
     /// <summary>
     /// Modèle de dossier associé au client.

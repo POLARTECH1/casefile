@@ -45,7 +45,8 @@
             <!-- Filtres -->
             <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="{DynamicResource Space.5}">
                 <!-- Barre de recherche -->
-                <TextBox Classes="FormTextInput" Watermark="Rechercher un client...">
+                <TextBox Classes="FormTextInput" Watermark="Rechercher un client..."
+                         Text="{Binding Filtre.RechercheTexte}">
                     <TextBox.InnerLeftContent>
                         <LucideIcon Kind="Search" Size="16" Margin="{StaticResource Spacing.4.Horizontal}" />
                     </TextBox.InnerLeftContent>
@@ -77,9 +78,12 @@
                                             <StackPanel Orientation="Vertical"
                                                         Spacing="{StaticResource Space.1-5}">
                                                 <TextBlock> Schémas de client</TextBlock>
-                                                <CheckBox Content="Particulier" />
-                                                <CheckBox Content="Entreprise" />
-                                                <CheckBox Content="VIP" />
+                                                <CheckBox Content="Particulier"
+                                                          IsChecked="{Binding Filtre.FiltreParticulier}" />
+                                                <CheckBox Content="Entreprise"
+                                                          IsChecked="{Binding Filtre.FiltreEntreprise}" />
+                                                <CheckBox Content="VIP"
+                                                          IsChecked="{Binding Filtre.FiltreVip}" />
                                             </StackPanel>
                                         </Border>
                                         <StackPanel>
@@ -88,10 +92,14 @@
                                                 <DropDownButton.Flyout>
                                                     <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
                                                         <StackPanel Spacing="{StaticResource Space.1-5}">
-                                                            <CheckBox Content="0-10 documents" />
-                                                            <CheckBox Content="11-20 documents" />
-                                                            <CheckBox Content="20+ documents" />
-                                                            <CheckBox Content="Tous" />
+                                                            <CheckBox Content="0-10 documents"
+                                                                      IsChecked="{Binding Filtre.FiltreDocuments0a10}" />
+                                                            <CheckBox Content="11-20 documents"
+                                                                      IsChecked="{Binding Filtre.FiltreDocuments11a20}" />
+                                                            <CheckBox Content="20+ documents"
+                                                                      IsChecked="{Binding Filtre.FiltreDocuments20Plus}" />
+                                                            <CheckBox Content="Tous"
+                                                                      IsChecked="{Binding Filtre.FiltreDocumentsTous}" />
                                                         </StackPanel>
                                                     </Flyout>
                                                 </DropDownButton.Flyout>
@@ -101,7 +109,8 @@
                                     </StackPanel>
                                 </Border>
                                 <Border Grid.Row="2" Padding="{StaticResource Spacing.2}">
-                                    <Button Classes="Primary">
+                                    <Button Classes="Primary"
+                                            Command="{Binding AppliquerFiltresCommand}">
                                         <TextBlock>Appliquer les filtres</TextBlock>
                                     </Button>
                                 </Border>

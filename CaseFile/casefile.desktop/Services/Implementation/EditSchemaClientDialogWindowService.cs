@@ -7,6 +7,11 @@ using casefile.desktop.Views.WindowModal.Schema;
 
 namespace casefile.desktop.Services.Implementation;
 
+/// <summary>
+/// Fournit un service pour afficher une fenêtre de dialogue permettant d'éditer un schéma client.
+/// Cette classe est utilisée pour gérer l'interaction de l'utilisateur avec l'interface graphique
+/// tout en appliquant les modifications nécessaires au schéma client sélectionné.
+/// </summary>
 public sealed class EditSchemaClientDialogWindowService
     : DialogWindowServiceBase, IDialogWindowService<Guid, SchemaClientDto?>
 {
