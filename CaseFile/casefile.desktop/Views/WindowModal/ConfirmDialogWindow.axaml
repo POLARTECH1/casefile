@@ -7,10 +7,14 @@
         x:Class="casefile.desktop.Views.WindowModal.ConfirmDialogWindow"
         Classes="DialogWindow"
         Title="{Binding Title}"
+        MaxWidth="350"
         SizeToContent="WidthAndHeight"
         x:DataType="windowModal:ConfirmDialogWindowViewModel" CornerRadius="{StaticResource Radius.Lg}">
     <Grid Margin="{StaticResource Spacing.5}" RowDefinitions="*, Auto" RowSpacing="{StaticResource Space.5}">
-        <TextBlock TextAlignment="Center" Text="{Binding Message}" />
+        <TextBlock
+            TextAlignment="Center"
+            Text="{Binding Message}"
+            TextWrapping="Wrap" />
         <StackPanel Grid.Row="1" HorizontalAlignment="Center"
                     Spacing="{StaticResource Space.3}"
                     Orientation="Horizontal">

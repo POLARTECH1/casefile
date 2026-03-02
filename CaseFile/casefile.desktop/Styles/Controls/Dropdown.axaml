@@ -1,12 +1,55 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
+<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="DropDownButton.CaseFileDropDown /template/ #RootBorder #InnerGrid PathIcon">
         <Setter Property="IsVisible" Value="False" />
+        <Setter Property="Padding" Value="8,6" />
+    </Style>
+    <Style Selector="DropDownButton.CaseFileDropDown /template/ ContentPresenter">
+        <Setter Property="FontSize" Value="{DynamicResource Text.Sm}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Medium}" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="DropDownButton.CaseFileDropDown LucideIcon">
+        <Setter Property="Size" Value="16"></Setter>
+    </Style>
+    <Style Selector="DropDownButton.CaseFileDropDown:pressed">
+        <Setter Property="RenderTransform" Value="None" />
     </Style>
 
-    <Style Selector="DropDownButton.SecondaryNoBorder">
+    <Style Selector="DropDownButton.SecondaryNoBorder /template/ Border#RootBorder">
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="DropDownButton.SecondaryNoBorder /template/ ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource Brush.Primary}" />
-        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="DropDownButton.SecondaryNoBorder:pointerover /template/ Border#RootBorder">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource Color.Secondary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="DropDownButton.Secondary /template/ Border#RootBorder">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Button.Secondary.Background}" />
+
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="DropDownButton.Secondary /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Primary}" />
+    </Style>
+
+    <Style Selector="DropDownButton.Secondary:pointerover /template/ Border#RootBorder">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource Color.Secondary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand" />
     </Style>
 </Styles>
