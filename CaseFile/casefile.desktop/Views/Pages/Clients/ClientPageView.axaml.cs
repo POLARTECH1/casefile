@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Clients;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
 

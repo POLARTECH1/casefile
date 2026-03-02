@@ -11,11 +11,15 @@
     </Style>
     <Style Selector="Button.NavItem">
         <Setter Property="FontWeight" Value="{DynamicResource Font.ExtraBold}" />
-
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Padding" Value="10,10" />
         <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="Button.NavItem > StackPanel > TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style Selector="Button.NavItem:not(.Selected):pointerover /template/ ContentPresenter">

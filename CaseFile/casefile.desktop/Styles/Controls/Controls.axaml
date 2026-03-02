@@ -10,6 +10,7 @@
     <Style Selector="Button LucideIcon">
         <Setter Property="Size" Value="16"></Setter>
     </Style>
+    
 
     <Style Selector="TextBox">
         <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />

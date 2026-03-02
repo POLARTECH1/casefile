@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:casefile.desktop.ViewModels"
+             xmlns:clients="clr-namespace:casefile.desktop.ViewModels.Clients"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="casefile.desktop.Views.Pages.Clients.ClientPageView"
-             x:DataType="models:ClientPageViewModel">
+             x:DataType="clients:ClientPageViewModel">
     <Border Padding="{DynamicResource Spacing.5}">
 
         <Grid RowDefinitions="Auto, Auto,  *" RowSpacing="{DynamicResource Space.5}">

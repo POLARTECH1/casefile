@@ -1,6 +1,6 @@
 using ReactiveUI;
 
-namespace casefile.desktop.ViewModels;
+namespace casefile.desktop.ViewModels.Clients;
 
 /// <summary>
 /// Représente le modèle de vue pour la page client dans l'application.

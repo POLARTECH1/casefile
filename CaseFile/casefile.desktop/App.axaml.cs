@@ -33,6 +33,7 @@ using casefile.desktop.Services;
 using casefile.desktop.Services.Implementation;
 using casefile.desktop.Tools;
 using casefile.desktop.ViewModels;
+using casefile.desktop.ViewModels.Clients;
 using casefile.desktop.ViewModels.Schema;
 using casefile.desktop.ViewModels.Template;
 using casefile.desktop.Views;
@@ -92,6 +93,7 @@ public partial class App : Application
         {
             var db = scope.ServiceProvider.GetRequiredService<CaseFileContext>();
             db.Database.Migrate();
+        
             Seeder.Seed(db);
         }
 
