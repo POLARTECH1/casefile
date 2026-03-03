@@ -42,7 +42,7 @@
 
 
     <!-- ============================================================ -->
-    <!--  Warning  (ambre)                                            -->
+    <!--  Warning (ambre)                                            -->
     <!-- ============================================================ -->
     <Style Selector="Border.Badge.Warning">
         <Setter Property="Background"  Value="{DynamicResource Brush.Amber-100}" />

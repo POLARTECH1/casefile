@@ -10,7 +10,6 @@
     <ItemGroup>
         <Folder Include="Controls\" />
         <AvaloniaResource Include="Assets\**"/>
-        <Folder Include="Models\" />
         <Folder Include="Views\Pages\Dashboard\" />
         <Folder Include="Views\Pages\Entreprise\" />
         <Folder Include="Views\Pages\Schema\" />
