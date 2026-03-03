@@ -1,0 +1,20 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Border.Nav">
+        <Setter Property="Background" Value="{DynamicResource Brush.Secondary}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Full}" />
+    </Style>
+
+    <Style Selector="Border.Nav > Button.NavItem /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Full}" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.Nav > Button.NavItem:pointerover /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Full}" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.Nav > Button.NavItem.Active /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Full}" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Button.Secondary.Background}" />
+    </Style>
+</Styles>

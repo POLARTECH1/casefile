@@ -18,4 +18,6 @@ public class SchemaClientDropdownItemViewModel
     /// Commande exécutée quand l'utilisateur sélectionne cet élément dans le dropdown.
     /// </summary>
     public ICommand? SelectionnerCommand { get; set; }
+    
+    
 }

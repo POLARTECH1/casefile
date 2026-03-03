@@ -13,7 +13,7 @@
             <!-- Entete -->
             <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center"
                   Margin="{DynamicResource Spacing.5.Bottom}">
-                <StackPanel Spacing="8">
+                <StackPanel Spacing="{StaticResource Space.2}">
                     <TextBlock Classes="h1">Clients</TextBlock>
                     <TextBlock>Gérez vos clients et leurs dossiers</TextBlock>
                 </StackPanel>
@@ -22,19 +22,19 @@
                             Spacing="{StaticResource Space.4}"
                             Orientation="Horizontal">
                     <Button Classes="Secondary">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                             <LucideIcon Kind="Download" />
                             <TextBlock>Importer</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Classes="Secondary">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                             <LucideIcon Kind="Upload" />
                             <TextBlock>Exporter</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Classes="Primary" Command="{Binding NaviguerVersCreationClientCommand}">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                             <LucideIcon Kind="Plus" />
                             <TextBlock>Nouveau Client</TextBlock>
                         </StackPanel>
@@ -53,7 +53,7 @@
                 </TextBox>
                 <DropDownButton Grid.Column="1" Classes="CaseFileDropDown Secondary">
                     <DropDownButton.Content>
-                        <StackPanel Orientation="Horizontal" Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                             <LucideIcon Kind="Funnel" />
                             <TextBlock>Filtres</TextBlock>
                         </StackPanel>
@@ -131,7 +131,7 @@
                         <DataGridTemplateColumn Header="Client" Width="2*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                                         <Border Padding="{StaticResource Spacing.2-5}"
                                                 Background="{DynamicResource Brush.Chart.2.Muted}"
                                                 CornerRadius="{StaticResource Radius.Full}">
