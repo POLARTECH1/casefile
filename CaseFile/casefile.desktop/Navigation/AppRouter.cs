@@ -50,6 +50,7 @@ public sealed class AppRouter : IAppRouter, IDisposable
         {
             AppRoute.Dashboard => _activeRouteScope.ServiceProvider.GetRequiredService<DashboardPageViewModel>(),
             AppRoute.Clients => _activeRouteScope.ServiceProvider.GetRequiredService<ClientPageViewModel>(),
+            AppRoute.CreateClient => _activeRouteScope.ServiceProvider.GetRequiredService<CreateClientPageViewModel>(),
             AppRoute.Schema => _activeRouteScope.ServiceProvider.GetRequiredService<SchemaPageViewModel>(),
             AppRoute.Templates => _activeRouteScope.ServiceProvider.GetRequiredService<TemplatePageViewModel>(),
             AppRoute.Entreprise => _activeRouteScope.ServiceProvider.GetRequiredService<EntreprisePageViewModel>(),
@@ -95,6 +96,7 @@ public sealed class AppRouter : IAppRouter, IDisposable
         {
             DashboardPageViewModel => AppRoute.Dashboard,
             ClientPageViewModel => AppRoute.Clients,
+            CreateClientPageViewModel => AppRoute.CreateClient,
             SchemaPageViewModel => AppRoute.Schema,
             TemplatePageViewModel => AppRoute.Templates,
             EntreprisePageViewModel => AppRoute.Entreprise,

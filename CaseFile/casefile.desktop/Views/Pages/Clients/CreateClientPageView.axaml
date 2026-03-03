@@ -1,0 +1,353 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:clients="clr-namespace:casefile.desktop.ViewModels.Clients"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
+             x:Class="casefile.desktop.Views.Pages.Clients.CreateClientPageView"
+             x:DataType="clients:CreateClientPageViewModel">
+
+    <Border Padding="{DynamicResource Spacing.5}">
+
+        <Grid RowDefinitions="Auto, *" RowSpacing="{StaticResource Space.5}">
+            <!-- En-tête -->
+            <StackPanel Spacing="{StaticResource Space.4}">
+                <Button Classes="Link" Command="{Binding RetournerVersListeCommand}"
+                        VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                        <LucideIcon Kind="ArrowLeft" Size="16" />
+                        <TextBlock>Retour</TextBlock>
+                    </StackPanel>
+                </Button>
+                <StackPanel Spacing="{StaticResource Space.1}">
+                    <TextBlock Classes="h1">Nouveau client</TextBlock>
+                    <TextBlock>Remplissez les informations pour créer un nouveau client</TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Formulaire -->
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Spacing="{StaticResource Space.5}" Width="800" HorizontalAlignment="Left">
+                    <!-- Bannière d'erreurs -->
+                    <Border IsVisible="{Binding ADesErreurs}"
+                            BorderBrush="{DynamicResource Brush.Red-500}"
+                            BorderThickness="1"
+                            CornerRadius="{StaticResource Radius.Md}"
+                            Padding="{StaticResource Spacing.3}">
+                        <StackPanel Spacing="{StaticResource Space.2}">
+                            <TextBlock FontWeight="{StaticResource Font.SemiBold}"
+                                       FontSize="{StaticResource Text.Sm}"
+                                       Foreground="{DynamicResource Brush.Red-500}">
+                                Veuillez corriger les erreurs suivantes :
+                            </TextBlock>
+                            <ItemsControl ItemsSource="{Binding Erreurs}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="{StaticResource Space.1-5}">
+                                            <TextBlock Text="•"
+                                                       Foreground="{DynamicResource Brush.Red-500}"
+                                                       FontSize="{StaticResource Text.Sm}" />
+                                            <TextBlock Text="{Binding}"
+                                                       Foreground="{DynamicResource Brush.Red-500}"
+                                                       FontSize="{StaticResource Text.Sm}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <!--  Nom & Prénom  -->
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="{StaticResource Space.4}">
+                        <StackPanel Spacing="{StaticResource Space.2}">
+                            <TextBlock Text="Nom *" FontSize="{StaticResource Text.Sm}"
+                                       FontWeight="{StaticResource Font.Medium}" />
+                            <TextBox Classes="FormTextInput"
+                                     Watermark="Dupont"
+                                     Text="{Binding Nom}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="{StaticResource Space.2}">
+                            <TextBlock Text="Prénom *" FontSize="{StaticResource Text.Sm}"
+                                       FontWeight="{StaticResource Font.Medium}" />
+                            <TextBox Classes="FormTextInput"
+                                     Watermark="Jean"
+                                     Text="{Binding Prenom}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Email  -->
+                    <StackPanel Spacing="{StaticResource Space.2}">
+                        <TextBlock Text="Email *" FontSize="{StaticResource Text.Sm}"
+                                   FontWeight="{StaticResource Font.Medium}" />
+                        <TextBox Classes="FormTextInput"
+                                 Watermark="jean.dupont@email.com"
+                                 Text="{Binding Email}" />
+                    </StackPanel>
+
+                    <!-- ── Téléphone -->
+                    <StackPanel Spacing="{StaticResource Space.2}">
+                        <TextBlock Text="Téléphone *" FontSize="{StaticResource Text.Sm}"
+                                   FontWeight="{StaticResource Font.Medium}" />
+                        <TextBox Classes="FormTextInput"
+                                 Watermark="+33 6 12 34 56 78"
+                                 Text="{Binding Telephone}" />
+                    </StackPanel>
+
+                    <!-- Schéma de client -->
+                    <StackPanel Spacing="{StaticResource Space.2}">
+                        <TextBlock Text="Schéma de client"
+                                   FontSize="{StaticResource Text.Sm}"
+                                   FontWeight="{StaticResource Font.Medium}" />
+                        <DropDownButton Content="{Binding SchemaSelectionneNom}"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Left"
+                                        Classes="CaseFileDropDown Secondary">
+                            <DropDownButton.Flyout>
+                                <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                                    <Grid RowDefinitions="Auto, Auto, Auto"
+                                          RowSpacing="{StaticResource Space.2}"
+                                          Margin="{StaticResource Spacing.2}"
+                                          MinWidth="360">
+                                        <!-- Recherche -->
+                                        <TextBox Grid.Row="0"
+                                                 Classes="FormTextInput"
+                                                 Watermark="Rechercher un schéma..."
+                                                 Text="{Binding RechercheSchema}">
+                                            <TextBox.InnerLeftContent>
+                                                <LucideIcon Kind="Search" Size="16"
+                                                            Margin="{StaticResource Spacing.4.Horizontal}" />
+                                            </TextBox.InnerLeftContent>
+                                        </TextBox>
+                                        <!-- Liste des schémas -->
+                                        <Border Grid.Row="1"
+                                                BorderThickness="0, 1, 0, 1"
+                                                BorderBrush="{DynamicResource Brush.Border}"
+                                                Padding="{StaticResource Spacing.1.Vertical}">
+                                            <ItemsControl ItemsSource="{Binding ListeSchemas}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate
+                                                        x:DataType="clients:SchemaClientDropdownItemViewModel">
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                Command="{Binding SelectionnerCommand}"
+                                                                HorizontalAlignment="Stretch"
+                                                                HorizontalContentAlignment="Left">
+                                                            <TextBlock Text="{Binding Nom}"
+                                                                       FontSize="{StaticResource Text.Sm}" />
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Border>
+                                        <!-- Pagination schémas -->
+                                        <Grid Grid.Row="2" ColumnDefinitions="Auto, *, Auto">
+                                            <Button Grid.Column="0"
+                                                    Classes="Secondary"
+                                                    Command="{Binding PageSchemaArriereCommand}">
+                                                <LucideIcon Kind="ChevronLeft" Size="14" />
+                                            </Button>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding PaginationSchemaLabel}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="{StaticResource Text.Sm}" />
+                                            <Button Grid.Column="2"
+                                                    Classes="Secondary"
+                                                    Command="{Binding PageSchemaAvantCommand}">
+                                                <LucideIcon Kind="ChevronRight" Size="14" />
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Flyout>
+                            </DropDownButton.Flyout>
+                        </DropDownButton>
+                    </StackPanel>
+
+                    <!--  Template de dossier -->
+                    <StackPanel Spacing="{StaticResource Space.2}">
+                        <TextBlock Text="Template de dossier"
+                                   FontSize="{StaticResource Text.Sm}"
+                                   FontWeight="{StaticResource Font.Medium}" />
+                        <DropDownButton Content="{Binding TemplateSelectionneNom}"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Left"
+                                        Classes="CaseFileDropDown Secondary">
+                            <DropDownButton.Flyout>
+                                <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                                    <Grid RowDefinitions="Auto, Auto, Auto"
+                                          RowSpacing="{StaticResource Space.2}"
+                                          Margin="{StaticResource Spacing.2}"
+                                          MinWidth="360">
+                                        <!-- Recherche -->
+                                        <TextBox Grid.Row="0"
+                                                 Classes="FormTextInput"
+                                                 Watermark="Rechercher un template..."
+                                                 Text="{Binding RechercheTemplate}">
+                                            <TextBox.InnerLeftContent>
+                                                <LucideIcon Kind="Search" Size="16"
+                                                            Margin="{StaticResource Spacing.4.Horizontal}" />
+                                            </TextBox.InnerLeftContent>
+                                        </TextBox>
+                                        <!-- Liste des templates -->
+                                        <Border Grid.Row="1"
+                                                BorderThickness="0, 1, 0, 1"
+                                                BorderBrush="{DynamicResource Brush.Border}"
+                                                Padding="{StaticResource Spacing.1.Vertical}">
+                                            <ItemsControl ItemsSource="{Binding ListeTemplates}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate
+                                                        x:DataType="clients:TemplateDossierDropdownItemViewModel">
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                Command="{Binding SelectionnerCommand}"
+                                                                HorizontalAlignment="Stretch"
+                                                                HorizontalContentAlignment="Left">
+                                                            <TextBlock Text="{Binding Nom}"
+                                                                       FontSize="{StaticResource Text.Sm}" />
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Border>
+                                        <!-- Pagination templates -->
+                                        <Grid Grid.Row="2" ColumnDefinitions="Auto, *, Auto">
+                                            <Button Grid.Column="0"
+                                                    Classes="Secondary"
+                                                    Command="{Binding PageTemplateArriereCommand}">
+                                                <LucideIcon Kind="ChevronLeft" Size="14" />
+                                            </Button>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding PaginationTemplateLabel}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="{StaticResource Text.Sm}" />
+                                            <Button Grid.Column="2"
+                                                    Classes="Secondary"
+                                                    Command="{Binding PageTemplateAvantCommand}">
+                                                <LucideIcon Kind="ChevronRight" Size="14" />
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Flyout>
+                            </DropDownButton.Flyout>
+                        </DropDownButton>
+                    </StackPanel>
+
+                    <!-- ── Champs dynamiques du schéma  -->
+                    <StackPanel IsVisible="{Binding ADesChampsDAttributs}"
+                                Spacing="{StaticResource Space.4}">
+                        <Border BorderThickness="0, 1, 0, 0"
+                                BorderBrush="{DynamicResource Brush.Border}"
+                                Padding="{StaticResource Spacing.3.Vertical}">
+                            <TextBlock Text="Attributs du schéma"
+                                       FontSize="{StaticResource Text.Sm}"
+                                       FontWeight="{StaticResource Font.SemiBold}" />
+                        </Border>
+
+                        <ItemsControl ItemsSource="{Binding ChampsDAttributs}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="{StaticResource Space.4}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="clients:CreateClientFormulaireDefinitionAttributElement">
+                                    <StackPanel>
+
+                                        <!-- Champ texte -->
+                                        <StackPanel IsVisible="{Binding IsChampTexte}"
+                                                    Spacing="{StaticResource Space.2}">
+                                            <StackPanel Orientation="Horizontal"
+                                                        Spacing="{StaticResource Space.1}">
+                                                <TextBlock Text="{Binding Libelle}"
+                                                           FontSize="{StaticResource Text.Sm}"
+                                                           FontWeight="{StaticResource Font.Medium}" />
+                                                <TextBlock Text="*"
+                                                           IsVisible="{Binding EstRequis}"
+                                                           Foreground="{DynamicResource Brush.Red-500}"
+                                                           FontSize="{StaticResource Text.Sm}" />
+                                            </StackPanel>
+                                            <TextBox Classes="FormTextInput"
+                                                     Text="{Binding StringValue}" />
+                                        </StackPanel>
+
+                                        <!-- Champ nombre -->
+                                        <StackPanel IsVisible="{Binding IsChampNombre}"
+                                                    Spacing="{StaticResource Space.2}">
+                                            <StackPanel Orientation="Horizontal"
+                                                        Spacing="{StaticResource Space.1}">
+                                                <TextBlock Text="{Binding Libelle}"
+                                                           FontSize="{StaticResource Text.Sm}"
+                                                           FontWeight="{StaticResource Font.Medium}" />
+                                                <TextBlock Text="*"
+                                                           IsVisible="{Binding EstRequis}"
+                                                           Foreground="{DynamicResource Brush.Red-500}"
+                                                           FontSize="{StaticResource Text.Sm}" />
+                                            </StackPanel>
+                                            <NumericUpDown Classes="FormTextInput"
+                                                           Value="{Binding NumberValue}" />
+                                        </StackPanel>
+
+                                        <!-- Champ date -->
+                                        <StackPanel IsVisible="{Binding IsChampDate}"
+                                                    Spacing="{StaticResource Space.2}">
+                                            <StackPanel Orientation="Horizontal"
+                                                        Spacing="{StaticResource Space.1}">
+                                                <TextBlock Text="{Binding Libelle}"
+                                                           FontSize="{StaticResource Text.Sm}"
+                                                           FontWeight="{StaticResource Font.Medium}" />
+                                                <TextBlock Text="*"
+                                                           IsVisible="{Binding EstRequis}"
+                                                           Foreground="{DynamicResource Brush.Red-500}"
+                                                           FontSize="{StaticResource Text.Sm}" />
+                                            </StackPanel>
+                                            <DatePicker SelectedDate="{Binding DateValue}" />
+                                        </StackPanel>
+
+                                        <!-- Champ booléen -->
+                                        <StackPanel IsVisible="{Binding IsChampBooleen}"
+                                                    Spacing="{StaticResource Space.2}">
+                                            <CheckBox IsChecked="{Binding BoolValue}">
+                                                <StackPanel Orientation="Horizontal"
+                                                            Spacing="{StaticResource Space.1}">
+                                                    <TextBlock Text="{Binding Libelle}"
+                                                               FontSize="{StaticResource Text.Sm}"
+                                                               FontWeight="{StaticResource Font.Medium}" />
+                                                    <TextBlock Text="*"
+                                                               IsVisible="{Binding EstRequis}"
+                                                               Foreground="{DynamicResource Brush.Red-500}"
+                                                               FontSize="{StaticResource Text.Sm}" />
+                                                </StackPanel>
+                                            </CheckBox>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- ── Bouton de soumission  -->
+                    <Button Classes="Primary"
+                            Command="{Binding CreerClientCommand}"
+                            HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                            <LucideIcon Kind="UserPlus" Size="16" />
+                            <TextBlock>Créer le client</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

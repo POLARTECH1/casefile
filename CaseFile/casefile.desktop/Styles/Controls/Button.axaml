@@ -78,7 +78,6 @@
     <Style Selector="Button.Danger">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Brush.Red-600}" />
-
     </Style>
     <Style Selector="Button.Danger /template/ ContentPresenter">
         <Setter Property="BorderThickness" Value="1" />
@@ -95,4 +94,22 @@
         </Setter>
         <Setter Property="Cursor" Value="Hand" />
     </Style>
+
+    <!-- Link Button -->
+    <Style Selector="Button.Link">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground}" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="Button.Link:not(:disabled):pointerover">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Primary}" />
+    </Style>
+    <Style Selector="Button.Link:not(:disabled):pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Input}" />
+    </Style>
+
+
 </Styles>

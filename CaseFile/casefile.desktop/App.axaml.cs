@@ -212,6 +212,9 @@ public partial class App : Application
         services.AddScoped<IGetSchemaClientForEdit, GetSchemaClientForEdit>();
         services.AddScoped<IGetClientItems, GetClientItems>();
         services.AddScoped<IDeleteClient, DeleteClient>();
+        services.AddScoped<ICreateClient, CreateClient>();
+        services.AddScoped<IGetSchemaClientsForSelect, GetSchemaClientsForSelect>();
+        services.AddScoped<IGetTemplateDossiersForSelect, GetTemplateDossiersForSelect>();
         services.AddScoped<ICreateSchemaClient, CreateSchemaClient>();
         services.AddScoped<IUpdateSchemaClient, UpdateSchemaClient>();
         services.AddScoped<IDeleteSchemaClient, DeleteSchemaClient>();
@@ -246,6 +249,7 @@ public partial class App : Application
         services.AddScoped<DashboardPageViewModel>();
         services.AddScoped<TemplatePageViewModel>();
         services.AddScoped<ClientPageViewModel>();
+        services.AddScoped<CreateClientPageViewModel>();
         services.AddScoped<SchemaPageViewModel>();
         services.AddScoped<EntreprisePageViewModel>();
     }

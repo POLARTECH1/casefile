@@ -44,7 +44,7 @@ public class NavBarViewModel : ReactiveObject, IDisposable
 
     public bool IsDashboardActive => _activeRoute == AppRoute.Dashboard;
 
-    public bool IsClientActive => _activeRoute == AppRoute.Clients;
+    public bool IsClientActive => _activeRoute == AppRoute.Clients || _activeRoute == AppRoute.CreateClient;
 
     public bool IsSchemaActive => _activeRoute == AppRoute.Schema;
 

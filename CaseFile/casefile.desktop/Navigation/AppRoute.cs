@@ -4,6 +4,7 @@ public enum AppRoute
 {
     Dashboard,
     Clients,
+    CreateClient,
     Schema,
     Templates,
     Entreprise,

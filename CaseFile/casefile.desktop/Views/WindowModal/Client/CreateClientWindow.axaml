@@ -68,6 +68,23 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <StackPanel Spacing="{StaticResource Space.2}">
+                <TextBlock Text="Schéma de client" />
+                <DropDownButton Content="Sélectionner un schéma" Classes="FormTextInput">
+                    <DropDownButton.Flyout>
+                        <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                            <StackPanel Spacing="{StaticResource Space.2}">
+                                <!-- Input de recherche pour filtrer les schemas -->
+                                <TextBox Classes="FormTextInput" Watermark="Rechercher un schéma..." />
+                                Text="{Binding SearchSchemaText, UpdateSourceTrigger=PropertyChanged}" />
+                                <ItemsControl>
+
+                                </ItemsControl>
+                            </StackPanel>
+                        </Flyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </StackPanel>
             <Button Classes="Primary">
                 <TextBlock>Créer le client</TextBlock>
             </Button>

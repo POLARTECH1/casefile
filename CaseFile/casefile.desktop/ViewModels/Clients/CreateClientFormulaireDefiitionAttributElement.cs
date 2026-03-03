@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using casefile.domain.model;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -13,6 +13,11 @@ public partial class CreateClientFormulaireDefinitionAttributElement : Observabl
     /// Identifiant unique de la définition.
     /// </summary>
     public Guid Id { get; set; }
+
+    /// <summary>
+    /// Clé technique de l'attribut (utilisée pour créer la valeur).
+    /// </summary>
+    public string Cle { get; set; } = string.Empty;
 
     /// <summary>
     /// Libellé affiché de l'attribut.
@@ -33,11 +38,14 @@ public partial class CreateClientFormulaireDefinitionAttributElement : Observabl
     /// Indique si l'attribut est obligatoire.
     /// </summary>
     public bool EstRequis { get; set; }
+
     [ObservableProperty] private string _stringValue = string.Empty;
-    [ObservableProperty] private int _numberValue = 0;
-    [ObservableProperty] private DateTime _dateValue = DateTime.Now;
+    [ObservableProperty] private decimal? _numberValue;
+    [ObservableProperty] private DateTimeOffset? _dateValue = DateTimeOffset.Now;
+    [ObservableProperty] private bool _boolValue;
 
     public bool IsChampTexte => Type == TypeAttribut.Texte;
     public bool IsChampNombre => Type == TypeAttribut.Nombre;
     public bool IsChampDate => Type == TypeAttribut.Date;
+    public bool IsChampBooleen => Type == TypeAttribut.Booleen;
 }

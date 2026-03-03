@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using casefile.application.DTOs.Client;
 using casefile.application.UseCases.Interfaces;
+using casefile.desktop.Navigation;
 using casefile.desktop.Services;
 using casefile.desktop.ViewModels;
 using CommunityToolkit.Mvvm.Input;
@@ -20,16 +21,19 @@ public partial class ClientPageViewModel : PageViewModelBase
     private readonly IGetClientItems _getClientItems;
     private readonly IDeleteClient _deleteClient;
     private readonly IDialogWindowService<ConfirmationDialogRequest, bool?> _confirmationDialogService;
+    private readonly IAppRouter _router;
 
     public ClientPageViewModel(
         IScreen screen,
         IGetClientItems getClientItems,
         IDeleteClient deleteClient,
-        IDialogWindowService<ConfirmationDialogRequest, bool?> confirmationDialogService) : base(screen)
+        IDialogWindowService<ConfirmationDialogRequest, bool?> confirmationDialogService,
+        IAppRouter router) : base(screen)
     {
         _getClientItems = getClientItems;
         _deleteClient = deleteClient;
         _confirmationDialogService = confirmationDialogService;
+        _router = router;
         _ = ChargerClientsAsync();
     }
 
@@ -56,6 +60,9 @@ public partial class ClientPageViewModel : PageViewModelBase
             ListeClients.Add(Map(client));
         }
     }
+
+    [RelayCommand]
+    private void NaviguerVersCreationClient() => _router.NavigateTo(AppRoute.CreateClient).Subscribe();
 
     [RelayCommand]
     private async Task AppliquerFiltres()
