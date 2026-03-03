@@ -9,6 +9,8 @@ public class CreateRegleNommageDocumentDtoValidator : AbstractValidator<CreateRe
 {
     public CreateRegleNommageDocumentDtoValidator()
     {
-        RuleFor(x => x.Pattern).NotEmpty().MaximumLength(500);
+        RuleFor(x => x.Pattern)
+            .NotEmpty().WithMessage("Le pattern de nommage est obligatoire.")
+            .MaximumLength(500).WithMessage("Le pattern de nommage ne peut pas dépasser 500 caractères.");
     }
 }

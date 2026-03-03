@@ -1,0 +1,135 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:schema="clr-namespace:casefile.desktop.ViewModels.Schema"
+        mc:Ignorable="d" d:DesignWidth="580" d:DesignHeight="700"
+        x:Class="casefile.desktop.Views.WindowModal.Schema.CreateSchemaClientWindow"
+        Classes="DialogWindow"
+        x:DataType="schema:CreateSchemaClientWindowViewModel"
+        Title="Créer un schéma de client"
+        Width="580"
+        MaxHeight="740"
+        SizeToContent="Height"
+        CornerRadius="{StaticResource Radius.Lg}">
+
+    <Grid RowDefinitions="*, Auto" Margin="{StaticResource Spacing.5}">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="{StaticResource Space.5}">
+                <StackPanel Spacing="{StaticResource Space.3}">
+                    <StackPanel Spacing="{StaticResource Space.1}">
+                        <TextBlock Classes="FormLabel">Nom du schéma *</TextBlock>
+                        <TextBox Classes="FormTextInput"
+                                 Text="{Binding Nom}"
+                                 Watermark="Ex: Particulier, Entreprise..." />
+                        <TextBlock IsVisible="{Binding HasNomError}"
+                                   Text="{Binding NomError}"
+                                   Foreground="{DynamicResource Brush.Red-600}"
+                                   FontSize="{StaticResource Text.Xs}"
+                                   Margin="{StaticResource Spacing.0-5.Left}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Spacing="{StaticResource Space.3}">
+                    <Border BorderThickness="0,1,0,0"
+                            BorderBrush="{DynamicResource Brush.Border}"
+                            Padding="{DynamicResource Spacing.4.Top}">
+                        <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center">
+                            <TextBlock Classes="h3" VerticalAlignment="Center">Propriétés personnalisées</TextBlock>
+                            <Button Grid.Column="1" Classes="Secondary"
+                                    Command="{Binding AjouterProprieteCommand}">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <LucideIcon Kind="Plus" Size="{StaticResource Text.Sm}" />
+                                    <TextBlock>Ajouter une propriété</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <TextBlock IsVisible="{Binding HasProprietesError}"
+                               Text="{Binding ProprietesError}"
+                               Foreground="{DynamicResource Brush.Red-600}"
+                               FontSize="{StaticResource Text.Xs}"
+                               Margin="{StaticResource Spacing.0-5.Left}" />
+
+                    <ItemsControl ItemsSource="{Binding Proprietes}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" Spacing="{StaticResource Space.2-5}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="schema:SchemaPropertyItemViewModel">
+                                <Border BorderThickness="1"
+                                        BorderBrush="{DynamicResource Brush.Border}"
+                                        CornerRadius="{DynamicResource Radius.Lg}"
+                                        Padding="{DynamicResource Spacing.4}">
+                                    <StackPanel Spacing="10">
+                                        <Grid ColumnDefinitions="Auto, *, Auto" VerticalAlignment="Center">
+                                            <Border VerticalAlignment="Center"
+                                                    Margin="{StaticResource Spacing.2-5.Right}">
+                                                <LucideIcon Kind="Shapes"
+                                                            Size="20"
+                                                            Foreground="{DynamicResource Brush.Blue-600}" />
+                                            </Border>
+                                            <TextBox Grid.Column="1"
+                                                     Classes="FormTextInput"
+                                                     Text="{Binding Libelle}"
+                                                     Watermark="Nom de la propriété" />
+                                            <Button Grid.Column="2"
+                                                    Classes="Danger"
+                                                    Command="{Binding RemoveCommand}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="{StaticResource Spacing.2.Left}">
+                                                <LucideIcon Kind="Trash2" Size="16" />
+                                            </Button>
+                                        </Grid>
+
+                                        <TextBlock IsVisible="{Binding HasLibelleError}"
+                                                   Text="{Binding LibelleError}"
+                                                   Foreground="{DynamicResource Brush.Red-600}"
+                                                   FontSize="{StaticResource Text.Xs}"
+                                                   Margin="{StaticResource Spacing.7.Left}" />
+
+                                        <Grid ColumnDefinitions="*, *" ColumnSpacing="{StaticResource Space.2-5}">
+                                            <StackPanel Grid.Column="0" Spacing="4">
+                                                <TextBlock FontSize="{StaticResource Text.Sm}">Type</TextBlock>
+                                                <ComboBox Classes="FormComboBox"
+                                                          ItemsSource="{Binding TypesAttribut}"
+                                                          SelectedItem="{Binding Type}"
+                                                          PlaceholderText="Sélectionnez" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Spacing="4">
+                                                <TextBlock FontSize="{StaticResource Text.Sm}">Valeur par défaut (optionnel)</TextBlock>
+                                                <TextBox Classes="FormTextInput"
+                                                         Text="{Binding ValeurDefaut}"
+                                                         Watermark="Valeur par défaut" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                            <ToggleSwitch IsChecked="{Binding EstRequis}" OffContent="" OnContent="" />
+                                            <TextBlock VerticalAlignment="Center" FontSize="12">Champ requis</TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="1"
+                BorderThickness="0,1,0,0"
+                BorderBrush="{DynamicResource Brush.Border}"
+                Padding="{DynamicResource Spacing.4.Top}"
+                Margin="{DynamicResource Spacing.4.Top}">
+            <Button Classes="Primary"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding CreerSchemaClientCommand}">
+                <TextBlock TextAlignment="Center">Créer le schéma</TextBlock>
+            </Button>
+        </Border>
+    </Grid>
+</Window>

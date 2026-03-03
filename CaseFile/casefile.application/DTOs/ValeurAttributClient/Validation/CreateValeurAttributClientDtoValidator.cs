@@ -9,7 +9,11 @@ public class CreateValeurAttributClientDtoValidator : AbstractValidator<CreateVa
 {
     public CreateValeurAttributClientDtoValidator()
     {
-        RuleFor(x => x.Cle).NotEmpty().MaximumLength(100);
-        RuleFor(x => x.Valeur).NotEmpty().MaximumLength(4000);
+        RuleFor(x => x.Cle)
+            .NotEmpty().WithMessage("La clé de la valeur d'attribut client est obligatoire.")
+            .MaximumLength(100).WithMessage("La clé de la valeur d'attribut client ne peut pas dépasser 100 caractères.");
+        RuleFor(x => x.Valeur)
+            .NotEmpty().WithMessage("La valeur de l'attribut client est obligatoire.")
+            .MaximumLength(4000).WithMessage("La valeur de l'attribut client ne peut pas dépasser 4000 caractères.");
     }
 }

@@ -4,5 +4,11 @@ DB-used: postgresql (16)
 Packaged: FluentResults : pour ammeliorer l'informations des resultats
             Serilog : pour les logs
             Adalis : pour les filtres des requetes
+            LucideAvalonia : pour les icones (lucide:Lucide Icon="name")
+            Semi.Avalonia : pour le theme
             
         
+environnement variable:  
+ MIGRATION_CONNECTION_STRING="Host=localhost;Port=55432;Database=casefile;Username=casefile;Password=casefile_dev_pw"
+ ajouter aussi la variable d'environnement pour le mode: DOTNET_ENVIRONMENT=Development
+ 

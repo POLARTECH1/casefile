@@ -19,4 +19,9 @@ public class DocumentAttendu
     /// Type de document attendu.
     /// </summary>
     public TypeDocument? TypeDocument { get; set; }
+
+    /// <summary>
+    /// Indique si le document est requis dans l'élément de template.
+    /// </summary>
+    public bool EstRequis { get; set; }
 }

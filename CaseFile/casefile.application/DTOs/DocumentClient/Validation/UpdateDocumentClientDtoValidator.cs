@@ -10,6 +10,8 @@ public class UpdateDocumentClientDtoValidator : AbstractValidator<UpdateDocument
     public UpdateDocumentClientDtoValidator()
     {
         Include(new CreateDocumentClientDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du document client est obligatoire.");
     }
 }

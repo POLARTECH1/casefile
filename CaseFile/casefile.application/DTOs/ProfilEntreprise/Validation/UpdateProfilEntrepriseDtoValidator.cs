@@ -10,6 +10,8 @@ public class UpdateProfilEntrepriseDtoValidator : AbstractValidator<UpdateProfil
     public UpdateProfilEntrepriseDtoValidator()
     {
         Include(new CreateProfilEntrepriseDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du profil entreprise est obligatoire.");
     }
 }

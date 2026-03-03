@@ -10,6 +10,8 @@ public class UpdateTemplateDossierElementDtoValidator : AbstractValidator<Update
     public UpdateTemplateDossierElementDtoValidator()
     {
         Include(new CreateTemplateDossierElementDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant de l'élément de template est obligatoire.");
     }
 }

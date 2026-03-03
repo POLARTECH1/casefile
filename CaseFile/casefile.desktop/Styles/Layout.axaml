@@ -1,0 +1,31 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource Brush.Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Foreground}" />
+        <Setter Property="FontSize" Value="{DynamicResource Text.Base}" />
+        <Setter Property="FontWeight" Value="{DynamicResource Font.Normal}" />
+    </Style>
+
+    <Style Selector="Window.DialogWindow">
+        <Setter Property="WindowStartupLocation" Value="CenterOwner"></Setter>
+        <Setter Property="SizeToContent" Value="WidthAndHeight" />
+        <Setter Property="CanResize" Value="False" />
+        <Setter Property="Background" Value="{DynamicResource Brush.Card}" />
+
+    </Style>
+
+    <Style Selector="Border#IconApp">
+        <Setter Property="CornerRadius" Value="{DynamicResource Radius.Lg}" />
+        <Setter Property="Padding" Value="{DynamicResource Spacing.2}" />
+        <Setter Property="Background" Value="{DynamicResource Color.Blue-600}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Border.Sidebar">
+        <Setter Property="Background" Value="{DynamicResource Color.Sidebar}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Sidebar.Border}" />
+        <Setter Property="BorderThickness" Value="1, 0, 1, 1" />
+    </Style>
+</Styles>

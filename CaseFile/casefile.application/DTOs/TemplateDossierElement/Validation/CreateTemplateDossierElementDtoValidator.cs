@@ -10,8 +10,14 @@ public class CreateTemplateDossierElementDtoValidator : AbstractValidator<Create
 {
     public CreateTemplateDossierElementDtoValidator()
     {
-        RuleFor(x => x.Nom).NotEmpty().MaximumLength(150);
-        RuleFor(x => x.Ordre).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.Nom)
+            .NotEmpty()
+            .WithMessage("Le nom de l'élément de template est obligatoire.")
+            .MaximumLength(150)
+            .WithMessage("Le nom de l'élément de template ne peut pas dépasser 150 caractères.");
+        RuleFor(x => x.Ordre)
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("L'ordre de l'élément de template doit être supérieur ou égal à 0.");
         RuleForEach(x => x.CreateDocumentAttendusDto).SetValidator(new CreateDocumentAttenduDtoValidator());
         RuleFor(x => x.CreateDocumentAttendusDto)
             .Must(list => list.Select(d => d.IdTypeDocument).Distinct().Count() == list.Count)

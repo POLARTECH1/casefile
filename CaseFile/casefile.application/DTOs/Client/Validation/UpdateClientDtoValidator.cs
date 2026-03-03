@@ -10,6 +10,8 @@ public class UpdateClientDtoValidator : AbstractValidator<UpdateClientDto>
     public UpdateClientDtoValidator()
     {
         Include(new CreateClientDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du client est obligatoire.");
     }
 }

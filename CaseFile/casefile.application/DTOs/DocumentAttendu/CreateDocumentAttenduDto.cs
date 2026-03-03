@@ -6,4 +6,6 @@ namespace casefile.application.DTOs.DocumentAttendu;
 public class CreateDocumentAttenduDto
 {
     public Guid? IdTypeDocument { get; set; }
+    
+    public bool EstRequis { get; set; }
 }

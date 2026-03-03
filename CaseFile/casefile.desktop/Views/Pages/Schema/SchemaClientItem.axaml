@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:schema="clr-namespace:casefile.desktop.ViewModels.Schema"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="casefile.desktop.Views.Pages.Schema.SchemaClientItem"
+             x:DataType="schema:SchemaClientItemViewModel">
+    <Border Classes="app-card">
+        <Grid Classes="app-card-layout" RowDefinitions="Auto, Auto, *, Auto, Auto">
+            <Grid Classes="app-card-header" ColumnDefinitions="Auto, * , Auto">
+                <Border Classes="app-card-icon-container">
+                    <LucideIcon Classes="app-card-icon" Kind="FileStack"></LucideIcon>
+                </Border>
+                <Button Classes="SecondaryNoBorder app-card-settings-button" Grid.Column="2" Command="{Binding OuvrirCommand}">
+                    <LucideIcon Classes="app-card-settings-icon" Kind="Eye"/>
+                </Button>
+            </Grid>
+
+            <TextBlock Classes="app-card-title" Grid.Row="1" Text="{Binding Nom}" />
+            <TextBlock Grid.Row="2" Classes="app-card-description" Text="{Binding DescriptionCourte}" />
+
+            <StackPanel Classes="app-card-details-section" Grid.Row="3" Orientation="Vertical">
+                <Grid Classes="app-card-detail-row" ColumnDefinitions="Auto, *, Auto">
+                    <TextBlock Classes="app-card-detail-label">Propriétés</TextBlock>
+                    <TextBlock Classes="app-card-detail-value" Grid.Column="2"
+                               Text="{Binding NombreDeProprietes}" />
+                </Grid>
+                <Grid Classes="app-card-detail-row" ColumnDefinitions="Auto, *, Auto">
+                    <TextBlock Classes="app-card-detail-label">Utilisé par</TextBlock>
+                    <TextBlock Classes="app-card-detail-value" Grid.Column="2"
+                               Text="{Binding NombreDeClientsQuiUtilisentCeSchema}" />
+                </Grid>
+            </StackPanel>
+
+            <Border Classes="app-card-actions-container" Grid.Row="4">
+                <Grid Classes="app-card-actions-layout" ColumnDefinitions="*, Auto">
+                    <Button Classes="Secondary app-card-primary-action-button" Command="{Binding ModifierCommand}">
+                        <StackPanel Classes="app-card-primary-action-button-content" Orientation="Horizontal"
+                                    Spacing="8" HorizontalAlignment="Center">
+                            <LucideIcon Classes="app-card-primary-action-button-icon" Kind="SquarePen" Size="18"></LucideIcon>
+                            <TextBlock Classes="app-card-primary-action-button-text">Modifier</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Danger app-card-secondary-action-button" Grid.Column="1" Command="{Binding SupprimerCommand}">
+                        <LucideIcon Classes="app-card-secondary-action-button-icon" Kind="Trash2" Size="18"></LucideIcon>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

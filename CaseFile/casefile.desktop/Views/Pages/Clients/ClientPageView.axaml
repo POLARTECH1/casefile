@@ -1,0 +1,236 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:casefile.desktop.ViewModels"
+             xmlns:clients="clr-namespace:casefile.desktop.ViewModels.Clients"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="casefile.desktop.Views.Pages.Clients.ClientPageView"
+             x:DataType="clients:ClientPageViewModel">
+    <Border Padding="{DynamicResource Spacing.5}">
+
+        <Grid RowDefinitions="Auto, Auto,  *" RowSpacing="{DynamicResource Space.5}">
+            <!-- Entete -->
+            <Grid ColumnDefinitions="*, Auto" VerticalAlignment="Center"
+                  Margin="{DynamicResource Spacing.5.Bottom}">
+                <StackPanel Spacing="{StaticResource Space.2}">
+                    <TextBlock Classes="h1">Clients</TextBlock>
+                    <TextBlock>Gérez vos clients et leurs dossiers</TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Spacing="{StaticResource Space.4}"
+                            Orientation="Horizontal">
+                    <Button Classes="Secondary">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                            <LucideIcon Kind="Download" />
+                            <TextBlock>Importer</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Secondary">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                            <LucideIcon Kind="Upload" />
+                            <TextBlock>Exporter</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Primary" Command="{Binding NaviguerVersCreationClientCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                            <LucideIcon Kind="Plus" />
+                            <TextBlock>Nouveau Client</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+            <!-- Filtres -->
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="{DynamicResource Space.5}">
+                <!-- Barre de recherche -->
+                <TextBox Classes="FormTextInput" Watermark="Rechercher un client..."
+                         Text="{Binding Filtre.RechercheTexte}">
+                    <TextBox.InnerLeftContent>
+                        <LucideIcon Kind="Search" Size="16" Margin="{StaticResource Spacing.4.Horizontal}" />
+                    </TextBox.InnerLeftContent>
+                </TextBox>
+                <DropDownButton Grid.Column="1" Classes="CaseFileDropDown Secondary">
+                    <DropDownButton.Content>
+                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                            <LucideIcon Kind="Funnel" />
+                            <TextBlock>Filtres</TextBlock>
+                        </StackPanel>
+                    </DropDownButton.Content>
+                    <DropDownButton.Flyout>
+                        <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                            <Grid RowDefinitions="Auto, *, Auto">
+                                <Border Grid.Row="0" BorderThickness="0, 0,0,  1"
+                                        BorderBrush="{DynamicResource Brush.Border}"
+                                        Padding="{StaticResource Spacing.2}">
+                                    <TextBlock FontSize="{StaticResource Text.Sm}"
+                                               FontWeight="{StaticResource Font.SemiBold}">
+                                        Filtres
+                                    </TextBlock>
+                                </Border>
+                                <Border Grid.Row="1" Padding="{StaticResource Spacing.2}"
+                                        BorderThickness="0, 0,0,  1"
+                                        BorderBrush="{DynamicResource Brush.Border}">
+                                    <StackPanel>
+                                        <Border BorderThickness="0, 0,0,  1"
+                                                BorderBrush="{DynamicResource Brush.Border}">
+                                            <StackPanel Orientation="Vertical"
+                                                        Spacing="{StaticResource Space.1-5}">
+                                                <TextBlock> Schémas de client</TextBlock>
+                                                <CheckBox Content="Particulier"
+                                                          IsChecked="{Binding Filtre.FiltreParticulier}" />
+                                                <CheckBox Content="Entreprise"
+                                                          IsChecked="{Binding Filtre.FiltreEntreprise}" />
+                                                <CheckBox Content="VIP"
+                                                          IsChecked="{Binding Filtre.FiltreVip}" />
+                                            </StackPanel>
+                                        </Border>
+                                        <StackPanel>
+                                            <TextBlock>Nombre de documents</TextBlock>
+                                            <DropDownButton Content="Nombres de documents" Classes="SecondaryNoBorder">
+                                                <DropDownButton.Flyout>
+                                                    <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                                                        <StackPanel Spacing="{StaticResource Space.1-5}">
+                                                            <CheckBox Content="0-10 documents"
+                                                                      IsChecked="{Binding Filtre.FiltreDocuments0a10}" />
+                                                            <CheckBox Content="11-20 documents"
+                                                                      IsChecked="{Binding Filtre.FiltreDocuments11a20}" />
+                                                            <CheckBox Content="20+ documents"
+                                                                      IsChecked="{Binding Filtre.FiltreDocuments20Plus}" />
+                                                            <CheckBox Content="Tous"
+                                                                      IsChecked="{Binding Filtre.FiltreDocumentsTous}" />
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </DropDownButton.Flyout>
+
+                                            </DropDownButton>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="2" Padding="{StaticResource Spacing.2}">
+                                    <Button Classes="Primary"
+                                            Command="{Binding AppliquerFiltresCommand}">
+                                        <TextBlock>Appliquer les filtres</TextBlock>
+                                    </Button>
+                                </Border>
+                            </Grid>
+                        </Flyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid ItemsSource="{Binding ListeClients}"
+                          AutoGenerateColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserSortColumns="False"
+                          Classes="WithBorder">
+                    <DataGrid.Columns>
+                        <!-- Nom et prénom avec icone -->
+                        <DataGridTemplateColumn Header="Client" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                                        <Border Padding="{StaticResource Spacing.2-5}"
+                                                Background="{DynamicResource Brush.Chart.2.Muted}"
+                                                CornerRadius="{StaticResource Radius.Full}">
+                                            <LucideIcon Kind="UserRound" Size="{StaticResource Text.Xl}"
+                                                        Foreground="{DynamicResource Brush.Chart.2}" />
+                                        </Border>
+                                        <Button Classes="SecondaryNoBorder"
+                                                Command="{Binding OuvrirClientCommand}">
+                                            <TextBlock Text="{Binding NomPrenom}" VerticalAlignment="Center" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Email -->
+                        <DataGridTemplateColumn Header="Email" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Email}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Schéma -->
+                        <DataGridTemplateColumn Header="Schéma" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <Border Classes="Badge Purple">
+                                            <TextBlock Text="{Binding NomSchema}" />
+                                        </Border>
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Nombre de dossiers -->
+                        <DataGridTemplateColumn Header="Documents" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding NombreDocuments}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Actions -->
+                        <DataGridTemplateColumn Header="Actions" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DropDownButton Classes="CaseFileDropDown SecondaryNoBorder">
+                                        <DropDownButton.Content>
+                                            <LucideIcon Kind="EllipsisVertical" Size="{StaticResource Text.Lg}" />
+                                        </DropDownButton.Content>
+                                        <DropDownButton.Flyout>
+                                            <Flyout FlyoutPresenterClasses="CaseFileFlyoutPresenter">
+                                                <Border Padding="{StaticResource Spacing.2}">
+                                                    <StackPanel Orientation="Vertical"
+                                                                Spacing="{StaticResource Space.1-5}"
+                                                                Background="{DynamicResource Brush.Card}">
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                Command="{Binding OuvrirClientCommand}">
+                                                            <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                       HorizontalAlignment="Left">
+                                                                Afficher
+                                                            </TextBlock>
+                                                        </Button>
+                                                        <Button Classes="SecondaryNoBorder">
+                                                            <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                       HorizontalAlignment="Left">
+                                                                Modifier
+                                                            </TextBlock>
+                                                        </Button>
+                                                        <Button Classes="SecondaryNoBorder">
+                                                            <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                       HorizontalAlignment="Left">
+                                                                Exporter Dossier
+                                                            </TextBlock>
+                                                        </Button>
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                Command="{Binding SupprimerClientCommand}">
+                                                            <TextBlock HorizontalAlignment="Left"
+                                                                       FontSize="{StaticResource Text.Xs}"
+                                                                       Foreground="{DynamicResource Brush.Red-500}">
+                                                                Supprimer
+                                                            </TextBlock>
+                                                        </Button>
+                                                    </StackPanel>
+
+                                                </Border>
+                                            </Flyout>
+                                        </DropDownButton.Flyout>
+                                    </DropDownButton>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

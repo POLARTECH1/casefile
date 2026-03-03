@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using System;
+using ReactiveUI.Avalonia;
 using Serilog;
 
 namespace casefile.desktop;
@@ -33,5 +34,6 @@ sealed class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
+            .UseReactiveUI(_ => { })
             .LogToTrace();
 }

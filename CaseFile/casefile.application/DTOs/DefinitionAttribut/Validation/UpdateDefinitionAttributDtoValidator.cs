@@ -10,6 +10,8 @@ public class UpdateDefinitionAttributDtoValidator : AbstractValidator<UpdateDefi
     public UpdateDefinitionAttributDtoValidator()
     {
         Include(new CreateDefinitionAttributDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant de la définition d'attribut est obligatoire.");
     }
 }

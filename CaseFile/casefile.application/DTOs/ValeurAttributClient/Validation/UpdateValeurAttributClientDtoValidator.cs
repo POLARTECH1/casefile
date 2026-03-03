@@ -10,6 +10,8 @@ public class UpdateValeurAttributClientDtoValidator : AbstractValidator<UpdateVa
     public UpdateValeurAttributClientDtoValidator()
     {
         Include(new CreateValeurAttributClientDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant de la valeur d'attribut client est obligatoire.");
     }
 }

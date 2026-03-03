@@ -10,6 +10,8 @@ public class UpdateCourrielEnvoyeDtoValidator : AbstractValidator<UpdateCourriel
     public UpdateCourrielEnvoyeDtoValidator()
     {
         Include(new CreateCourrielEnvoyeDtoValidator());
-        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("L'identifiant du courriel envoyé est obligatoire.");
     }
 }
