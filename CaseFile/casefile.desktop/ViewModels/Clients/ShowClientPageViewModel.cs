@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using casefile.application.UseCases.Interfaces;
 using casefile.desktop.Navigation;
 using casefile.desktop.ViewModels.Clients.SubPages;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 
@@ -14,13 +13,6 @@ public partial class ShowClientPageViewModel : PageViewModelBase
     private readonly IAppRouter _router;
     private readonly IGetClientItem _getClientItem;
 
-    private string _nomPrenomClient = string.Empty;
-    private string _email = string.Empty;
-    private string _telephone = string.Empty;
-    private string _schemaClient = string.Empty;
-    private int _nombreDocuments;
-    private ViewModelBase? _activeSubPageViewModel;
-    
     public ShowClientPageViewModel(
         IScreen screen,
         IAppRouter router,
@@ -37,51 +29,70 @@ public partial class ShowClientPageViewModel : PageViewModelBase
 
     public Guid ClientId { get; }
 
-    public bool IsViewDossierActive => ActiveSubPageViewModel is ShowClientDossiersSubPageViewModel;
-    public bool IsViewDocumentActive => ActiveSubPageViewModel is ShowClientDocumentsSubPageViewModel;
-    public bool IsViewHistoriqueEmailsActive => ActiveSubPageViewModel is ShowClientHistoriqueEmailsSubPageViewModel;
+    private bool _isViewDossierActive;
+    private bool _isViewDocumentActive;
+    private bool _isViewHistoriqueEmailsActive;
+
+    public bool IsViewDossierActive
+    {
+        get => _isViewDossierActive;
+        private set => this.RaiseAndSetIfChanged(ref _isViewDossierActive, value);
+    }
+
+    public bool IsViewDocumentActive
+    {
+        get => _isViewDocumentActive;
+        private set => this.RaiseAndSetIfChanged(ref _isViewDocumentActive, value);
+    }
+
+    public bool IsViewHistoriqueEmailsActive
+    {
+        get => _isViewHistoriqueEmailsActive;
+        private set => this.RaiseAndSetIfChanged(ref _isViewHistoriqueEmailsActive, value);
+    }
+
     public string NomPrenomClient
     {
-        get => _nomPrenomClient;
-        private set => this.RaiseAndSetIfChanged(ref _nomPrenomClient, value);
-    }
+        get;
+        private set => this.RaiseAndSetIfChanged(ref field, value);
+    } = string.Empty;
 
     public string Email
     {
-        get => _email;
-        private set => this.RaiseAndSetIfChanged(ref _email, value);
-    }
+        get;
+        private set => this.RaiseAndSetIfChanged(ref field, value);
+    } = string.Empty;
 
     public string Telephone
     {
-        get => _telephone;
-        private set => this.RaiseAndSetIfChanged(ref _telephone, value);
-    }
+        get;
+        private set => this.RaiseAndSetIfChanged(ref field, value);
+    } = string.Empty;
 
     public string SchemaClient
     {
-        get => _schemaClient;
+        get;
         private set
         {
-            this.RaiseAndSetIfChanged(ref _schemaClient, value);
+            this.RaiseAndSetIfChanged(ref field, value);
             this.RaisePropertyChanged(nameof(IsClientHasSchema));
         }
-    }
+    } = string.Empty;
 
     public bool IsClientHasSchema => string.IsNullOrWhiteSpace(SchemaClient) == false;
 
     public int NombreDocuments
     {
-        get => _nombreDocuments;
-        private set => this.RaiseAndSetIfChanged(ref _nombreDocuments, value);
+        get;
+        private set => this.RaiseAndSetIfChanged(ref field, value);
     }
 
     public ViewModelBase? ActiveSubPageViewModel
     {
-        get => _activeSubPageViewModel;
-        private set => this.RaiseAndSetIfChanged(ref _activeSubPageViewModel, value);
+        get;
+        private set => this.RaiseAndSetIfChanged(ref field, value);
     }
-
+    
     [RelayCommand]
     private void RetourVersListeClients()
     {
@@ -92,18 +103,28 @@ public partial class ShowClientPageViewModel : PageViewModelBase
     private void AfficherDossiers()
     {
         ActiveSubPageViewModel = new ShowClientDossiersSubPageViewModel(ClientId);
+        ToggleActiveClass();
     }
 
     [RelayCommand]
     private void AfficherDocuments()
     {
         ActiveSubPageViewModel = new ShowClientDocumentsSubPageViewModel(ClientId);
+        ToggleActiveClass();
     }
 
     [RelayCommand]
     private void AfficherHistoriqueEmails()
     {
         ActiveSubPageViewModel = new ShowClientHistoriqueEmailsSubPageViewModel(ClientId);
+        ToggleActiveClass();
+    }
+
+    private void ToggleActiveClass()
+    {
+        IsViewDossierActive = ActiveSubPageViewModel is ShowClientDossiersSubPageViewModel;
+        IsViewDocumentActive = ActiveSubPageViewModel is ShowClientDocumentsSubPageViewModel;
+        IsViewHistoriqueEmailsActive = ActiveSubPageViewModel is ShowClientHistoriqueEmailsSubPageViewModel;
     }
 
     private async Task ChargerClientAsync()

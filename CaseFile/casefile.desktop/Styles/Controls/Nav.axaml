@@ -7,7 +7,7 @@
         <Setter Property="Padding" Value="{DynamicResource Spacing.1}" />
     </Style>
     <Style Selector="Border.Nav Button.NavItem">
-        <Setter Property="Padding" Value="5,3" />
+        <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="{StaticResource Text.Xs}" />
     </Style>
 

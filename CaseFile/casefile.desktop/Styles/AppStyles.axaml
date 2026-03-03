@@ -8,9 +8,9 @@
     <StyleInclude Source="/Styles/Layout.axaml" />
     <StyleInclude Source="/Styles/Controls/Flyout.axaml"/>
     <StyleInclude Source="/Styles/Controls/DataGrid.axaml" />
-    <StyleInclude Source="/Styles/Controls/Nav.axaml"/>
     <StyleInclude Source="/Styles/Controls/NavBar.axaml" />
     <StyleInclude Source="/Styles/Controls/Dropdown.axaml"></StyleInclude>
     <StyleInclude Source="/Styles/Controls/AppCard.axaml" />
     <StyleInclude Source="/Styles/Controls/Badges.axaml" />
+    <StyleInclude Source="/Styles/Controls/Nav.axaml"/>
 </Styles>
