@@ -6,6 +6,15 @@ Application native pour la gestion de clients, la creation automatique de dossie
 - .NET 10 SDK installe
 
 ## Initialiser la base de donnees (Docker)
+Avant de lancer Docker, ajouter un fichier `.env` a la racine du projet (`CaseFile/.env`) avec:
+
+```env
+DB_PORT=55432
+POSTGRES_DB=casefile
+POSTGRES_USER=casefile
+POSTGRES_PASSWORD=casefile_dev_pw
+```
+
 Depuis le dossier `CaseFile` :
 
 ```bash
