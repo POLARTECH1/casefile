@@ -1,49 +1,66 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:clients="clr-namespace:casefile.desktop.ViewModels.Clients"
+             xmlns:subVm="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages"
+             xmlns:subViews="clr-namespace:casefile.desktop.Views.Pages.Clients.SubPages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="clients:ShowClientPageViewModel"
              x:Class="casefile.desktop.Views.Pages.Clients.ShowClientPageView">
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="subVm:ShowClientDossiersSubPageViewModel">
+            <subViews:ShowClientDossiersSubPageView />
+        </DataTemplate>
+        <DataTemplate DataType="subVm:ShowClientDocumentsSubPageViewModel">
+            <subViews:ShowClientDocumentsSubPageView />
+        </DataTemplate>
+        <DataTemplate DataType="subVm:ShowClientHistoriqueEmailsSubPageViewModel">
+            <subViews:ShowClientHistoriqueEmailsSubPageView />
+        </DataTemplate>
+    </UserControl.DataTemplates>
     <Border Padding="{DynamicResource Spacing.5}">
         <Grid RowDefinitions="Auto, *" RowSpacing="{StaticResource Space.5}">
-            <!-- En-tête -->
+            <!-- HEADER -->
             <StackPanel Spacing="{StaticResource Space.4}">
                 <!-- Bouton de retour -->
                 <Button Classes="Link"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Command="{Binding RetourVersListeClientsCommand}">
                     <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                         <LucideIcon Kind="ArrowLeft" Size="16" />
                         <TextBlock>Retour</TextBlock>
                     </StackPanel>
                 </Button>
+
                 <!-- Informations du client -->
                 <Grid ColumnDefinitions="Auto, *, Auto">
                     <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.4}"
                                 VerticalAlignment="Top">
+                        <!-- Avatar du client -->
                         <Border Padding="{StaticResource Spacing.2-5}"
                                 Background="{DynamicResource Brush.Chart.2.Muted}"
-                                CornerRadius="{StaticResource Radius.Full}">
+                                CornerRadius="{StaticResource Radius.Full}"
+                                VerticalAlignment="Top">
                             <LucideIcon Kind="UserRound" Size="{StaticResource Text.3Xl}"
                                         Foreground="{DynamicResource Brush.Chart.2}" />
                         </Border>
                         <StackPanel Spacing="{StaticResource Space.3}">
                             <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.3}">
                                 <TextBlock Classes="h1"
-                                           Text="{Binding NomPrenomCLient}" />
-                                <Border Classes="Badge Purple" IsVisible="{Binding IsCLientHasSchema }">
-                                    <TextBlock Text="{Binding Client.SchemaClient.Nom}" />
+                                           Text="{Binding NomPrenomClient}" />
+                                <Border Classes="Badge Purple" IsVisible="{Binding IsClientHasSchema}">
+                                    <TextBlock Text="{Binding SchemaClient}" />
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="{StaticResource Space.2}">
                                 <StackPanel Spacing="2" Orientation="Horizontal">
                                     <LucideIcon Kind="Mail" Size="{StaticResource Text.Xs}" />
-                                    <TextBlock FontSize="{StaticResource Text.Xs}" Text="{Binding Client.Email}" />
+                                    <TextBlock FontSize="{StaticResource Text.Xs}" Text="{Binding Email}" />
                                 </StackPanel>
                                 <StackPanel Spacing="2" Orientation="Horizontal">
                                     <LucideIcon Kind="Phone" Size="{StaticResource Text.Xs}" />
-                                    <TextBlock FontSize="{StaticResource Text.Xs}" Text="{Binding Client.Telephone}" />
+                                    <TextBlock FontSize="{StaticResource Text.Xs}" Text="{Binding Telephone}" />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
@@ -67,32 +84,38 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                <!-- Navigation secondaire -->
+
+                <!-- Navigation entre les sous-pages -->
                 <Border Classes="Nav">
                     <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.0-5}">
-                        <Button Classes="NavItem">
+                        <Button Classes="NavItem" Command="{Binding AfficherDossiersCommand}"
+                                Classes.Active="{Binding IsViewDossierActive}">
                             <StackPanel Spacing="{StaticResource Space.3}" Orientation="Horizontal">
                                 <LucideIcon Kind="Folder" />
                                 <TextBlock>Dossiers</TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Classes="NavItem">
+                        <Button Classes="NavItem" Command="{Binding AfficherDocumentsCommand}"
+                                Classes.Active="{Binding IsViewDocumentActive}">
                             <StackPanel Spacing="{StaticResource Space.3}" Orientation="Horizontal">
                                 <LucideIcon Kind="FileText" />
                                 <TextBlock>Tous les documents</TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Classes="NavItem">
+                        <Button Classes="NavItem" Command="{Binding AfficherHistoriqueEmailsCommand}"
+                                Classes.Active="{Binding IsViewHistoriqueEmailsActive}">
                             <StackPanel Spacing="{StaticResource Space.3}" Orientation="Horizontal">
-                                <LucideIcon Kind="Folder" />
+                                <LucideIcon Kind="Mail" />
                                 <TextBlock>Historique emails</TextBlock>
                             </StackPanel>
                         </Button>
                     </StackPanel>
                 </Border>
-
             </StackPanel>
 
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding ActiveSubPageViewModel}" />
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

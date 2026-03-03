@@ -11,9 +11,7 @@ using ReactiveUI;
 namespace casefile.desktop.Navigation;
 
 /// <summary>
-/// Représente un routeur d'application responsable de la navigation entre les différentes vues
-/// au sein de l'application. Gère les opérations de navigation, ainsi que la disposition des
-/// ressources associées à chaque route.
+/// Represente un routeur d'application responsable de la navigation entre les differentes vues.
 /// </summary>
 public sealed class AppRouter : IAppRouter, IDisposable
 {
@@ -33,14 +31,6 @@ public sealed class AppRouter : IAppRouter, IDisposable
 
     public IObservable<AppRoute> CurrentRouteChanged => _currentRouteSubject.AsObservable();
 
-    /// <summary>
-    /// Navigue vers une page spécifique en fonction de l'itinéraire fourni.
-    /// </summary>
-    /// <param name="route">Itinéraire de navigation représentant la page cible.</param>
-    /// <returns>Un observable qui publie le modèle de vue récemment chargé.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    /// L'itinéraire spécifié n'est pas pris en charge.
-    /// </exception>
     public IObservable<IRoutableViewModel> NavigateTo(AppRoute route)
     {
         DisposeActiveScope();
@@ -54,11 +44,23 @@ public sealed class AppRouter : IAppRouter, IDisposable
             AppRoute.Schema => _activeRouteScope.ServiceProvider.GetRequiredService<SchemaPageViewModel>(),
             AppRoute.Templates => _activeRouteScope.ServiceProvider.GetRequiredService<TemplatePageViewModel>(),
             AppRoute.Entreprise => _activeRouteScope.ServiceProvider.GetRequiredService<EntreprisePageViewModel>(),
+            AppRoute.ShowClient => throw new InvalidOperationException("Utiliser NavigateToShowClient(clientId) pour cette route."),
             _ => throw new ArgumentOutOfRangeException(nameof(route), route, "Route non supportee"),
         };
 
         return _screen.Router.NavigateAndReset.Execute(vm)
             .Do(_ => SetCurrentRoute(route));
+    }
+
+    public IObservable<IRoutableViewModel> NavigateToShowClient(Guid clientId)
+    {
+        DisposeActiveScope();
+
+        _activeRouteScope = _scopeFactory.CreateScope();
+        var vm = ActivatorUtilities.CreateInstance<ShowClientPageViewModel>(_activeRouteScope.ServiceProvider, clientId);
+
+        return _screen.Router.NavigateAndReset.Execute(vm)
+            .Do(_ => SetCurrentRoute(AppRoute.ShowClient));
     }
 
     public IObservable<IRoutableViewModel> GoBack() =>
@@ -97,6 +99,7 @@ public sealed class AppRouter : IAppRouter, IDisposable
             DashboardPageViewModel => AppRoute.Dashboard,
             ClientPageViewModel => AppRoute.Clients,
             CreateClientPageViewModel => AppRoute.CreateClient,
+            ShowClientPageViewModel => AppRoute.ShowClient,
             SchemaPageViewModel => AppRoute.Schema,
             TemplatePageViewModel => AppRoute.Templates,
             EntreprisePageViewModel => AppRoute.Entreprise,

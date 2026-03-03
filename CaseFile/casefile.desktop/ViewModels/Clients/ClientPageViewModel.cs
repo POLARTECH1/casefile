@@ -84,6 +84,12 @@ public partial class ClientPageViewModel : PageViewModelBase
         }
     }
 
+    private Task OuvrirClient(Guid clientId)
+    {
+        _router.NavigateToShowClient(clientId).Subscribe();
+        return Task.CompletedTask;
+    }
+
     private ClientListItemViewModel Map(ClientItemDto client)
     {
         return new ClientListItemViewModel
@@ -93,6 +99,7 @@ public partial class ClientPageViewModel : PageViewModelBase
             Email = client.Email,
             NomSchema = client.NomSchema,
             NombreDocuments = client.NombreDocuments,
+            OuvrirClientCommand = new AsyncRelayCommand(() => OuvrirClient(client.Id)),
             SupprimerClientCommand = new AsyncRelayCommand(() => SupprimerClient(client.Id))
         };
     }

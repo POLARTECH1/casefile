@@ -138,7 +138,10 @@
                                             <LucideIcon Kind="UserRound" Size="{StaticResource Text.Xl}"
                                                         Foreground="{DynamicResource Brush.Chart.2}" />
                                         </Border>
-                                        <TextBlock Text="{Binding NomPrenom}" VerticalAlignment="Center" />
+                                        <Button Classes="SecondaryNoBorder"
+                                                Command="{Binding OuvrirClientCommand}">
+                                            <TextBlock Text="{Binding NomPrenom}" VerticalAlignment="Center" />
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -186,10 +189,11 @@
                                                     <StackPanel Orientation="Vertical"
                                                                 Spacing="{StaticResource Space.1-5}"
                                                                 Background="{DynamicResource Brush.Card}">
-                                                        <Button Classes="SecondaryNoBorder">
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                Command="{Binding OuvrirClientCommand}">
                                                             <TextBlock FontSize="{StaticResource Text.Xs}"
                                                                        HorizontalAlignment="Left">
-                                                                Voir détails
+                                                                Afficher
                                                             </TextBlock>
                                                         </Button>
                                                         <Button Classes="SecondaryNoBorder">

@@ -13,18 +13,13 @@ using ReactiveUI;
 
 namespace casefile.desktop.Tools;
 
-/// <summary>
-/// Fournit un mécanisme pour localiser les vues associées aux modèles de vue dans l'application.
-/// Cette classe est utilisée pour résoudre et retourner l'instance de vue correspondant au modèle de vue donné.
-/// Implémente l'interface <c>IViewLocator</c>.
-/// </summary>
-
 public class AppViewLocator : ReactiveUI.IViewLocator
 {
     private readonly Dictionary<Type, Func<IViewFor>> _mappings = new()
     {
         { typeof(ClientPageViewModel),       () => new ClientPageView() },
         { typeof(CreateClientPageViewModel), () => new CreateClientPageView() },
+        { typeof(ShowClientPageViewModel),   () => new ShowClientPageView() },
         { typeof(DashboardPageViewModel),    () => new DashboardPageView() },
         { typeof(EntreprisePageViewModel),   () => new EntreprisePageView() },
         { typeof(SchemaPageViewModel),       () => new SchemaPageView() },
@@ -37,6 +32,7 @@ public class AppViewLocator : ReactiveUI.IViewLocator
         {
             ClientPageViewModel context       => new ClientPageView { DataContext = context },
             CreateClientPageViewModel context => new CreateClientPageView { DataContext = context },
+            ShowClientPageViewModel context   => new ShowClientPageView { DataContext = context },
             DashboardPageViewModel context    => new DashboardPageView { DataContext = context },
             EntreprisePageViewModel context   => new EntreprisePageView { DataContext = context },
             SchemaPageViewModel context       => new SchemaPageView { DataContext = context },
