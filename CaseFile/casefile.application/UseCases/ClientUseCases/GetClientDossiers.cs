@@ -11,7 +11,7 @@ public class GetClientDossiers(IClientRepository clientRepository) : IGetClientD
 {
     public async Task<Result<IEnumerable<ShowClientDossierDto>>> ExecuteAsync(Guid clientId)
     {
-        var clientsResult = await clientRepository.GetAllAsync(new ClientByIdWithDetailsSpecification(clientId));
+        var clientsResult = await clientRepository.GetAllAsync(new ClientByIdWithDossiersAndTemplateSpecification(clientId));
         if (clientsResult.IsFailed)
         {
             return Result.Fail<IEnumerable<ShowClientDossierDto>>(clientsResult.Errors);

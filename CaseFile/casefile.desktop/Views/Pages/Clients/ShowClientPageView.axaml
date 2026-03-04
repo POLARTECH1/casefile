@@ -88,6 +88,11 @@
                     </StackPanel>
                 </Grid>
 
+                <TextBlock IsVisible="{Binding HasLoadingClientError}"
+                           Foreground="{DynamicResource Brush.Red-600}"
+                           FontSize="{StaticResource Text.Xs}"
+                           Text="{Binding LoadingClientError}" />
+
                 <!-- Navigation entre les sous-pages -->
                 <Border Classes="Nav">
                     <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.0-5}">

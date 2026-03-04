@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using casefile.application.DTOs.Client;
 using casefile.application.UseCases.Interfaces;
@@ -10,11 +11,16 @@ public sealed class ShowClientDossiersSubPageViewModel : ViewModelBase
 {
     private readonly IGetClientDossiers _getClientDossiers;
 
+    /// <summary>
+    /// Sémaphore utilisé pour gérer l'accès concurrent à la méthode de chargement des dossiers,
+    /// garantissant qu'une seule opération de chargement est exécutée à la fois.
+    /// </summary>
+    private readonly SemaphoreSlim _loadingSemaphore = new(1, 1);
+
     public ShowClientDossiersSubPageViewModel(Guid clientId, IGetClientDossiers getClientDossiers)
     {
         ClientId = clientId;
         _getClientDossiers = getClientDossiers;
-        _ = ChargerDossiersAsync();
     }
 
     public Guid ClientId { get; }
@@ -25,18 +31,35 @@ public sealed class ShowClientDossiersSubPageViewModel : ViewModelBase
     public ObservableCollection<ShowClientDossierSubPageItemViewModel> Dossiers { get; } =
         new ObservableCollection<ShowClientDossierSubPageItemViewModel>();
 
+    /// <summary>
+    /// Charge de manière asynchrone les dossiers du client associé à l'ID spécifié
+    /// et met à jour la collection observable des dossiers.
+    /// Garantit également qu'une seule opération de chargement est exécutée à la fois
+    /// en utilisant un sémaphore.
+    /// </summary>
+    /// <returns>
+    /// Une tâche représentant l'opération asynchrone de chargement des dossiers.
+    /// </returns>
     public async Task ChargerDossiersAsync()
     {
-        var result = await _getClientDossiers.ExecuteAsync(ClientId);
-        if (result.IsFailed)
+        await _loadingSemaphore.WaitAsync();
+        try
         {
-            return;
-        }
+            var result = await _getClientDossiers.ExecuteAsync(ClientId);
+            if (result.IsFailed)
+            {
+                return;
+            }
 
-        Dossiers.Clear();
-        foreach (var dossier in result.Value)
+            Dossiers.Clear();
+            foreach (var dossier in result.Value)
+            {
+                Dossiers.Add(Map(dossier));
+            }
+        }
+        finally
         {
-            Dossiers.Add(Map(dossier));
+            _loadingSemaphore.Release();
         }
     }
 
