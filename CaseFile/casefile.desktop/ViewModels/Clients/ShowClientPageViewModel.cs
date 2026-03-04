@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using casefile.application.UseCases.Interfaces;
 using casefile.desktop.Navigation;
 using casefile.desktop.ViewModels.Clients.SubPages;
+using casefile.desktop.ViewModels.Clients.SubPages.PageDocuments;
+using casefile.desktop.ViewModels.Clients.SubPages.PageDossier;
+using casefile.desktop.ViewModels.Clients.SubPages.PageEmailHistory;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 

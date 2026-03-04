@@ -1,7 +1,6 @@
 using System;
-using System.Collections.ObjectModel;
 
-namespace casefile.desktop.ViewModels.Clients.SubPages;
+namespace casefile.desktop.ViewModels.Clients.SubPages.PageDocuments;
 
 public sealed class ShowClientDocumentsSubPageViewModel : ViewModelBase
 {

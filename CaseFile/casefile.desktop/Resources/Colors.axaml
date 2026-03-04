@@ -229,4 +229,29 @@
     <SolidColorBrush x:Key="Brush.Lime-900" Color="{DynamicResource Color.Lime-900}" />
     <Color x:Key="Color.Lime-950">#1a2e05</Color>
     <SolidColorBrush x:Key="Brush.Lime-950" Color="{DynamicResource Color.Lime-950}" />
+
+    <Color x:Key="Color.Green-50">#f0fdf4</Color>
+    <SolidColorBrush x:Key="Brush.Green-50" Color="{DynamicResource Color.Green-50}" />
+    <Color x:Key="Color.Green-100">#dcfce7</Color>
+    <SolidColorBrush x:Key="Brush.Green-100" Color="{DynamicResource Color.Green-100}" />
+    <Color x:Key="Color.Green-200">#bbf7d0</Color>
+    <SolidColorBrush x:Key="Brush.Green-200" Color="{DynamicResource Color.Green-200}" />
+    <Color x:Key="Color.Green-300">#86efac</Color>
+    <SolidColorBrush x:Key="Brush.Green-300" Color="{DynamicResource Color.Green-300}" />
+    <Color x:Key="Color.Green-400">#4ade80</Color>
+    <SolidColorBrush x:Key="Brush.Green-400" Color="{DynamicResource Color.Green-400}" />
+    <Color x:Key="Color.Green-500">#22c55e</Color>
+    <SolidColorBrush x:Key=" Brush.Green-500" Color="{DynamicResource Color.Green-500}" />
+    <Color x:Key="Color.Green-600">#16a34a</Color>
+    <SolidColorBrush x:Key="Brush.Green-600" Color="{DynamicResource Color.Green-600}" />
+    <Color x:Key="Color.Green-700">#15803d</Color>
+    <SolidColorBrush x:Key="Brush.Green-700" Color="{DynamicResource Color.Green-700}" />
+    <Color x:Key="Color.Green-800">#166534</Color>
+    <SolidColorBrush x:Key="Brush.Green-800" Color="{DynamicResource Color.Green-800}" />
+    <Color x:Key="Color.Green-900">#14532d</Color>
+    <SolidColorBrush x:Key="Brush.Green-900" Color="{DynamicResource Color.Green-900}" />
+    <Color x:Key="Color.Green-950">#052e16</Color>
+    <SolidColorBrush x:Key="Brush.Green-950" Color="{DynamicResource Color.Green-950}" />
+
+
 </ResourceDictionary>
