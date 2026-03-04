@@ -29,15 +29,32 @@ public class GetClientDossiers(IClientRepository clientRepository) : IGetClientD
             .ToDictionary(g => g.Key, g => g.SelectMany(e => e.DocumentsAttendus).ToList(), StringComparer.OrdinalIgnoreCase)
             ?? new Dictionary<string, List<DocumentAttendu>>(StringComparer.OrdinalIgnoreCase);
 
-        var dossiers = client.Dossiers
-            .OrderBy(d => d.Nom)
-            .Select(dossier =>
+        var dossiersParNom = client.Dossiers
+            .GroupBy(d => d.Nom, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
+
+        var nomsDossiers = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var nomTemplate in templateElementsByName.Keys)
+        {
+            nomsDossiers.Add(nomTemplate);
+        }
+
+        foreach (var nomDossier in dossiersParNom.Keys)
+        {
+            nomsDossiers.Add(nomDossier);
+        }
+
+        var dossiers = nomsDossiers
+            .OrderBy(n => n)
+            .Select(nomDossier =>
             {
-                var attendus = templateElementsByName.TryGetValue(dossier.Nom, out var value)
+                var attendus = templateElementsByName.TryGetValue(nomDossier, out var value)
                     ? value
                     : new List<DocumentAttendu>();
 
-                var documents = dossier.Documents.ToList();
+                var documents = dossiersParNom.TryGetValue(nomDossier, out var dossiersExistants)
+                    ? dossiersExistants.SelectMany(d => d.Documents).ToList()
+                    : new List<DocumentClient>();
                 var attendusMappees = new List<ShowClientDossierDocumentAttenduEtTeleverseDto>();
                 var documentsUtilises = new HashSet<Guid>();
 
@@ -95,8 +112,8 @@ public class GetClientDossiers(IClientRepository clientRepository) : IGetClientD
 
                 return new ShowClientDossierDto
                 {
-                    Nom = dossier.Nom,
-                    NombreDocuments = dossier.Documents.Count,
+                    Nom = nomDossier,
+                    NombreDocuments = documents.Count,
                     NombreDocumentRequis = nombreRequis,
                     IsDossierComplet = requisManquants == 0,
                     DocumentsAttendusEtTeleverses = attendusMappees
