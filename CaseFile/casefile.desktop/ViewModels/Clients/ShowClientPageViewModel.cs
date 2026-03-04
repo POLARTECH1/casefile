@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using casefile.application.UseCases.Interfaces;
 using casefile.desktop.Navigation;
-using casefile.desktop.ViewModels.Clients.SubPages;
 using casefile.desktop.ViewModels.Clients.SubPages.PageDocuments;
 using casefile.desktop.ViewModels.Clients.SubPages.PageDossier;
 using casefile.desktop.ViewModels.Clients.SubPages.PageEmailHistory;
@@ -15,15 +14,18 @@ public partial class ShowClientPageViewModel : PageViewModelBase
 {
     private readonly IAppRouter _router;
     private readonly IGetClientItem _getClientItem;
+    private readonly IGetClientDossiers _getClientDossiers;
 
     public ShowClientPageViewModel(
         IScreen screen,
         IAppRouter router,
         IGetClientItem getClientItem,
+        IGetClientDossiers getClientDossiers,
         Guid clientId) : base(screen)
     {
         _router = router;
         _getClientItem = getClientItem;
+        _getClientDossiers = getClientDossiers;
         ClientId = clientId;
 
         AfficherDossiers();
@@ -105,7 +107,7 @@ public partial class ShowClientPageViewModel : PageViewModelBase
     [RelayCommand]
     private void AfficherDossiers()
     {
-        ActiveSubPageViewModel = new ShowClientDossiersSubPageViewModel(ClientId);
+        ActiveSubPageViewModel = new ShowClientDossiersSubPageViewModel(ClientId, _getClientDossiers);
         ToggleActiveClass();
     }
 

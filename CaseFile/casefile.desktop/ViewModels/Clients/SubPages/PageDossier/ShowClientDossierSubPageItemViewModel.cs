@@ -6,9 +6,9 @@ public class ShowClientDossierSubPageItemViewModel
 {
     public string Nom { get; set; } = string.Empty;
 
-    public int NombreDocuments { get; set; }
+    public string NombreDocuments { get; set; } = string.Empty;
 
-    public int NombreDocumentRequis { get; set; }
+    public string NombreDocumentRequis { get; set; } = string.Empty;
 
     /// <summary>
     /// Determine si le dossier est considéré comme complet, c'est-à-dire que tous les documents requis sont présents.

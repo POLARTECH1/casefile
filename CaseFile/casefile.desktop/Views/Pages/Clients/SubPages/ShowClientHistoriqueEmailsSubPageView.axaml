@@ -10,6 +10,6 @@
              x:Class="casefile.desktop.Views.Pages.Clients.SubPages.ShowClientHistoriqueEmailsSubPageView"
              x:DataType="pageEmailHistory:ShowClientHistoriqueEmailsSubPageViewModel">
     <Border>
-        <TextBlock Text="Page Historique emails (a completer)" />
+        <TextBlock Text="Page Historique emails (a completer) blablabla" />
     </Border>
 </UserControl>

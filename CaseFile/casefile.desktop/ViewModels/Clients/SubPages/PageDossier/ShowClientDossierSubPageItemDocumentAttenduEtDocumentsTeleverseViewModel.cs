@@ -1,5 +1,4 @@
-﻿using System;
-using casefile.domain.model;
+using System;
 
 namespace casefile.desktop.ViewModels.Clients.SubPages.PageDossier;
 
@@ -16,7 +15,7 @@ public class ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseView
     /// <summary>
     /// Type de document attendu.
     /// </summary>
-    public String? NomTypeDocumentAttendu { get; set; }
+    public string? NomTypeDocumentAttendu { get; set; }
 
     public bool EstRequis { get; set; }
 
@@ -24,12 +23,20 @@ public class ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseView
     /// Determine si le document attendu est considéré comme incomplet, c'est-à-dire que le document client est requis et manquant
     /// </summary>
     public bool IsIncomplet { get; set; }
+
     public bool IsDocumentAttenduPresentDansDossierClient { get; set; }
 
     public string ExtensionTypeDocumentAttendu { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Le document client téléversé correspondant au document attendu, s'il existe. Peut être null si aucun document n'a été téléversé pour ce document attendu.
-    /// </summary>
-    public DocumentClient? DocumentClient;
+    public Guid? DocumentClientId { get; set; }
+
+    public string DocumentClientNomOriginal { get; set; } = string.Empty;
+
+    public string DocumentClientNomStandardise { get; set; } = string.Empty;
+
+    public string DocumentClientCheminPhysique { get; set; } = string.Empty;
+
+    public string DocumentClientExtension { get; set; } = string.Empty;
+
+    public DateTime? DocumentClientAjouteLe { get; set; }
 }

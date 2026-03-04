@@ -10,6 +10,6 @@
              x:Class="casefile.desktop.Views.Pages.Clients.SubPages.ShowClientDocumentsSubPageView"
              x:DataType="pageDocuments:ShowClientDocumentsSubPageViewModel">
     <Border>
-        <TextBlock Text="Page Tous les documents (a completer)" />
+        <TextBlock Text="blablablabla" />
     </Border>
 </UserControl>
