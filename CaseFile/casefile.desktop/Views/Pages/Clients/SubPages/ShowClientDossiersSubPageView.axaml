@@ -3,12 +3,138 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages"
+             xmlns:pageDossier="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages.PageDossier"
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450"
              x:Class="casefile.desktop.Views.Pages.Clients.SubPages.ShowClientDossiersSubPageView"
-             x:DataType="vm:ShowClientDossiersSubPageViewModel">
-    <Border>
-        <TextBlock Text="Page Dossiers (a completer)" />
-    </Border>
+             x:DataType="pageDossier:ShowClientDossiersSubPageViewModel">
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding Dossiers}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Spacing="{StaticResource Space.4}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{DynamicResource Brush.Border}"
+                            Padding="{DynamicResource Spacing.6}"
+                            CornerRadius="{DynamicResource Radius.Md}"
+                            BorderThickness="1"
+                            Background="{DynamicResource Brush.Card}">
+                        <StackPanel Spacing="{StaticResource Space.6}">
+                            <!-- En-tête du dossier -->
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <!-- Icone et details du dossier -->
+                                <StackPanel VerticalAlignment="Top" Spacing="{StaticResource Space.4}"
+                                            Orientation="Horizontal">
+                                    <Border CornerRadius="{DynamicResource Radius.Lg}"
+                                            Padding="{DynamicResource Spacing.2}"
+                                            Background="{DynamicResource Color.Blue-600}"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center">
+                                        <LucideIcon Classes="app-card-icon" Kind="Folder"></LucideIcon>
+                                    </Border>
+                                    <StackPanel Spacing="{StaticResource Space.4}">
+                                        <TextBlock Classes="h2" Text="{Binding Nom}" />
+                                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                                            <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                       Text="{Binding NombreDocuments}" />
+                                            <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                       Text="{Binding NombreDocumentRequis}" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                </StackPanel>
+                                <!-- Statut di dossier et bouton ajouter un document -->
+                                <StackPanel Grid.Column="2" VerticalAlignment="Top" Spacing="{StaticResource Space.4}"
+                                            Orientation="Horizontal">
+                                    <StackPanel IsVisible="{Binding IsDossierComplet}" Orientation="Horizontal"
+                                                Spacing="{StaticResource Space.2}"
+                                                VerticalAlignment="Center">
+                                        <LucideIcon Kind="CircleCheck" Foreground="{DynamicResource Color.Green-600}"
+                                                    Size="16" />
+                                        <TextBlock FontSize="{StaticResource Text.Xs}" Text="Complet" />
+                                    </StackPanel>
+                                    <StackPanel IsVisible="{Binding !IsDossierComplet}" Orientation="Horizontal"
+                                                Spacing="{StaticResource Space.2}"
+                                                VerticalAlignment="Center">
+                                        <LucideIcon Kind="CircleAlert" Foreground="{DynamicResource Brush.Yellow-600}"
+                                                    Size="16" />
+                                        <TextBlock FontSize="{StaticResource Text.Xs}" Text="Incomplet" />
+                                    </StackPanel>
+                                    <Button Classes="Primary" Command="{Binding AjouterDocumentCommand}">
+                                        <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
+                                            <LucideIcon Kind="Plus"></LucideIcon>
+                                            <TextBlock Text="Ajouter" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel>
+                                <!-- Liste des documents attendus et téléversés pour ce dossier -->
+                                <ItemsControl ItemsSource="{Binding DocumentsAttendusEtTeleverses}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Spacing="{StaticResource Space.4}" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="{DynamicResource Brush.Muted}"
+                                                    CornerRadius="{StaticResource Radius.Lg}"
+                                                    Padding="{StaticResource Spacing.3}">
+                                                <Grid ColumnDefinitions="Auto, Auto, *, Auto"
+                                                      ColumnSpacing="{StaticResource Space.4}"
+                                                      VerticalAlignment="Center">
+                                                    <!-- Icone de statut du document -->
+                                                    <LucideIcon IsVisible="{Binding IsIncomplet }" Kind="CircleAlert"
+                                                                Foreground="{DynamicResource Brush.Red-600}"
+                                                                Size="{StaticResource Text.Base}" />
+                                                    <LucideIcon Grid.Column="0" IsVisible="{Binding !IsIncomplet }"
+                                                                Kind="CircleAlert"
+                                                                Foreground="{DynamicResource Brush.Green-600}"
+                                                                Size="{StaticResource Text.Base}" />
+                                                    <!-- Détails du document -->
+                                                    <StackPanel Grid.Column="1" Spacing="{StaticResource Space.2}">
+                                                        <StackPanel Spacing="{StaticResource Space.4}"
+                                                                    Orientation="Horizontal"
+                                                                    VerticalAlignment="Center">
+                                                            <TextBlock Classes="h4"
+                                                                       Text="{Binding NomTypeDocumentAttendu}" />
+                                                            <Border IsVisible="{Binding EstRequis}"
+                                                                    Classes="Badge Danger">
+                                                                <TextBlock>Requis</TextBlock>
+                                                            </Border>
+                                                        </StackPanel>
+                                                        <TextBlock FontSize="{StaticResource Text.Xs}"
+                                                                   Text="{Binding ExtensionTypeDocumentAttendu}" />
+                                                    </StackPanel>
+                                                    <!-- Options de visualisation et téléchargement du document -->
+                                                    <StackPanel Grid.Column="3" Orientation="Horizontal"
+                                                                Spacing="{StaticResource Space.3}">
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                IsEnabled="{Binding CanOpenDocument}"
+                                                                Command="{Binding OuvrirDocumentCommand}">
+                                                            <LucideIcon Kind="Eye" />
+                                                        </Button>
+                                                        <Button Classes="SecondaryNoBorder">
+                                                            <LucideIcon Kind="Download" />
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+
 </UserControl>

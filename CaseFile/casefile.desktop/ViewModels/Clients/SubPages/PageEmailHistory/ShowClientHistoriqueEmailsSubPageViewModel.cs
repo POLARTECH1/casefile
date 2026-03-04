@@ -1,6 +1,6 @@
 using System;
 
-namespace casefile.desktop.ViewModels.Clients.SubPages;
+namespace casefile.desktop.ViewModels.Clients.SubPages.PageEmailHistory;
 
 public sealed class ShowClientHistoriqueEmailsSubPageViewModel : ViewModelBase
 {

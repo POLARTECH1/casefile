@@ -5,17 +5,20 @@
              xmlns:clients="clr-namespace:casefile.desktop.ViewModels.Clients"
              xmlns:subVm="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages"
              xmlns:subViews="clr-namespace:casefile.desktop.Views.Pages.Clients.SubPages"
+             xmlns:pageEmailHistory="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages.PageEmailHistory"
+             xmlns:pageDocuments="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages.PageDocuments"
+             xmlns:pageDossier="clr-namespace:casefile.desktop.ViewModels.Clients.SubPages.PageDossier"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="clients:ShowClientPageViewModel"
              x:Class="casefile.desktop.Views.Pages.Clients.ShowClientPageView">
     <UserControl.DataTemplates>
-        <DataTemplate DataType="subVm:ShowClientDossiersSubPageViewModel">
+        <DataTemplate DataType="pageDossier:ShowClientDossiersSubPageViewModel">
             <subViews:ShowClientDossiersSubPageView />
         </DataTemplate>
-        <DataTemplate DataType="subVm:ShowClientDocumentsSubPageViewModel">
+        <DataTemplate DataType="pageDocuments:ShowClientDocumentsSubPageViewModel">
             <subViews:ShowClientDocumentsSubPageView />
         </DataTemplate>
-        <DataTemplate DataType="subVm:ShowClientHistoriqueEmailsSubPageViewModel">
+        <DataTemplate DataType="pageEmailHistory:ShowClientHistoriqueEmailsSubPageViewModel">
             <subViews:ShowClientHistoriqueEmailsSubPageView />
         </DataTemplate>
     </UserControl.DataTemplates>
@@ -84,6 +87,11 @@
                         </Button>
                     </StackPanel>
                 </Grid>
+
+                <TextBlock IsVisible="{Binding HasLoadingClientError}"
+                           Foreground="{DynamicResource Brush.Red-600}"
+                           FontSize="{StaticResource Text.Xs}"
+                           Text="{Binding LoadingClientError}" />
 
                 <!-- Navigation entre les sous-pages -->
                 <Border Classes="Nav">

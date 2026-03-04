@@ -19,6 +19,7 @@ using casefile.application.DTOs.TemplateDossierElement.Validation;
 using casefile.application.DTOs.TypeDocument.Validation;
 using casefile.application.DTOs.ValeurAttributClient.Validation;
 using casefile.application.Mapping;
+using casefile.application.Services;
 using casefile.application.UseCases.Interfaces;
 using casefile.application.UseCases.ClientUseCases;
 using casefile.application.UseCases.SchemaClientUseCases;
@@ -169,6 +170,14 @@ public partial class App : Application
             else
                 opt.UseSqlite(cs);
         });
+
+        services.AddDbContextFactory<CaseFileContext>(opt =>
+        {
+            if (string.Equals(provider, "Postgres", StringComparison.OrdinalIgnoreCase))
+                opt.UseNpgsql(cs).UseSnakeCaseNamingConvention();
+            else
+                opt.UseSqlite(cs);
+        });
     }
 
     /// <summary>
@@ -212,6 +221,8 @@ public partial class App : Application
         services.AddScoped<IGetSchemaClientForEdit, GetSchemaClientForEdit>();
         services.AddScoped<IGetClientItems, GetClientItems>();
         services.AddScoped<IGetClientItem, GetClientItem>();
+        services.AddScoped<IGetClientDossiers, GetClientDossiers>();
+        services.AddScoped<IClientDocumentUploadService, ClientDocumentUploadService>();
         services.AddScoped<IDeleteClient, DeleteClient>();
         services.AddScoped<ICreateClient, CreateClient>();
         services.AddScoped<IGetSchemaClientsForSelect, GetSchemaClientsForSelect>();
@@ -233,6 +244,8 @@ public partial class App : Application
             ShowSchemaClientDialogWindowService>();
         services.AddScoped<IDialogWindowService<ConfirmationDialogRequest, bool?>,
             ConfirmationDialogWindowService>();
+        services.AddScoped<IDialogWindowService<UploadClientDocumentDialogRequest, bool?>,
+            UploadClientDocumentDialogWindowService>();
     }
 
     /// <summary>
