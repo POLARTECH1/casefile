@@ -58,7 +58,8 @@
                                         <TextBlock FontSize="{StaticResource Text.Xs}" Text="Complet" />
                                     </StackPanel>
                                     <StackPanel IsVisible="{Binding !IsDossierComplet}" Orientation="Horizontal"
-                                                Spacing="{StaticResource Space.2}">
+                                                Spacing="{StaticResource Space.2}"
+                                                VerticalAlignment="Center">
                                         <LucideIcon Kind="CircleAlert" Foreground="{DynamicResource Brush.Yellow-600}"
                                                     Size="16" />
                                         <TextBlock FontSize="{StaticResource Text.Xs}" Text="Incomplet" />
