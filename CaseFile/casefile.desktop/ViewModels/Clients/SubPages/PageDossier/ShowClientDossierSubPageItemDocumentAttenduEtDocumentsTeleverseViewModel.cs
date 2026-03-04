@@ -1,9 +1,10 @@
-using System;
+﻿using System;
+using CommunityToolkit.Mvvm.Input;
 
 namespace casefile.desktop.ViewModels.Clients.SubPages.PageDossier;
 
 /// <summary>
-/// View Model représentant les documents attendus associes au document televersé d'un dossier client.
+/// View Model representant les documents attendus associes au document televerse d'un dossier client.
 /// </summary>
 public class ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseViewModel
 {
@@ -20,7 +21,7 @@ public class ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseView
     public bool EstRequis { get; set; }
 
     /// <summary>
-    /// Determine si le document attendu est considéré comme incomplet, c'est-à-dire que le document client est requis et manquant
+    /// Determine si le document attendu est considere comme incomplet, c'est-a-dire que le document client est requis et manquant.
     /// </summary>
     public bool IsIncomplet { get; set; }
 
@@ -39,4 +40,10 @@ public class ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseView
     public string DocumentClientExtension { get; set; } = string.Empty;
 
     public DateTime? DocumentClientAjouteLe { get; set; }
+
+    public bool CanOpenDocument =>
+        string.IsNullOrWhiteSpace(DocumentClientCheminPhysique) == false &&
+        IsDocumentAttenduPresentDansDossierClient;
+
+    public IAsyncRelayCommand? OuvrirDocumentCommand { get; set; }
 }

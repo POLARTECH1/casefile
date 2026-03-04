@@ -1,45 +1,37 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using casefile.application.DTOs.Client;
 using casefile.application.UseCases.Interfaces;
+using casefile.desktop.Services;
+using CommunityToolkit.Mvvm.Input;
 
 namespace casefile.desktop.ViewModels.Clients.SubPages.PageDossier;
 
 public sealed class ShowClientDossiersSubPageViewModel : ViewModelBase
 {
     private readonly IGetClientDossiers _getClientDossiers;
+    private readonly IDialogWindowService<UploadClientDocumentDialogRequest, bool?> _uploadClientDocumentDialogService;
 
-    /// <summary>
-    /// Sémaphore utilisé pour gérer l'accès concurrent à la méthode de chargement des dossiers,
-    /// garantissant qu'une seule opération de chargement est exécutée à la fois.
-    /// </summary>
     private readonly SemaphoreSlim _loadingSemaphore = new(1, 1);
 
-    public ShowClientDossiersSubPageViewModel(Guid clientId, IGetClientDossiers getClientDossiers)
+    public ShowClientDossiersSubPageViewModel(
+        Guid clientId,
+        IGetClientDossiers getClientDossiers,
+        IDialogWindowService<UploadClientDocumentDialogRequest, bool?> uploadClientDocumentDialogService)
     {
         ClientId = clientId;
         _getClientDossiers = getClientDossiers;
+        _uploadClientDocumentDialogService = uploadClientDocumentDialogService;
     }
 
     public Guid ClientId { get; }
 
-    /// <summary>
-    /// L'ensemble des dossiers virtuels associés au client.
-    /// </summary>
     public ObservableCollection<ShowClientDossierSubPageItemViewModel> Dossiers { get; } =
         new ObservableCollection<ShowClientDossierSubPageItemViewModel>();
 
-    /// <summary>
-    /// Charge de manière asynchrone les dossiers du client associé à l'ID spécifié
-    /// et met à jour la collection observable des dossiers.
-    /// Garantit également qu'une seule opération de chargement est exécutée à la fois
-    /// en utilisant un sémaphore.
-    /// </summary>
-    /// <returns>
-    /// Une tâche représentant l'opération asynchrone de chargement des dossiers.
-    /// </returns>
     public async Task ChargerDossiersAsync()
     {
         await _loadingSemaphore.WaitAsync();
@@ -54,7 +46,7 @@ public sealed class ShowClientDossiersSubPageViewModel : ViewModelBase
             Dossiers.Clear();
             foreach (var dossier in result.Value)
             {
-                Dossiers.Add(Map(dossier));
+                Dossiers.Add(MapDossier(dossier));
             }
         }
         finally
@@ -63,25 +55,26 @@ public sealed class ShowClientDossiersSubPageViewModel : ViewModelBase
         }
     }
 
-    private static ShowClientDossierSubPageItemViewModel Map(ShowClientDossierDto dossier)
+    private ShowClientDossierSubPageItemViewModel MapDossier(ShowClientDossierDto dossier)
     {
         var item = new ShowClientDossierSubPageItemViewModel
         {
             Nom = dossier.Nom,
             NombreDocuments = dossier.NombreDocuments + " document(s)",
             NombreDocumentRequis = dossier.NombreDocumentRequis + " requis",
-            IsDossierComplet = dossier.IsDossierComplet
+            IsDossierComplet = dossier.IsDossierComplet,
+            AjouterDocumentCommand = new AsyncRelayCommand(() => AjouterDocumentAuDossierAsync(dossier.Nom))
         };
 
         foreach (var document in dossier.DocumentsAttendusEtTeleverses)
         {
-            item.DocumentsAttendusEtTeleverses.Add(Map(document));
+            item.DocumentsAttendusEtTeleverses.Add(MapDocument(document));
         }
 
         return item;
     }
 
-    private static ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseViewModel Map(
+    private ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseViewModel MapDocument(
         ShowClientDossierDocumentAttenduEtTeleverseDto document)
     {
         return new ShowClientDossierSubPageItemDocumentAttenduEtDocumentsTeleverseViewModel
@@ -97,7 +90,39 @@ public sealed class ShowClientDossiersSubPageViewModel : ViewModelBase
             DocumentClientNomStandardise = document.DocumentClientNomStandardise,
             DocumentClientCheminPhysique = document.DocumentClientCheminPhysique,
             DocumentClientExtension = document.DocumentClientExtension,
-            DocumentClientAjouteLe = document.DocumentClientAjouteLe
+            DocumentClientAjouteLe = document.DocumentClientAjouteLe,
+            OuvrirDocumentCommand = new AsyncRelayCommand(() => OuvrirDocumentAsync(document.DocumentClientCheminPhysique))
         };
+    }
+
+    private async Task AjouterDocumentAuDossierAsync(string nomDossier)
+    {
+        var result = await _uploadClientDocumentDialogService.Show(new UploadClientDocumentDialogRequest(ClientId, nomDossier));
+        if (result == true)
+        {
+            await ChargerDossiersAsync();
+        }
+    }
+
+    private static Task OuvrirDocumentAsync(string cheminPhysique)
+    {
+        if (string.IsNullOrWhiteSpace(cheminPhysique))
+        {
+            return Task.CompletedTask;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = cheminPhysique,
+                UseShellExecute = true
+            });
+        }
+        catch
+        {
+        }
+
+        return Task.CompletedTask;
     }
 }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using casefile.application.UseCases.Interfaces;
 using casefile.desktop.Navigation;
+using casefile.desktop.Services;
 using casefile.desktop.ViewModels.Clients.SubPages.PageDocuments;
 using casefile.desktop.ViewModels.Clients.SubPages.PageDossier;
 using casefile.desktop.ViewModels.Clients.SubPages.PageEmailHistory;
@@ -18,6 +19,7 @@ public partial class ShowClientPageViewModel : PageViewModelBase
 
     private readonly IGetClientItem _getClientItem;
     private readonly IGetClientDossiers _getClientDossiers;
+    private readonly IDialogWindowService<UploadClientDocumentDialogRequest, bool?> _uploadClientDocumentDialogService;
 
     /// <summary>
     /// Semaphore utilisé pour synchroniser et limiter l'accès concurrent
@@ -36,11 +38,13 @@ public partial class ShowClientPageViewModel : PageViewModelBase
         IAppRouter router,
         IGetClientItem getClientItem,
         IGetClientDossiers getClientDossiers,
+        IDialogWindowService<UploadClientDocumentDialogRequest, bool?> uploadClientDocumentDialogService,
         Guid clientId) : base(screen)
     {
         _router = router;
         _getClientItem = getClientItem;
         _getClientDossiers = getClientDossiers;
+        _uploadClientDocumentDialogService = uploadClientDocumentDialogService;
         ClientId = clientId;
 
         _ = InitialiserAsync();
@@ -162,7 +166,10 @@ public partial class ShowClientPageViewModel : PageViewModelBase
         try
         {
             var dossiersViewModel = ActiveSubPageViewModel as ShowClientDossiersSubPageViewModel
-                                    ?? new ShowClientDossiersSubPageViewModel(ClientId, _getClientDossiers);
+                                    ?? new ShowClientDossiersSubPageViewModel(
+                                        ClientId,
+                                        _getClientDossiers,
+                                        _uploadClientDocumentDialogService);
 
             ActiveSubPageViewModel = dossiersViewModel;
             ToggleActiveClass();

@@ -1,0 +1,72 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:windowModal="clr-namespace:casefile.desktop.ViewModels.WindowModal"
+        mc:Ignorable="d" d:DesignWidth="620" d:DesignHeight="300"
+        x:Class="casefile.desktop.Views.WindowModal.UploadClientDocumentWindow"
+        x:DataType="windowModal:UploadClientDocumentWindowViewModel"
+        Classes="DialogWindow"
+        Title="Televerser un document"
+        Width="620"
+        SizeToContent="Height"
+        CornerRadius="{StaticResource Radius.Lg}">
+
+    <Grid Margin="{StaticResource Spacing.5}" RowDefinitions="*, Auto" RowSpacing="{StaticResource Space.5}">
+        <StackPanel Spacing="{StaticResource Space.4}">
+            <StackPanel Spacing="{StaticResource Space.1}">
+                <TextBlock Classes="FormLabel">Dossier cible</TextBlock>
+                <TextBlock Text="{Binding NomDossier}" />
+            </StackPanel>
+
+            <StackPanel Spacing="{StaticResource Space.2}">
+                <TextBlock Classes="FormLabel">Type de document *</TextBlock>
+                <ComboBox Classes="FormComboBox"
+                          ItemsSource="{Binding TypesDocument}"
+                          SelectedItem="{Binding TypeDocumentSelectionne}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="windowModal:UploadTypeDocumentItemViewModel">
+                            <TextBlock Text="{Binding Nom}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Spacing="{StaticResource Space.2}">
+                <TextBlock Classes="FormLabel">Fichier a televerser</TextBlock>
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="{StaticResource Space.2}">
+                    <TextBox Grid.Column="0"
+                             Classes="FormTextInput"
+                             IsReadOnly="True"
+                             Text="{Binding CheminFichierSource}"
+                             Watermark="Aucun fichier selectionne" />
+                    <Button Grid.Column="1"
+                            Classes="Secondary"
+                            Command="{Binding ChoisirFichierCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <LucideIcon Kind="FileSearch" />
+                            <TextBlock>Parcourir</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <TextBlock IsVisible="{Binding HasError}"
+                       Text="{Binding ErrorMessage}"
+                       Foreground="{DynamicResource Brush.Red-600}"
+                       FontSize="{StaticResource Text.Xs}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="{StaticResource Space.3}">
+            <Button Classes="Secondary" Command="{Binding AnnulerCommand}">
+                <TextBlock>Annuler</TextBlock>
+            </Button>
+            <Button Classes="Primary" Command="{Binding TeleverserCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <LucideIcon Kind="Upload" />
+                    <TextBlock>Televerser</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

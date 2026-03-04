@@ -64,7 +64,7 @@
                                                     Size="16" />
                                         <TextBlock FontSize="{StaticResource Text.Xs}" Text="Incomplet" />
                                     </StackPanel>
-                                    <Button Classes="Primary">
+                                    <Button Classes="Primary" Command="{Binding AjouterDocumentCommand}">
                                         <StackPanel Orientation="Horizontal" Spacing="{StaticResource Space.2}">
                                             <LucideIcon Kind="Plus"></LucideIcon>
                                             <TextBlock Text="Ajouter" />
@@ -114,7 +114,9 @@
                                                     <!-- Options de visualisation et téléchargement du document -->
                                                     <StackPanel Grid.Column="3" Orientation="Horizontal"
                                                                 Spacing="{StaticResource Space.3}">
-                                                        <Button Classes="SecondaryNoBorder">
+                                                        <Button Classes="SecondaryNoBorder"
+                                                                IsEnabled="{Binding CanOpenDocument}"
+                                                                Command="{Binding OuvrirDocumentCommand}">
                                                             <LucideIcon Kind="Eye" />
                                                         </Button>
                                                         <Button Classes="SecondaryNoBorder">
